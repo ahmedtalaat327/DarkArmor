@@ -1,0 +1,5 @@
+<Expander IsExpanded="True" Grid.Column="1" Margin="0 10 7 0" ExpandDirection="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top"> 
+            <Border BorderBrush="Black" BorderThickness="1">
+                <ui:Button>Test button</ui:Button>
+            </Border>
+        </Expander>

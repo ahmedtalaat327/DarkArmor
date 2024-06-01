@@ -16,7 +16,7 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
            
@@ -38,21 +38,78 @@
                     <StackPanel Margin="1" VerticalAlignment="Center"  Orientation="Horizontal">
                         <ui:Button  Margin="5 0 0 0" FontSize="16" Icon="{ui:SymbolIcon CalendarPlay16}" 
                              Content="Play Monitoring" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                                Background="#006fff"   />
+                                Background="#006fff"  Command="{Binding ViewModel.CounterIncrementCommand}" />
 
                         <ui:Button  Margin="5 0 0 0" FontSize="16" Icon="{ui:SymbolIcon DismissSquare20 }" 
-                             Content="Stop" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                        <ui:ProgressRing Margin="5" Width="22" Height="22" BorderThickness="22" IsIndeterminate="True"  />
+                             Content="Stop" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                                    Command="{Binding ViewModel.CounterResetCommand}" />
+                        <ui:ProgressRing Margin="5" Width="22" Height="22" BorderThickness="22"
+                                  Visibility="{Binding ViewModel.IndicatorAppear}"  IsIndeterminate="{Binding ViewModel.Counter, Mode=TwoWay}"  />
                         <!--  <ui:TextBlock Margin="6 0 0 0" Text="Hello, here we can check an overview of current network devices status." VerticalAlignment="Center"/>-->
                     </StackPanel>
                 </ui:Card>
 
-                <StackPanel Width="800" Height="400">
+                <StackPanel Width="800" Height="auto">
                     <StackPanel.Background>
                         <ImageBrush ImageSource="/Assets/dotted.png" TileMode="Tile"   Stretch="Uniform" AlignmentY="Top" Viewport="0,0,400,400" ViewportUnits="Absolute"/>
                     </StackPanel.Background>
-                    <ui:DataGrid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        
+                    <ui:DataGrid Margin="15" 
+                                 VerticalScrollBarVisibility="Visible"
+                                 HorizontalScrollBarVisibility="Visible"
+                                 HorizontalAlignment="Stretch" 
+                                 VerticalAlignment="Stretch"
+                                 ColumnWidth="*" 
+                                 ItemsSource="{Binding ViewModel.DataShowed}">
+                        <ui:DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                              
+                                <Setter Property="Foreground" Value="#ffffff" />
+                                <Setter Property="BorderThickness" Value="1" />
+                                <Setter Property="SnapsToDevicePixels" Value="True" />
+                                <Setter Property="UseLayoutRounding" Value="True" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="MinWidth" Value="10" />
+                                <Setter Property="MinHeight" Value="30" />
+                                <Setter Property="Cursor" Value="Hand" />
+                                 
+                                <Setter Property="Padding" Value="4" />
+                                <Setter Property="SeparatorBrush" Value="#FFC9CACA" />
+                                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                <Setter Property="Border.CornerRadius" Value="16" />
+                                <Setter Property="Border.Background" Value="#77306fff" />
+ 
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                                            <Border Background="#77306fff" CornerRadius="5">
+                                                <ContentPresenter Margin="5"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="TextBlock.Margin" Value="1"/>
+                                <Setter Property="TextBlock.Padding" Value="3"/>
+                                
+ 
+
+                            </Style>
+                        </ui:DataGrid.ColumnHeaderStyle>
+                        <ui:DataGrid.RowHeaderStyle>
+                            <Style TargetType="{x:Type DataGridRowHeader}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
+                                            <Border Height="5" Width="5" Background="#77306fff" CornerRadius="15">
+                                                <ContentPresenter Margin="5"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="TextBlock.Margin" Value="1"/>
+                                <Setter Property="TextBlock.Padding" Value="3"/>
+
+                            </Style>
+                        </ui:DataGrid.RowHeaderStyle>
                     </ui:DataGrid>
                 </StackPanel>
 

@@ -18,7 +18,7 @@ namespace DarkArmor.ViewModels.Pages
             Counter=true;
             IndicatorAppear = Visibility.Visible;
 
-            DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC"});
+            DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" , Active = true });
             DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" });
             DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" });
             DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" });
@@ -38,6 +38,8 @@ namespace DarkArmor.ViewModels.Pages
         public int Index { get; set; } = 0;
         public string Name { get; set; } = "None";
         public string Description { get; set; } = "Device";
+
+        public bool Active { get; set; } = false;
 
     }
 }

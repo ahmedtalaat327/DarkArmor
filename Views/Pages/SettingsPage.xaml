@@ -32,9 +32,11 @@
             CommandParameter="theme_light"
             Content="Light"
             GroupName="themeSelect"
+            IsEnabled="False"
             IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
         <RadioButton
             Margin="0,8,0,0"
+            IsEnabled="False"
             Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
             CommandParameter="theme_dark"
             Content="Dark"
@@ -48,5 +50,7 @@
             Text="About DarkArmor" />
         <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
         <Image Margin="0,12,0,0" Width="140" Height="140" Source="{Binding ViewModel.AppIcon}" />
+        <TextBlock Margin="0,12,0,0" Text="Developed and designed by @ahmedtalaat327 @at github." />
+
     </StackPanel>
 </Page>

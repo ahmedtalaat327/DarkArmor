@@ -1,5 +1,5 @@
 # DarkArmor [inDark Sneaky]
-</br>Our new project is built to serve MVVM pattern and Oracle sql commands with new .dll easy static funcs.</br></br>
+</br>New tool to cut packet off on network programmed in MVVM pattern for educational purposes.</br></br>
 <p align="center">
 <kbd>
 <img src="wpfui-icon.ico" alt="Glass-Type-Copy-5-1366x697" 

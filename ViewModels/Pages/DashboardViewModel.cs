@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Media;
 
 namespace DarkArmor.ViewModels.Pages
 {
@@ -19,7 +21,9 @@ namespace DarkArmor.ViewModels.Pages
             IndicatorAppear = Visibility.Visible;
 
             DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" , Active = true });
-            DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" });
+            DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" , 
+                Status = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ED1C24"))
+                                      });
             DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" });
             DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" });
             DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" });
@@ -35,11 +39,17 @@ namespace DarkArmor.ViewModels.Pages
     }
     public class MyDeiceTest
     {
+
         public int Index { get; set; } = 0;
+
         public string Name { get; set; } = "None";
+        
         public string Description { get; set; } = "Device";
 
         public bool Active { get; set; } = false;
+
+        [Browsable(false)]
+        public SolidColorBrush Status { get; set; } = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#40f4cd"));
 
     }
 }

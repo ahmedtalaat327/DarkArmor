@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:DarkArmor.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:local2="clr-namespace:DarkArmor.Views.Messages"
     Title="DashboardPage"
     d:DataContext="{d:DesignInstance local:DashboardPage,
                                      IsDesignTimeCreatable=False}"
@@ -17,6 +18,7 @@
     mc:Ignorable="d">
 
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
            
@@ -61,6 +63,7 @@
                                  ColumnWidth="*" 
                                  IsReadOnly="True"
                                  ItemsSource="{Binding ViewModel.DataShowed}"
+                                 Name="tabledata"
                                  MouseDoubleClick="DataGrid_MouseDoubleClick">
                         <ui:DataGrid.ColumnHeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -101,7 +104,9 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
-                                            <Border Height="5" Width="5" Background="#77306fff" CornerRadius="15">
+                                            <Border Height="5" Width="5"
+                                                    Background="{Binding Status}"
+                                                    CornerRadius="15">
                                                 <ContentPresenter Margin="5"/>
                                             </Border>
                                         </ControlTemplate>
@@ -139,5 +144,8 @@
             </StackPanel>
 
         </Grid>
+        
+        <local2:DeviceShowcase x:Name="messageControl"  Visibility="Collapsed" />
+
     </Grid>
 </Page>

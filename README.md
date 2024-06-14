@@ -19,3 +19,11 @@ style="corner-radius: 4; border: 5; border-color: blue;">
 
 There are many great apps out there available. however, I didn't find one that really suited my needs UI and performance so I created this enhanced one.
 
+<!-- ROADMAP PROJECT -->
+## ROAD MAP 🌴
+* Set Environemnt intializer
+* Add Data classes to the folowing : 
+    * Execute the collector.
+    * Send request from (src) to (dest).
+    * Collect reply as akn from the collector.
+    * Get info from domain ARP message.

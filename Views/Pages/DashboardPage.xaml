@@ -24,6 +24,7 @@
            
         </Grid.ColumnDefinitions>
         
+        
         <Grid Grid.Column="0">
             <Grid.Background>
                 <SolidColorBrush Color="#202020"/>
@@ -138,7 +139,30 @@
                              
                         </DataGrid.CellStyle>
 
+
+                        <DataGrid.Columns>
+
+                          
+                            <DataGridTemplateColumn DisplayIndex="3" Header="Active">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ui:ToggleSwitch Name="PART_Editor" 
+                                                         HorizontalAlignment="Center"
+                              Command="{Binding View.DataContext.ApproveCommand}"  
+                              CommandParameter="{Binding RowData.Row}" 
+                              IsChecked="{Binding Active}"
+                              Checked="PART_Editor_Checked"
+                              Unchecked="PART_Editor_Unchecked"/>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                          
+                        </DataGrid.Columns>
+
                     </ui:DataGrid>
+               
                 </StackPanel>
 
             </StackPanel>
@@ -147,5 +171,12 @@
         
         <local2:DeviceShowcase x:Name="messageControl"  Visibility="Collapsed" />
 
+        <DockPanel Grid.Row="1" LastChildFill="False">
+            <ui:Button DockPanel.Dock="Right"  Icon="{ui:SymbolIcon ReceiptPlay24}"  Background="#006fff" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="30" HorizontalAlignment="Right">
+                <ui:Button.Effect>
+                <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
+            </ui:Button.Effect>
+        </ui:Button>
+        </DockPanel>
     </Grid>
 </Page>

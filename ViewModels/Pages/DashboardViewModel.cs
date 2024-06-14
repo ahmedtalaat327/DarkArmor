@@ -14,19 +14,22 @@ namespace DarkArmor.ViewModels.Pages
         [ObservableProperty]
         private ObservableCollection<MyDeiceTest> _dataShowed = new ObservableCollection<MyDeiceTest>();
 
+       
         [RelayCommand]
         private void OnCounterIncrement()
         {
             Counter=true;
             IndicatorAppear = Visibility.Visible;
 
-            DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" , Active = true });
-            DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" , 
-                Status = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ED1C24"))
-                                      });
-            DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" });
-            DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" });
-            DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "Ahmed", Description = "PC" });
+            DataShowed.Add(new MyDeiceTest() { Index = 0, Name = "John Doe", Description = "PC" });
+            DataShowed.Add(new MyDeiceTest() { Index = 1, Name = "Kendrik Paul", Description = "PC" , 
+                Status = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ED1C24")) ,
+                Active = false
+            });
+            DataShowed.Add(new MyDeiceTest() { Index = 2, Name = "Boland Upon", Description = "PC" });
+            DataShowed.Add(new MyDeiceTest() { Index = 3, Name = "Sado Firo", Description = "PC" });
+            DataShowed.Add(new MyDeiceTest() { Index = 4, Name = "Dimitry Alon", Description = "PC" });
+
 
 
         }
@@ -37,19 +40,21 @@ namespace DarkArmor.ViewModels.Pages
             IndicatorAppear = Visibility.Collapsed;
         }
     }
-    public class MyDeiceTest
+    public partial class MyDeiceTest : ObservableObject
     {
+        [ObservableProperty]
+        private int _index = 0;
 
-        public int Index { get; set; } = 0;
+        [ObservableProperty]
+        private string _name = "None";
+        [ObservableProperty]
+        private string _description  = "Device";
+        [ObservableProperty]
+        private bool _active  = true;
 
-        public string Name { get; set; } = "None";
-        
-        public string Description { get; set; } = "Device";
-
-        public bool Active { get; set; } = false;
-
+        [ObservableProperty]
         [Browsable(false)]
-        public SolidColorBrush Status { get; set; } = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#40f4cd"));
+        private SolidColorBrush _status = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#40f4cd"));
 
     }
 }

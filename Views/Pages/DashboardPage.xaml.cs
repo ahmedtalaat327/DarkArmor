@@ -1,4 +1,5 @@
 ﻿
+using DarkArmor.Models;
 using DarkArmor.ViewModels.Pages;
 using Helpers.DarkArmor;
 using System.Windows.Controls;
@@ -18,19 +19,39 @@ namespace DarkArmor.Views.Pages
 
             InitializeComponent();
 
+            
             this.tabledata.AutoGeneratingColumn += Tabledata_AutoGeneratingColumn;
+            
         }
 
         private void Tabledata_AutoGeneratingColumn(object? sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if ((string)e.Column.Header == nameof(MyDeiceTest.Status))
+            if ((string)e.Column.Header == nameof(NetworkDevice.OSName))
             {
                 e.Cancel = true;
             }
-            if ((string)e.Column.Header == nameof(MyDeiceTest.Active))
+            if ((string)e.Column.Header == nameof(NetworkDevice.Active))
             {
                 e.Cancel = true;
             }
+            if ((string)e.Column.Header == nameof(NetworkDevice.Status))
+            {
+                e.Cancel = true;
+            }
+            if ((string)e.Column.Header == nameof(NetworkDevice.Type))
+            {
+                e.Cancel = true;
+            }
+            if ((string)e.Column.Header == nameof(NetworkDevice.Nic))
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Column.Width = new DataGridLength(1,DataGridLengthUnitType.Auto);
+            }
+
+            e.Column.CanUserSort = false;
 
         }
 

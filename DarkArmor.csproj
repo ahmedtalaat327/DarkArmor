@@ -33,6 +33,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="NtL">
+      <HintPath>StaticLibs\NtL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Assets\DarkArmorStyles.xaml" />
   </ItemGroup>
 

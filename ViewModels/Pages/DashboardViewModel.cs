@@ -1,6 +1,7 @@
 ﻿using DarkArmor.Models;
+using DarkArmor.Models.Skeleton;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Net;
 using System.Windows.Media;
 
 namespace DarkArmor.ViewModels.Pages
@@ -23,13 +24,17 @@ namespace DarkArmor.ViewModels.Pages
             IndicatorAppear = Visibility.Visible;
 
            
-            DataShowed.Add(new NetworkDevice() { DeviceIndex = 0, DomainName = "John Doe", Type = Models.Skeleton.DeviceType.UDevice  , 
-                Status = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ED1C24")) ,
-                Active = false
+            DataShowed.Add(new NetworkDevice() {
+                DeviceIndex = 0, DomainName = "John Doe", Type = Models.Skeleton.DeviceType.UDevice  , 
+                //Status = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ED1C24")) ,
+                Active = true ,
+                Nic = new NICController() { Nic_ndex = 0, Address = IPAddress.Parse("192.168.0.0"), Manufacture = "some trading manf", PhysicalAdress = "00:00:00:00" }
             });
-           
 
 
+          //  ((NavigationViewItem)(App.GetService<MainWindowViewModel>().MenuItems[0])).Content = "dd";
+
+            
 
         }
         [RelayCommand]
@@ -37,6 +42,23 @@ namespace DarkArmor.ViewModels.Pages
         {
             Counter = false;
             IndicatorAppear = Visibility.Collapsed;
+        }
+        [RelayCommand]
+        public void OnToggleUnCheck(int keyin) {
+
+            //becomes unactive 
+            DataShowed[keyin].Active = false;
+            DataShowed[keyin].Status = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#ED1C24"));
+
+        }
+        [RelayCommand]
+        public void OnToggleCheck(int keyin)
+        {
+
+            //becomes unactive 
+            DataShowed[keyin].Active = true;
+            DataShowed[keyin].Status = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#40f4cd"));
+
         }
     }
     /*

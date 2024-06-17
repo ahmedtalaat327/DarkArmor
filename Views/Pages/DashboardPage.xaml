@@ -170,7 +170,7 @@
                                                     CornerRadius="5">
                                                     <StackPanel Orientation="Horizontal">
                                                     <ui:SymbolIcon Symbol="StoreMicrosoft20" />
-                                                    <TextBlock Text="Windows"/>
+                                                    <TextBlock Text="{Binding OSName}"/>
                                                     </StackPanel>
                                                 </Border>
                                                 <Border 
@@ -180,7 +180,7 @@
                                                     BorderBrush="#998366" 
                                                     Background="#839966" 
                                                     CornerRadius="5">
-                                                    <TextBlock Text="PC"/>
+                                                    <TextBlock Text="{Binding Type}"/>
                                                 </Border>
                                                 <Border  
                                                     Margin="1" 
@@ -189,7 +189,7 @@
                                                     BorderBrush="#669975" 
                                                     Background="#669299" 
                                                     CornerRadius="5">
-                                                    <TextBlock Text="Qualcomme adapter 12001."/>
+                                                    <TextBlock Text="{Binding Nic.Manufacture}"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -213,7 +213,7 @@
                               CommandParameter="{Binding RowData.Row}" 
                               IsChecked="{Binding Active}"
                               Checked="PART_Editor_Checked"
-                              Unchecked="PART_Editor_Unchecked"/>
+                              Unchecked="PART_Editor_UnChecked"/>
 
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

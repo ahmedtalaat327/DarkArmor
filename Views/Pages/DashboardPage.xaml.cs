@@ -3,7 +3,6 @@ using DarkArmor.Models;
 using DarkArmor.ViewModels.Pages;
 using Helpers.DarkArmor;
 using System.Windows.Controls;
-using System.Windows.Media;
 using Wpf.Ui.Controls;
 
 namespace DarkArmor.Views.Pages
@@ -68,7 +67,7 @@ namespace DarkArmor.Views.Pages
             }
         }
 
-        private void PART_Editor_Checked(object sender, RoutedEventArgs e)
+        private void PART_Editor_UnChecked(object sender, RoutedEventArgs e)
         {
 
             ToggleSwitch checkBox = (ToggleSwitch)e.OriginalSource;
@@ -77,12 +76,11 @@ namespace DarkArmor.Views.Pages
 
             if (index == -1) return;
 
-
-            ViewModel.DataShowed[index].Status = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#40f4cd"));
-
+            //command here
+            ViewModel.OnToggleUnCheck(index);
         }
 
-        private void PART_Editor_Unchecked(object sender, RoutedEventArgs e)
+        private void PART_Editor_Checked(object sender, RoutedEventArgs e)
         {
             ToggleSwitch checkBox = (ToggleSwitch)e.OriginalSource;
             DataGridRow dataGridRow = VisualTreeHelpers.FindAncestor<DataGridRow>(checkBox);
@@ -91,11 +89,7 @@ namespace DarkArmor.Views.Pages
             if (index == -1) return;
 
             
-            ViewModel.DataShowed[index].Status = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#ED1C24"));
-           
-           
-
-
+            ViewModel.OnToggleCheck(index);
         }
     }
 }

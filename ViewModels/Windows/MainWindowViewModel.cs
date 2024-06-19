@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using DarkArmor.ViewModels.Pages;
+using System.Collections.ObjectModel;
 using Wpf.Ui.Controls;
 
 namespace DarkArmor.ViewModels.Windows
@@ -7,6 +8,9 @@ namespace DarkArmor.ViewModels.Windows
     {
         [ObservableProperty]
         private string _applicationTitle = "inDark Sneaky";
+
+        [ObservableProperty]
+        private Uri _appIcon = null;
 
         [ObservableProperty]
         private ObservableCollection<object> _menuItems = new()
@@ -31,16 +35,32 @@ namespace DarkArmor.ViewModels.Windows
         {
             new NavigationViewItem()
             {
+                 
                 Content = "Settings",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
                 TargetPageType = typeof(Views.Pages.SettingsPage)
             }
         };
 
+        /*
         [ObservableProperty]
         private ObservableCollection<MenuItem> _trayMenuItems = new()
         {
-            new MenuItem { Header = "Home", Tag = "tray_home" }
+            new MenuItem { Header = "Notification", Tag = "tray_bell" }
         };
+        */
+        [RelayCommand]
+        public void OnWindowLoad()
+        {
+            var x = App.GetService<SettingsViewModel>().Released;
+            if (x)
+            {
+                AppIcon = new Uri("/Assets/wpfui-icon-256.png", UriKind.RelativeOrAbsolute);
+            }
+            else
+            {
+                AppIcon = new Uri("/Assets/beta-wpfui-icon-256.png", UriKind.RelativeOrAbsolute);
+            }
+        }
     }
 }

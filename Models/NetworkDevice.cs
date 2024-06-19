@@ -28,8 +28,7 @@ namespace DarkArmor.Models
         [ObservableProperty]
         [Browsable(false)]
         public NICController _nic = new NICController() { Nic_ndex = 0,Address = IPAddress.Parse("192.168.0.0") ,Manufacture = "some trading manf", PhysicalAdress = "00:00:00:00"};
-        [ObservableProperty]
-        [Browsable(false)]
-        private SolidColorBrush _status = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#40f4cd"));
+         
+      
     }
 }

@@ -33,10 +33,6 @@ namespace DarkArmor.Views.Pages
             {
                 e.Cancel = true;
             }
-            if ((string)e.Column.Header == nameof(NetworkDevice.Status))
-            {
-                e.Cancel = true;
-            }
             if ((string)e.Column.Header == nameof(NetworkDevice.Type))
             {
                 e.Cancel = true;

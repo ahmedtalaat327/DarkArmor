@@ -12,10 +12,13 @@ namespace DarkArmor.ViewModels.Pages
         private string _appVersion = String.Empty;
 
         [ObservableProperty]
-        private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
+        private ApplicationTheme _currentTheme = ApplicationTheme.Dark;
 
         [ObservableProperty]
-        private Uri _appIcon = null;
+        private Uri? _appIcon = null;
+
+        [ObservableProperty]
+        private bool _released = false;
         public void OnNavigatedTo()
         {
             if (!_isInitialized)
@@ -27,8 +30,21 @@ namespace DarkArmor.ViewModels.Pages
         private void InitializeViewModel()
         {
             CurrentTheme = ApplicationThemeManager.GetAppTheme();
-            AppVersion = $"UiDesktopApp1 - {GetAssemblyVersion()}";
-            AppIcon = new Uri("/Assets/wpfui-icon-256.png", UriKind.RelativeOrAbsolute);
+            switch (Released)
+            {
+                case (true):
+                    AppVersion = $"Released - {GetAssemblyVersion()}";
+                    AppIcon = new Uri("/Assets/wpfui-icon-256.png", UriKind.RelativeOrAbsolute);
+                    break;
+                case (false):
+                    AppVersion = $"BETA - {GetAssemblyVersion()}";
+                    AppIcon = new Uri("/Assets/beta-wpfui-icon-256.png", UriKind.RelativeOrAbsolute);
+                    break;
+                default:
+                    AppVersion = $"BETA - {GetAssemblyVersion()}";
+                    AppIcon = new Uri("/Assets/beta-wpfui-icon-256.png", UriKind.RelativeOrAbsolute);
+            }
+           
             _isInitialized = true;
         }
 

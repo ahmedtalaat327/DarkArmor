@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\beta-wpfui-icon-256.png" />
     <None Remove="Assets\dotted.png" />
     <None Remove="Assets\headr-p.png" />
     <None Remove="Assets\process.gif" />
@@ -39,6 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\beta-wpfui-icon-256.png" />
     <Resource Include="Assets\DarkArmorStyles.xaml" />
   </ItemGroup>
 
@@ -48,6 +50,10 @@
     <Resource Include="Assets\process.gif" />
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

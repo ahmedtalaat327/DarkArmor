@@ -2,7 +2,7 @@
 using DarkArmor.Models.Skeleton;
 using System.Collections.ObjectModel;
 using System.Net;
-using System.Windows.Media;
+
 
 namespace DarkArmor.ViewModels.Pages
 {
@@ -48,16 +48,14 @@ namespace DarkArmor.ViewModels.Pages
 
             //becomes unactive 
             DataShowed[keyin].Active = false;
-            DataShowed[keyin].Status = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#ED1C24"));
 
         }
         [RelayCommand]
         public void OnToggleCheck(int keyin)
         {
 
-            //becomes unactive 
+            //becomes active 
             DataShowed[keyin].Active = true;
-            DataShowed[keyin].Status = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#40f4cd"));
 
         }
     }

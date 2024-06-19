@@ -64,5 +64,10 @@ namespace DarkArmor.Views.Windows
         {
             throw new NotImplementedException();
         }
+
+        private void FluentWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.OnWindowLoad();
+        }
     }
 }

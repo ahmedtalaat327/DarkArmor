@@ -14,7 +14,7 @@ style="corner-radius: 4; border: 5; border-color: blue;">
 
 * Main page.. 💡 </br></br>
 
-    <a href=""><img src="./Screenshot 2024-06-17 024644.png" ></a>
+    <a href=""><img src="./Screenshot 2024-06-19 042250.png" ></a>
 
 
 There are many great apps out there available. however, I didn't find one that really suited my needs UI and performance so I created this enhanced one.

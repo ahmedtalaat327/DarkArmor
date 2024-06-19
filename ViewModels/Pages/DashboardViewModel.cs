@@ -31,10 +31,7 @@ namespace DarkArmor.ViewModels.Pages
                 Nic = new NICController() { Nic_ndex = 0, Address = IPAddress.Parse("192.168.0.0"), Manufacture = "some trading manf", PhysicalAdress = "00:00:00:00" }
             });
 
-
-          //  ((NavigationViewItem)(App.GetService<MainWindowViewModel>().MenuItems[0])).Content = "dd";
-
-            
+      
 
         }
         [RelayCommand]

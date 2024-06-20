@@ -27,7 +27,7 @@ namespace DarkArmor.Models
         public bool _active = true;
         [ObservableProperty]
         [Browsable(false)]
-        public NICController _nic = new NICController() { Nic_ndex = 0,Address = IPAddress.Parse("192.168.0.0") ,Manufacture = "some trading manf", PhysicalAdress = "00:00:00:00"};
+        public NICController _nic = new NICController() { Nic_index = 0,Address = IPAddress.Parse("192.168.0.0"), Mask = IPAddress.Parse("255.255.0.0") ,Manufacture = "some trading manf", PhysicalAdress = "00:00:00:00"};
          
       
     }

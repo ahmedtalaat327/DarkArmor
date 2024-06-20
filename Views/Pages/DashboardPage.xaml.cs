@@ -4,12 +4,15 @@ using DarkArmor.ViewModels.Pages;
 using Helpers.DarkArmor;
 using System.Windows.Controls;
 using Wpf.Ui.Controls;
+using System.Windows.Threading;
 
 namespace DarkArmor.Views.Pages
 {
     public partial class DashboardPage : INavigableView<DashboardViewModel>
     {
         public DashboardViewModel ViewModel { get; }
+
+        private DispatcherTimer checkMyDataShowedCollection = new DispatcherTimer();
 
         public DashboardPage(DashboardViewModel viewModel)
         {
@@ -20,7 +23,36 @@ namespace DarkArmor.Views.Pages
 
             
             this.tabledata.AutoGeneratingColumn += Tabledata_AutoGeneratingColumn;
+
+
+            checkMyDataShowedCollection.Tick += CheckMyDataShowedCollection_Tick; ;
+            checkMyDataShowedCollection.Interval = new TimeSpan(0, 0, 1);
             
+        }
+
+        private void CheckMyDataShowedCollection_Tick(object? sender, EventArgs e)
+        {
+            for (int index = 0; index < ViewModel.DiscoveredNICControllers.Count; index++)
+            {
+
+                if (ViewModel.DiscoveredNICControllers.Count > ViewModel.DataShowed.Count)
+                {
+
+                    ViewModel.DataShowed.Add(new NetworkDevice()
+                    {
+                        DeviceIndex = index,
+                        DomainName = "John Doe",
+                        Type = Models.Skeleton.DeviceType.UDevice,
+                        //Status = new SolidColorBrush((Color)ColorConverter.ConvertFromS tring("#ED1C24")) ,
+                        Active = true,
+                        Nic = ViewModel.DiscoveredNICControllers[index]
+                    });
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
 
         private void Tabledata_AutoGeneratingColumn(object? sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -86,6 +118,11 @@ namespace DarkArmor.Views.Pages
 
             
             ViewModel.OnToggleCheck(index);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            checkMyDataShowedCollection.Start();
         }
     }
 }

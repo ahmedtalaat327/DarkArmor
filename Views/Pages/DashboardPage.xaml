@@ -44,7 +44,7 @@
                     <StackPanel Margin="1" VerticalAlignment="Center"  Orientation="Horizontal">
                         <ui:Button  Margin="5 0 0 0" FontSize="16" Icon="{ui:SymbolIcon CalendarPlay16}" 
                              Content="Play Monitoring" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                                Background="#006fff"  Command="{Binding ViewModel.CounterIncrementCommand}" />
+                                Background="#006fff" Click="Button_Click"  Command="{Binding ViewModel.CounterIncrementCommand}" />
 
                         <ui:Button  Margin="5 0 0 0" FontSize="16" Icon="{ui:SymbolIcon DismissSquare20 }" 
                              Content="Stop" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
@@ -194,7 +194,7 @@
                                                     BorderBrush="#669975" 
                                                     Background="#669299" 
                                                     CornerRadius="5">
-                                                    <TextBlock Text="{Binding Nic.Manufacture}"/>
+                                                    <TextBlock Text="{Binding Nic.Address}"/>
                                                 </Border>
 
                                             </StackPanel>

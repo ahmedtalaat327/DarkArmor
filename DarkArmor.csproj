@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CliWrap" Version="3.6.6" />
     <PackageReference Include="WPF-UI" Version="3.0.4" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2 " />
@@ -34,12 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="NtL">
-      <HintPath>StaticLibs\NtL.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Assets\beta-wpfui-icon-256.png" />
     <Resource Include="Assets\DarkArmorStyles.xaml" />
   </ItemGroup>
@@ -50,10 +45,6 @@
     <Resource Include="Assets\process.gif" />
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

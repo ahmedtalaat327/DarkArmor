@@ -5,6 +5,8 @@ using Helpers.DarkArmor;
 using System.Windows.Controls;
 using Wpf.Ui.Controls;
 using System.Windows.Threading;
+using DarkArmor.Models.Skeleton;
+using System.Windows.Navigation;
 
 namespace DarkArmor.Views.Pages
 {
@@ -32,26 +34,54 @@ namespace DarkArmor.Views.Pages
 
         private void CheckMyDataShowedCollection_Tick(object? sender, EventArgs e)
         {
+            if (ViewModel.DiscoveredNICControllers.Count > ViewModel.DataShowed.Count)
+            {
+             //   int k = ViewModel.DiscoveredNICControllers.Count - ViewModel.DataShowed.Count - 1;
+
             for (int index = 0; index < ViewModel.DiscoveredNICControllers.Count; index++)
             {
-
-                if (ViewModel.DiscoveredNICControllers.Count > ViewModel.DataShowed.Count)
-                {
-
-                    ViewModel.DataShowed.Add(new NetworkDevice()
+                    if (ViewModel.DataShowed.Count > 0)
                     {
-                        DeviceIndex = index,
-                        DomainName = "John Doe",
-                        Type = Models.Skeleton.DeviceType.UDevice,
-                        //Status = new SolidColorBrush((Color)ColorConverter.ConvertFromS tring("#ED1C24")) ,
-                        Active = true,
-                        Nic = ViewModel.DiscoveredNICControllers[index]
-                    });
-                }
-                else
-                {
-                    return;
-                }
+                        foreach (var x in ViewModel.DataShowed.ToArray())
+                        {
+                            if (x.Nic != ViewModel.DiscoveredNICControllers[index])
+                            {
+                                ViewModel.DataShowed.Add(new NetworkDevice()
+                                {
+                                    DeviceIndex = index,
+                                    DomainName = "John Doe",
+                                    Type = Models.Skeleton.DeviceType.UDevice,
+                                    //Status = new SolidColorBrush((Color)ColorConverter.ConvertFromS tring("#ED1C24")) ,
+                                    Active = true,
+                                    Nic = ViewModel.DiscoveredNICControllers[index]
+                                });
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ViewModel.DataShowed.Add(new NetworkDevice()
+                        {
+                            DeviceIndex = index,
+                            DomainName = "John Doe",
+                            Type = Models.Skeleton.DeviceType.UDevice,
+                            //Status = new SolidColorBrush((Color)ColorConverter.ConvertFromS tring("#ED1C24")) ,
+                            Active = true,
+                            Nic = ViewModel.DiscoveredNICControllers[index]
+                        });
+                    }
+                
+                    
+             
+            }
+            }
+            else
+            {
+                return;
             }
         }
 

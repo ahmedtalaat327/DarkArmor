@@ -29,6 +29,8 @@ namespace DarkArmor.ViewModels.Pages
             Counter =true;
             IndicatorAppear = Visibility.Visible;
 
+            DiscoveredNICControllers.Clear();
+            DataShowed.Clear();
             /*
              DataShowed.Add(new NetworkDevice() {
                  DeviceIndex = 0, DomainName = "John Doe", Type = Models.Skeleton.DeviceType.UDevice  , 
@@ -42,7 +44,7 @@ namespace DarkArmor.ViewModels.Pages
             };
 
              await new ARPRequest(local_nicc, DiscoveredNICControllers).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
-            
+
             /*
             for(int index = 0; index < DiscoveredNICControllers.Count; index++)
             {
@@ -57,13 +59,16 @@ namespace DarkArmor.ViewModels.Pages
                 });
             }
             */
-
+            Counter = false;
+            IndicatorAppear = Visibility.Collapsed;
         }
         [RelayCommand]
         private void OnCounterReset()
         {
             Counter = false;
             IndicatorAppear = Visibility.Collapsed;
+
+            //you need a way ti capture the process and stop it / end it
         }
         [RelayCommand]
         public void OnToggleUnCheck(int keyin) {

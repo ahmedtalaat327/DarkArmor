@@ -63,12 +63,13 @@ namespace DarkArmor.ViewModels.Pages
             IndicatorAppear = Visibility.Collapsed;
         }
         [RelayCommand]
-        private void OnCounterReset()
+        private async Task OnCounterReset()
         {
             Counter = false;
             IndicatorAppear = Visibility.Collapsed;
 
-            //you need a way ti capture the process and stop it / end it
+            //you need a way to capture the process and stop it / end it
+            await ARPRequest.StopAllProcess();
         }
         [RelayCommand]
         public void OnToggleUnCheck(int keyin) {

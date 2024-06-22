@@ -1,6 +1,7 @@
 ﻿using CliWrap;
 using DarkArmor.Models.Skeleton;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Net;
 using System.Text;
 
@@ -22,6 +23,8 @@ namespace DarkArmor.Data
         private bool custom_range_scan = false;
         private List<string> ips_to_scan = new List<string>();
         private string artifial_broadcast = null;
+
+        private static List<CancellationTokenSource> ctcs = new List<CancellationTokenSource>();
         public ARPRequest(NICController currentInterface, ObservableCollection<NICController> refrenceredColls,double timeForARPReq = 0.49, bool shortScan = false, string someNewBroadcast = null)
         {
 
@@ -77,12 +80,14 @@ namespace DarkArmor.Data
 
                 try
                 {
-                    await Cli.Wrap("powershell.exe")
+                   await Cli.Wrap("powershell.exe")
                         .WithArguments(new[] { $@"& '{url}\Processes\Router Scanner.exe'" + " " + parameter1Value })
                         // This can be simplified with `ExecuteBufferedAsync()`
                         .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForScnnerBoardRunning))
                         .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
                         .ExecuteAsync(cts.Token);
+
+                    ctcs.Add(cts);
                 }
                 catch (OperationCanceledException)
                 {
@@ -145,6 +150,7 @@ namespace DarkArmor.Data
                         });
 
 
+
                     index++;
 
 
@@ -202,12 +208,13 @@ namespace DarkArmor.Data
                 var stdErrBuffer = new StringBuilder();
                 try
                 {
-                    await Cli.Wrap("powershell.exe")
+                   await Cli.Wrap("powershell.exe")
                         .WithArguments(new[] { $@"& '{url}\Processes\Request.exe'" + " " + paramsForReq[0] + " " + paramsForReq[1] })
                         // This can be simplified with `ExecuteBufferedAsync()`
                         .WithStandardOutputPipe(PipeTarget.ToStringBuilder(stdOutBuffer))
                         .WithStandardErrorPipe(PipeTarget.ToStringBuilder(stdErrBuffer))
                         .ExecuteAsync(cts.Token);
+                    ctcs.Add(cts);
                 }
                 catch (OperationCanceledException)
                 {
@@ -288,6 +295,20 @@ namespace DarkArmor.Data
             }
             return newList;
         }
+        public static async Task StopAllProcess()
+        {
+            
+            await Task.Run(async () =>
+            {
+                await Task.Delay(10);
+                foreach(var c in ctcs)
+                {
+                    c.Cancel();
+                }
+                 
+            });
+        }
+ 
     }
 
 }

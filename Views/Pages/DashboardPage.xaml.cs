@@ -7,6 +7,8 @@ using Wpf.Ui.Controls;
 using System.Windows.Threading;
 using DarkArmor.Models.Skeleton;
 using System.Windows.Navigation;
+using System;
+using System.Reflection;
 
 namespace DarkArmor.Views.Pages
 {
@@ -14,7 +16,7 @@ namespace DarkArmor.Views.Pages
     {
         public DashboardViewModel ViewModel { get; }
 
-        private DispatcherTimer checkMyDataShowedCollection = new DispatcherTimer();
+        //private DispatcherTimer checkMyDataShowedCollection = new DispatcherTimer();
 
         public DashboardPage(DashboardViewModel viewModel)
         {
@@ -27,13 +29,41 @@ namespace DarkArmor.Views.Pages
             this.tabledata.AutoGeneratingColumn += Tabledata_AutoGeneratingColumn;
 
 
-            checkMyDataShowedCollection.Tick += CheckMyDataShowedCollection_Tick; ;
-            checkMyDataShowedCollection.Interval = new TimeSpan(0, 0, 1);
+           // checkMyDataShowedCollection.Tick += CheckMyDataShowedCollection_Tick; ;
+           // checkMyDataShowedCollection.Interval = new TimeSpan(0, 0, 1);
+
+            this.ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             
         }
+        int xcount = 0;
+        private void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals(nameof(ViewModel.DiscoveredNICControllers)))
+            {
+                App.Current.Dispatcher.Invoke(()=>
+                {
+                    
+                ///////////////TO-MAKE-ChAHNGES-ACCROSS-MULTIPLE-THREADS//////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////
+                ViewModel.DataShowed.Add(new NetworkDevice()
+                {
+                    DeviceIndex = xcount,
+                    DomainName = "John Doe",
+                    Type = Models.Skeleton.DeviceType.UDevice,
+                    Active = true,
+                    Nic = ViewModel.DiscoveredNICControllers[xcount]
+                });
+                //////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////
+                });
+                xcount++;
+            }
+        }
 
+        /*
         private void CheckMyDataShowedCollection_Tick(object? sender, EventArgs e)
         {
+            
             if (ViewModel.DiscoveredNICControllers.Count > ViewModel.DataShowed.Count)
             {
              //   int k = ViewModel.DiscoveredNICControllers.Count - ViewModel.DataShowed.Count - 1;
@@ -83,7 +113,11 @@ namespace DarkArmor.Views.Pages
             {
                 return;
             }
+            
+
+          
         }
+        */
 
         private void Tabledata_AutoGeneratingColumn(object? sender, DataGridAutoGeneratingColumnEventArgs e)
         {
@@ -152,7 +186,8 @@ namespace DarkArmor.Views.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            checkMyDataShowedCollection.Start();
+            xcount = 0;
+            //checkMyDataShowedCollection.Start();
         }
     }
 }

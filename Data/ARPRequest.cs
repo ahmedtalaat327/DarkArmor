@@ -1,7 +1,7 @@
 ﻿using CliWrap;
 using DarkArmor.Models.Skeleton;
+using DarkArmor.ViewModels.Pages;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Net;
 using System.Text;
 
@@ -9,10 +9,12 @@ using System.Text;
 
 namespace DarkArmor.Data
 {
-    public class ARPRequest
+    public class ARPRequest : ObservableObject 
     {
         private NICController def_NICController = null;
-        private ObservableCollection<NICController> NICController_list = new ObservableCollection<NICController>();
+        
+
+       
         private string Url = null;
         private int index = 0;
         private double timeOut = 0.49;
@@ -24,16 +26,25 @@ namespace DarkArmor.Data
         private List<string> ips_to_scan = new List<string>();
         private string artifial_broadcast = null;
 
+
+        private ObservableCollection<NICController> NICController_list { get; set; } = new ObservableCollection<NICController>();
         private static List<CancellationTokenSource> ctcs = new List<CancellationTokenSource>();
-        public ARPRequest(NICController currentInterface, ObservableCollection<NICController> refrenceredColls,double timeForARPReq = 0.49, bool shortScan = false, string someNewBroadcast = null)
+        public ARPRequest(NICController currentInterface,double timeForARPReq = 0.49, bool shortScan = false, string someNewBroadcast = null)
         {
 
             this.def_NICController = currentInterface;
             this.timeOut = timeForARPReq;
             this.custom_range_scan = shortScan;
             this.artifial_broadcast = someNewBroadcast;
-            this.NICController_list = refrenceredColls;
+          //  this.NICController_list = refrenceredColls;
+
+            this.NICController_list.CollectionChanged += (s, e) => {
+
+                App.GetService<DashboardViewModel>().DiscoveredNICControllers = App.GetService<DashboardViewModel>().DiscoveredNICControllers.Union(NICController_list).ToObservableCollection();
+                OnPropertyChanged("DiscoveredNICControllers");
+            };
         }
+        
         public async Task TrigProcAsync(string url)
         {
             Url = url;
@@ -309,6 +320,16 @@ namespace DarkArmor.Data
             });
         }
  
+    }
+    public static class MyEnumerable
+    {
+        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> source)
+        {
+            var result = new ObservableCollection<T>();
+            foreach (var item in source)
+                result.Add(item);
+            return result;
+        }
     }
 
 }

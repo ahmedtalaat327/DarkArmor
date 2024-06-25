@@ -25,42 +25,40 @@ namespace DarkArmor.ViewModels.Pages
         private async Task OnCounterIncrement()
         {
            
-
             Counter =true;
             IndicatorAppear = Visibility.Visible;
 
             DiscoveredNICControllers.Clear();
             DataShowed.Clear();
-            /*
-             DataShowed.Add(new NetworkDevice() {
-                 DeviceIndex = 0, DomainName = "John Doe", Type = Models.Skeleton.DeviceType.UDevice  , 
-                 //Status = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ED1C24")) ,
-                 Active = true ,
-                 Nic = new NICController() { Nic_index = 0, Address = IPAddress.Parse("192.168.0.0"), Manufacture = "some trading manf", PhysicalAdress = "00:00:00:00" }
-             });
-            */
-            var local_nicc = new NICController() { Nic_index = 4, Address = IPAddress.Parse("192.168.79.34")
-                                                  ,Gate = IPAddress.Parse("192.168.79.243"), Mask = IPAddress.Parse("255.255.255.0")
+           
+            var local_nicc = new NICController() { Nic_index = 4,
+                Address = IPAddress.Parse("192.168.79.34"),
+                Gate = IPAddress.Parse("192.168.79.243"),
+                Mask = IPAddress.Parse("255.255.255.0")
             };
 
-             await new ARPRequest(local_nicc, DiscoveredNICControllers).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
 
-            /*
-            for(int index = 0; index < DiscoveredNICControllers.Count; index++)
+            // DiscoveredNICControllers.Add(local_nicc);
+            // OnPropertyChanged(nameof(DiscoveredNICControllers));
+
+              await new ARPRequest(local_nicc).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
+
+            var local2_nicc = new NICController()
             {
-                DataShowed.Add(new NetworkDevice()
-                {
-                    DeviceIndex = 0,
-                    DomainName = "John Doe",
-                    Type = Models.Skeleton.DeviceType.UDevice,
-                    //Status = new SolidColorBrush((Color)ColorConverter.ConvertFromS tring("#ED1C24")) ,
-                    Active = true,
-                    Nic = DiscoveredNICControllers[index]
-                });
-            }
-            */
+                Nic_index = 4,
+                Address = IPAddress.Parse("192.168.79.34"),
+                Gate = IPAddress.Parse("192.168.79.243"),
+                Mask = IPAddress.Parse("255.255.255.0"),
+                PhysicalAdress = "02:23:a1:11:e8"
+            };
+
+          //  DiscoveredNICControllers.Add(local2_nicc);
+
+
             Counter = false;
             IndicatorAppear = Visibility.Collapsed;
+
+
         }
         [RelayCommand]
         private async Task OnCounterReset()
@@ -87,25 +85,5 @@ namespace DarkArmor.ViewModels.Pages
 
         }
     }
-    /*
-    public partial class MyDeiceTest : ObservableObject
-    {
-        [ObservableProperty]
-        private int _index = 0;
-
-        [ObservableProperty]
-        private string _name = "None";
-
-        [ObservableProperty]
-        [Browsable(false)]
-        private string _description  = "Device";
-
-        [ObservableProperty]
-        private bool _active  = true;
-
-        [ObservableProperty]
-        [Browsable(false)]
-        private SolidColorBrush _status = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#40f4cd"));
-
-    }*/
+   
 }

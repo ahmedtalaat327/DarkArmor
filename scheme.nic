@@ -1,0 +1,15 @@
+<?xml version = "1.0"?>
+
+<def-info>
+
+<niccontroller>
+   
+   <Nic_index>4</Nic_index>
+   <Address>192.168.1.46</Address> 
+   <Gate>192.168.1.1</Gate>
+   <Mask>255.255.255.0</Mask>
+
+</niccontroller>
+
+
+</def-info>

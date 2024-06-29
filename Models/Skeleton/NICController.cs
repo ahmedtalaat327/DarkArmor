@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿ 
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
+
 
 namespace DarkArmor.Models.Skeleton
 {
@@ -44,5 +42,19 @@ namespace DarkArmor.Models.Skeleton
         /// </summary>
         [ObservableProperty]
         public IPAddress? _broadcast;
+    }
+    public partial class NICControllerAsString
+    {
+        [XmlElement("Nic_index")]
+        public string Nic_index { get; set; }
+        [XmlElement("Address")]
+        public string Address { get; set; }
+        [XmlElement("Mask")]
+        public string Mask { get; set; }
+        [XmlElement("Gate")]
+        public string Gate { get; set; }
+        [XmlElement("PhysicalAdress")]
+        public string PhysicalAdress { get; set; }  
+
     }
 }

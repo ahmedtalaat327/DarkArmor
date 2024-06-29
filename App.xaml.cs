@@ -1,4 +1,5 @@
-﻿using DarkArmor.Services;
+﻿using DarkArmor.Helpers;
+using DarkArmor.Services;
 using DarkArmor.ViewModels.Pages;
 using DarkArmor.ViewModels.Windows;
 using DarkArmor.Views.Pages;
@@ -70,6 +71,7 @@ namespace DarkArmor
         /// </summary>
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            DesktopAppOnly.CreateSomeStreamBlock();
             _host.Start();
         }
 

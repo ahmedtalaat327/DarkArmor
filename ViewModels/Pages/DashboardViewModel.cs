@@ -30,18 +30,28 @@ namespace DarkArmor.ViewModels.Pages
 
             DiscoveredNICControllers.Clear();
             DataShowed.Clear();
-           
+
+            /*
             var local_nicc = new NICController() { Nic_index = 4,
-                Address = IPAddress.Parse("192.168.79.34"),
-                Gate = IPAddress.Parse("192.168.79.243"),
+                Address = IPAddress.Parse("192.168.100.45"),
+                Gate = IPAddress.Parse("192.168.100.1"),
                 Mask = IPAddress.Parse("255.255.255.0")
             };
-
+            */
+            var local_nicc_asstring = DesktopAppOnly.LoadFromStreamBlock();
+            NICController local_nicc = new NICController()
+            {
+                Nic_index = Int32.Parse(local_nicc_asstring.Nic_index),
+                Address = IPAddress.Parse(local_nicc_asstring.Address),
+                Gate = IPAddress.Parse(local_nicc_asstring.Gate),
+                Mask = IPAddress.Parse(local_nicc_asstring.Mask),
+                PhysicalAdress = local_nicc_asstring.PhysicalAdress
+            };
 
             // DiscoveredNICControllers.Add(local_nicc);
             // OnPropertyChanged(nameof(DiscoveredNICControllers));
 
-              await new ARPRequest(local_nicc).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
+            await new ARPRequest(local_nicc).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
 
             var local2_nicc = new NICController()
             {

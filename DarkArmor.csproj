@@ -26,6 +26,7 @@
     <None Remove="Assets\dotted.png" />
     <None Remove="Assets\headr-p.png" />
     <None Remove="Assets\process.gif" />
+    <None Remove="Assets\univers24-banner-graphic-0f616694f8e4.png" />
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
   </ItemGroup>
@@ -43,6 +44,7 @@
     <Resource Include="Assets\dotted.png" />
     <Resource Include="Assets\headr-p.png" />
     <Resource Include="Assets\process.gif" />
+    <Resource Include="Assets\univers24-banner-graphic-0f616694f8e4.png" />
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
   </ItemGroup>

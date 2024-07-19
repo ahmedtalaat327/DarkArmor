@@ -52,9 +52,13 @@
         </StackPanel>
         </Border>
 
-        <Border Background="#77306fff" 
+        <Border Width="520"
+                Height="480"
                 CornerRadius="10"
                 Margin="40 0 40 40">
+            <Border.Background>
+                <ImageBrush ImageSource="/Assets/univers24-banner-graphic-0f616694f8e4.png" Stretch="UniformToFill"/>
+            </Border.Background>
             <StackPanel Margin="30">
                 <TextBlock
             Margin="0,24,0,0"

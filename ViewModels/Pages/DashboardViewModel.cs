@@ -38,7 +38,12 @@ namespace DarkArmor.ViewModels.Pages
                 Mask = IPAddress.Parse("255.255.255.0")
             };
             */
-            var local_nicc_asstring = DesktopAppOnly.LoadFromStreamBlock();
+
+            var local_nicc_asstring = await Task.Run<NICControllerAsString>(
+                () => {
+
+                return    DesktopAppOnly.LoadFromStreamBlock();
+            });
             NICController local_nicc = new NICController()
             {
                 Nic_index = Int32.Parse(local_nicc_asstring.Nic_index),

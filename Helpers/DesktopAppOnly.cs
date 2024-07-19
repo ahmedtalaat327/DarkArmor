@@ -47,10 +47,11 @@ namespace DarkArmor.Helpers
         {
             var dir = Path.Combine(Environment
                                  .GetFolderPath(Environment.SpecialFolder.ApplicationData), "inDarkSneaky\\scheme.nic");
-           // dir = Path.Combine(dir, "scheme.nic");
+          
             XmlReader reader = XmlReader.Create(dir);
             XmlSerializer serializer = new XmlSerializer(typeof(NICControllerAsString));
             NICControllerAsString def_nic = (NICControllerAsString)serializer?.Deserialize(reader);
+
 
             return def_nic;
         }

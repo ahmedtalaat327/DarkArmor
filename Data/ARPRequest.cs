@@ -40,11 +40,30 @@ namespace DarkArmor.Data
 
             this.NICController_list.CollectionChanged += (s, e) => {
 
-                App.GetService<DashboardViewModel>().DiscoveredNICControllers = App.GetService<DashboardViewModel>().DiscoveredNICControllers.Union(NICController_list).ToObservableCollection();
+                //due to arp spoof will make reply again you need to filter changes comes using ip
+                //solve by removing dublicates items in NICController_list?
+                //the item will be added at the end always
+                //so for lloop will be from 0 to count -1
+                //item to be removed and searched will count -1 always
+               
+                for(int a = 0; a < this.NICController_list.Count - 1; a++)
+                {
+
+                    if (this.NICController_list[this.NICController_list.Count-1].Address.ToString() == this.NICController_list[a].Address.ToString())
+                    {
+                        this.NICController_list.RemoveAt(this.NICController_list.Count - 1);
+                    }
+                }
+
+               App.GetService<DashboardViewModel>().DiscoveredNICControllers = App.GetService<DashboardViewModel>().DiscoveredNICControllers.Union(NICController_list).ToObservableCollection();
+
                 OnPropertyChanged("DiscoveredNICControllers");
+              
+
+              
             };
         }
-        
+
         public async Task TrigProcAsync(string url)
         {
             Url = url;

@@ -40,23 +40,32 @@ namespace DarkArmor.Views.Pages
         {
             if (e.PropertyName.Equals(nameof(ViewModel.DiscoveredNICControllers)))
             {
-                App.Current.Dispatcher.Invoke(()=>
-                {
-                    
-                ///////////////TO-MAKE-ChAHNGES-ACCROSS-MULTIPLE-THREADS//////////////////////////
-                //////////////////////////////////////////////////////////////////////////////////
-                ViewModel.DataShowed.Add(new NetworkDevice()
-                {
-                    DeviceIndex = xcount,
-                    DomainName = "John Doe",
-                    Type = Models.Skeleton.DeviceType.UDevice,
-                    Active = true,
-                    Nic = ViewModel.DiscoveredNICControllers[xcount]
-                });
-                //////////////////////////////////////////////////////////////////////////////////
-                //////////////////////////////////////////////////////////////////////////////////
-                });
-                xcount++;
+               
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+
+                    try
+                    {
+                        ///////////////TO-MAKE-ChAHNGES-ACCROSS-MULTIPLE-THREADS//////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+                        ViewModel.DataShowed.Add(new NetworkDevice()
+                        {
+                            DeviceIndex = xcount,
+                            DomainName = "John Doe",
+                            Type = Models.Skeleton.DeviceType.UDevice,
+                            Active = true,
+                            Nic = ViewModel.DiscoveredNICControllers[xcount]
+                        });
+                            //////////////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////////////
+                    }
+                    catch (Exception notchangedcorrectly)
+                    {
+
+                    }
+                    });
+                    xcount++;
+               
             }
         }
 

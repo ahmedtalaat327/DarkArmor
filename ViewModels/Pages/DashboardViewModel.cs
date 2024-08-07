@@ -85,18 +85,51 @@ namespace DarkArmor.ViewModels.Pages
             await ARPRequest.StopAllProcess();
         }
         [RelayCommand]
-        public void OnToggleUnCheck(int keyin) {
+        public async Task OnToggleUnCheck(int keyin) {
 
             //becomes unactive 
-            DataShowed[keyin].Active = false;
+            //DataShowed[keyin].Active = false;
+
+
+            var local_nicc_asstring = await Task.Run<NICControllerAsString>(
+              () => {
+
+                  return DesktopAppOnly.LoadFromStreamBlock();
+              });
+            NICController local_nicc = new NICController()
+            {
+                Nic_index = Int32.Parse(local_nicc_asstring.Nic_index),
+                Address = IPAddress.Parse(local_nicc_asstring.Address),
+                Gate = IPAddress.Parse(local_nicc_asstring.Gate),
+                Mask = IPAddress.Parse(local_nicc_asstring.Mask),
+                PhysicalAdress = local_nicc_asstring.PhysicalAdress
+            };
+
+            await new ManARP(DesktopAppOnly.PathFinder.GetApplicationRoot(), local_nicc, 1,DataShowed[keyin]).TrigAsyncProc();
 
         }
         [RelayCommand]
-        public void OnToggleCheck(int keyin)
+        public async Task OnToggleCheck(int keyin)
         {
 
             //becomes active 
-            DataShowed[keyin].Active = true;
+            //DataShowed[keyin].Active = true;
+
+            var local_nicc_asstring = await Task.Run<NICControllerAsString>(
+              () => {
+
+                  return DesktopAppOnly.LoadFromStreamBlock();
+              });
+            NICController local_nicc = new NICController()
+            {
+                Nic_index = Int32.Parse(local_nicc_asstring.Nic_index),
+                Address = IPAddress.Parse(local_nicc_asstring.Address),
+                Gate = IPAddress.Parse(local_nicc_asstring.Gate),
+                Mask = IPAddress.Parse(local_nicc_asstring.Mask),
+                PhysicalAdress = local_nicc_asstring.PhysicalAdress
+            };
+
+            await new ManARP(DesktopAppOnly.PathFinder.GetApplicationRoot(), local_nicc, 0, DataShowed[keyin]).TrigAsyncProc();
 
         }
     }

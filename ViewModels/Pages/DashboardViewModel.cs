@@ -3,7 +3,10 @@ using DarkArmor.Helpers;
 using DarkArmor.Models;
 using DarkArmor.Models.Skeleton;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Management;
 using System.Net;
+using System.Security.Cryptography;
 
 
 namespace DarkArmor.ViewModels.Pages
@@ -20,6 +23,9 @@ namespace DarkArmor.ViewModels.Pages
 
         [ObservableProperty]
         public ObservableCollection<NICController> _discoveredNICControllers = new ObservableCollection<NICController> ();
+
+        [ObservableProperty]
+        public ObservableCollection<ObservableCollection<int>> _processesMimsIds = new ObservableCollection<ObservableCollection<int>>();
 
        [RelayCommand]
         private async Task OnCounterIncrement()
@@ -105,7 +111,7 @@ namespace DarkArmor.ViewModels.Pages
                 PhysicalAdress = local_nicc_asstring.PhysicalAdress
             };
 
-            await new ManARP(DesktopAppOnly.PathFinder.GetApplicationRoot(), local_nicc, 1,DataShowed[keyin]).TrigAsyncProc();
+            await new ManARP(DesktopAppOnly.PathFinder.GetApplicationRoot(), local_nicc, 1,DataShowed[keyin],keyin).TrigAsyncProc();
 
         }
         [RelayCommand]
@@ -114,7 +120,7 @@ namespace DarkArmor.ViewModels.Pages
 
             //becomes active 
             //DataShowed[keyin].Active = true;
-
+            /*
             var local_nicc_asstring = await Task.Run<NICControllerAsString>(
               () => {
 
@@ -130,7 +136,45 @@ namespace DarkArmor.ViewModels.Pages
             };
 
             await new ManARP(DesktopAppOnly.PathFinder.GetApplicationRoot(), local_nicc, 0, DataShowed[keyin]).TrigAsyncProc();
+            */
+            for(int x = 0; x < ProcessesMimsIds.Count; x++)
+            {
+                for(int y = 0; y < ProcessesMimsIds[x].Count; y++) {
+                
+                   if(keyin == ProcessesMimsIds[x][y])
+                    {
+                        var processId = ProcessesMimsIds[x][y+1];
+                        KillProcessAndChildren(processId);
+                        DataShowed[keyin].Active = true;
+                        break;
+                    }
+                }
+            }
+        }
 
+        private static void KillProcessAndChildren(int pid)
+        {
+            // Cannot close 'system idle process'.
+            if (pid == 0)
+            {
+                return;
+            }
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher
+                    ("Select * From Win32_Process Where ParentProcessID=" + pid);
+            ManagementObjectCollection moc = searcher.Get();
+            foreach (ManagementObject mo in moc)
+            {
+                KillProcessAndChildren(Convert.ToInt32(mo["ProcessID"]));
+            }
+            try
+            {
+                Process proc = Process.GetProcessById(pid);
+                proc.Kill();
+            }
+            catch (ArgumentException)
+            {
+                // Process already exited.
+            }
         }
     }
    

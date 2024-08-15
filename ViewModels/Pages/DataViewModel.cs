@@ -1,4 +1,8 @@
-﻿using DarkArmor.Models;
+﻿using DarkArmor.Data;
+using DarkArmor.Helpers;
+using DarkArmor.Models;
+using DarkArmor.Models.Skeleton;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 using Wpf.Ui.Controls;
 
@@ -8,8 +12,17 @@ namespace DarkArmor.ViewModels.Pages
     {
         private bool _isInitialized = false;
 
+
         [ObservableProperty]
-        private IEnumerable<DataColor> _colors;
+        private bool _counter = false;
+        [ObservableProperty]
+        private Visibility _indicatorAppear = Visibility.Collapsed;
+
+        [ObservableProperty]
+        private ObservableCollection<string> _cardsnics = new ObservableCollection<string>();
+
+        [ObservableProperty]
+        private int _selectednicindex = 0;
 
         public void OnNavigatedTo()
         {
@@ -19,27 +32,25 @@ namespace DarkArmor.ViewModels.Pages
 
         public void OnNavigatedFrom() { }
 
-        private void InitializeViewModel()
+        private async Task InitializeViewModel()
         {
-            var random = new Random();
-            var colorCollection = new List<DataColor>();
+            Counter = true;
+            IndicatorAppear = Visibility.Visible;
 
-            for (int i = 0; i < 8192; i++)
-                colorCollection.Add(
-                    new DataColor
-                    {
-                        Color = new SolidColorBrush(
-                            Color.FromArgb(
-                                (byte)200,
-                                (byte)random.Next(0, 250),
-                                (byte)random.Next(0, 250),
-                                (byte)random.Next(0, 250)
-                            )
-                        )
-                    }
-                );
 
-            Colors = colorCollection;
+            var res  = await new CollectNICS().TrigExpProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
+
+            Cardsnics.Clear();
+
+            foreach(var nic in res)
+            {
+                Cardsnics.Add(nic.Manufacture);
+            }
+            //usually this come from presaved settings 
+            Selectednicindex = 0;
+
+            Counter = false;
+            IndicatorAppear = Visibility.Collapsed;
 
             _isInitialized = true;
         }

@@ -16,6 +16,9 @@ style="corner-radius: 4; border: 5; border-color: blue;">
 
  <a href=""><img src="./vs.png" ></a>
 
+* NIC cards preferences [still beta]⚙️
+
+ <a href=""><img src="./stt.png" ></a>
 
 There are many great apps out there available. however, I didn't find one that really suited my needs UI and performance so I created this enhanced one.
 

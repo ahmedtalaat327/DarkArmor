@@ -27,6 +27,12 @@ namespace DarkArmor.ViewModels.Pages
         [ObservableProperty]
         public ObservableCollection<ObservableCollection<int>> _processesMimsIds = new ObservableCollection<ObservableCollection<int>>();
 
+        [ObservableProperty]
+        public NICController? localNic;
+
+        [ObservableProperty]
+        public bool firstLoad = true;
+
        [RelayCommand]
         private async Task OnCounterIncrement()
         {
@@ -44,42 +50,60 @@ namespace DarkArmor.ViewModels.Pages
                 Mask = IPAddress.Parse("255.255.255.0")
             };
             */
-
-            var local_nicc_asstring = await Task.Run<NICControllerAsString>(
-                () => {
-
-                return    DesktopAppOnly.LoadFromStreamBlock();
-            });
-            NICController local_nicc = new NICController()
+            if (FirstLoad)
             {
-                Nic_index = Int32.Parse(local_nicc_asstring.Nic_index),
-                Address = IPAddress.Parse(local_nicc_asstring.Address),
-                Gate = IPAddress.Parse(local_nicc_asstring.Gate),
-                Mask = IPAddress.Parse(local_nicc_asstring.Mask),
-                PhysicalAdress = local_nicc_asstring.PhysicalAdress
-            };
+                var local_nicc_asstring = await Task.Run<NICControllerAsString>(
+                    () =>
+                    {
 
+                        return DesktopAppOnly.LoadFromStreamBlock();
+                    });
+                LocalNic = new NICController()
+                {
+                    Nic_Index = Int32.Parse(local_nicc_asstring.Nic_Index),
+                    Address = IPAddress.Parse(local_nicc_asstring.Address),
+                    Gate = IPAddress.Parse(local_nicc_asstring.Gate),
+                    Mask = IPAddress.Parse(local_nicc_asstring.Mask),
+                    Broadcast = IPAddress.Parse(local_nicc_asstring.Broadcast),
+                    PhysicalAdress = local_nicc_asstring.PhysicalAdress,
+                    Manufacture = local_nicc_asstring.Manufacture,
+                    Active = bool.Parse(local_nicc_asstring.Active)
+
+
+                };
+                FirstLoad = false;
+            }
             // DiscoveredNICControllers.Add(local_nicc);
             // OnPropertyChanged(nameof(DiscoveredNICControllers));
 
-            await new ARPRequest(local_nicc).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
-
-            var local2_nicc = new NICController()
+            //check if this network is valid ? or not [2 states not active NIC or Looping
+            if ((bool)!LocalNic.Active || LocalNic.Address.ToString().Equals("127.0.0.1"))
             {
-                Nic_index = 4,
-                Address = IPAddress.Parse("192.168.79.34"),
-                Gate = IPAddress.Parse("192.168.79.243"),
-                Mask = IPAddress.Parse("255.255.255.0"),
-                PhysicalAdress = "02:23:a1:11:e8"
-            };
+                //behold cancel..!!!
+                Counter = false;
+                IndicatorAppear = Visibility.Collapsed;
+                return;
+            }
+            else
+            {
+                await new ARPRequest(LocalNic).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
+                /*
+                var local2_nicc = new NICController()
+                {
+                    Nic_index = 4,
+                    Address = IPAddress.Parse("192.168.79.34"),
+                    Gate = IPAddress.Parse("192.168.79.243"),
+                    Mask = IPAddress.Parse("255.255.255.0"),
+                    PhysicalAdress = "02:23:a1:11:e8"
+                };
+                */
+                //  DiscoveredNICControllers.Add(local2_nicc);
 
-          //  DiscoveredNICControllers.Add(local2_nicc);
 
+                Counter = false;
+                IndicatorAppear = Visibility.Collapsed;
 
-            Counter = false;
-            IndicatorAppear = Visibility.Collapsed;
-
-
+            }
         }
         [RelayCommand]
         private async Task OnCounterReset()
@@ -104,7 +128,7 @@ namespace DarkArmor.ViewModels.Pages
               });
             NICController local_nicc = new NICController()
             {
-                Nic_index = Int32.Parse(local_nicc_asstring.Nic_index),
+                Nic_Index = Int32.Parse(local_nicc_asstring.Nic_Index),
                 Address = IPAddress.Parse(local_nicc_asstring.Address),
                 Gate = IPAddress.Parse(local_nicc_asstring.Gate),
                 Mask = IPAddress.Parse(local_nicc_asstring.Mask),

@@ -11,7 +11,12 @@ namespace DarkArmor.Models.Skeleton
         /// index depend on discovery order
         /// </summary>
         [ObservableProperty]
-        public int? _nic_index;
+        public int? _nic_Index;
+        /// <summary>
+        /// interface name in freindly title
+        /// </summary>
+        [ObservableProperty]
+        public string? _friendlyName;
         /// <summary>
         /// MAC address captured within ARP reply
         /// </summary>
@@ -42,11 +47,18 @@ namespace DarkArmor.Models.Skeleton
         /// </summary>
         [ObservableProperty]
         public IPAddress? _broadcast;
+        /// <summary>
+        /// etermines if this NIC is the real active one!
+        /// </summary>
+        [ObservableProperty]
+        public bool? _Active;
     }
     public partial class NICControllerAsString
     {
-        [XmlElement("Nic_index")]
-        public string Nic_index { get; set; }
+        [XmlElement("Nic_Index")]
+        public string Nic_Index { get; set; }
+        [XmlElement("FriendlyName")]
+        public string FriendlyName { get; set; }
         [XmlElement("Address")]
         public string Address { get; set; }
         [XmlElement("Mask")]
@@ -54,7 +66,15 @@ namespace DarkArmor.Models.Skeleton
         [XmlElement("Gate")]
         public string Gate { get; set; }
         [XmlElement("PhysicalAdress")]
-        public string PhysicalAdress { get; set; }  
+        public string PhysicalAdress { get; set; }
+        [XmlElement("Manufacture")]
+        public string Manufacture { get; set; }
+        [XmlElement("Broadcast")]
+        public string Broadcast { get; set; }
+        [XmlElement("Active")]
+        public string Active { get; set; }
+
+
 
     }
 }

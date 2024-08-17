@@ -70,7 +70,7 @@ namespace DarkArmor.Data
             await Task.Run(async () =>
             {
 
-                string parameter1Value = def_NICController.Nic_index.ToString();
+                string parameter1Value = def_NICController.Nic_Index.ToString();
 
                 // string parameters =  parameter1Value;
 
@@ -169,7 +169,7 @@ namespace DarkArmor.Data
                     if (index > 0)
                         NICController_list.Add(new NICController
                         {
-                            Nic_index = index,
+                            Nic_Index = index,
                             Manufacture = "not set yet"/*await new DNSResolver().TrigProcAsync(Url, GetBetween(inp, "*", "*"), (timeOut * 1000).ToString())*/,
                             Address = IPAddress.Parse(GetBetween(inp, "#", "#")),
                             PhysicalAdress = GetBetween(inp, "*", "*"),
@@ -199,7 +199,7 @@ namespace DarkArmor.Data
                             // Console.WriteLine(line_used);
 
                         }
-                        await TrigProcAsync_Inner(Url, new string[] { def_NICController.Nic_index.ToString(), line_used, ips_to_scan.Count.ToString() });
+                        await TrigProcAsync_Inner(Url, new string[] { def_NICController.Nic_Index.ToString(), line_used, ips_to_scan.Count.ToString() });
 
                     }
                     else
@@ -213,7 +213,7 @@ namespace DarkArmor.Data
                             // Console.WriteLine(line_used);
 
                         }
-                        await TrigProcAsync_Inner(Url, new string[] { def_NICController.Nic_index.ToString(), line_used, ipnetwork.ListIPAddress().Count.ToString() });
+                        await TrigProcAsync_Inner(Url, new string[] { def_NICController.Nic_Index.ToString(), line_used, ipnetwork.ListIPAddress().Count.ToString() });
                     }
 
                     key_to_start_req_proc = true;

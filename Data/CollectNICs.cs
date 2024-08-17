@@ -177,7 +177,7 @@ namespace DarkArmor.Data
                     && !String.IsNullOrEmpty(linesOfDNIC[4]) && !String.IsNullOrEmpty(linesOfDNIC[5]) && !String.IsNullOrEmpty(linesOfDNIC[6])
                     && !String.IsNullOrEmpty(linesOfDNIC[7]))
                 {
-                    NICs.Add(new NICController() { Nic_index = counter, Manufacture = linesOfDNIC[1], Address = System.Net.IPAddress.Parse(linesOfDNIC[2]), PhysicalAdress = linesOfDNIC[3], Mask = System.Net.IPAddress.Parse(linesOfDNIC[5]), Broadcast = System.Net.IPAddress.Parse(linesOfDNIC[6]), Gate = System.Net.IPAddress.Parse(linesOfDNIC[7]) });
+                    NICs.Add(new NICController() { Nic_Index = counter, FriendlyName = linesOfDNIC[1], Address = System.Net.IPAddress.Parse(linesOfDNIC[2]), PhysicalAdress = linesOfDNIC[3], Active = linesOfDNIC[4] == "0" ? false : true, Mask = System.Net.IPAddress.Parse(linesOfDNIC[5]), Broadcast = System.Net.IPAddress.Parse(linesOfDNIC[6]), Gate = System.Net.IPAddress.Parse(linesOfDNIC[7]) });
 
                     counter++;
 

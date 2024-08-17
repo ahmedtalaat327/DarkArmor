@@ -133,12 +133,21 @@
                 <ui:TextBlock Grid.Row="1" Grid.Column="0" Margin="5 0 0 0" Padding="24 0 0 0 " VerticalAlignment="Center" Text="Network card :"/>
                 <ui:TextBlock Grid.Row="2" Grid.Column="0" Margin="5 0 0 0" Padding="24 0 0 0" VerticalAlignment="Top" Text="Time-out [in ms] :"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" Margin="5 5 20 5" Padding="4" VerticalAlignment="Center"
-                          ItemsSource="{Binding ViewModel.Cardsnics}" SelectedIndex="{Binding ViewModel.Selectednicindex}"/>
-                <ui:TextBox Grid.Row="2" Grid.Column="1" Margin="14 0 0 0" Padding="4" VerticalAlignment="Top" HorizontalAlignment="Center" MinWidth="100"
-                            DataContext="{Binding LocalNICs}"/>
+                          ItemsSource="{Binding ViewModel.CardsNics}" DisplayMemberPath="FriendlyName" SelectionChanged="ComboBox_SelectionChanged"
+                          SelectedIndex="{Binding ViewModel.SelectednicIndex}"/>
+                <Slider Grid.Row="2" Grid.Column="1" Margin="20 0 40 0" Padding="4" VerticalAlignment="Top" HorizontalAlignment="Stretch" MinWidth="100"
+                        AutoToolTipPlacement="BottomRight"
+                        AutoToolTipPrecision="0"
+                        IsSnapToTickEnabled="True"
+                        Maximum="147"
+                        Minimum="49"
+                        TickFrequency="49"
+                        
+                        TickPlacement="BottomRight"/>
             </Grid>
             <!--end of nic preferences-->
         </Grid>
+        <!-- Left Side-->
         <Grid Grid.Column="1" 
               VerticalAlignment="Stretch"
               HorizontalAlignment="Stretch"
@@ -148,8 +157,15 @@
                     <SolidColorBrush  Color="#212130"/>
 
                 </Border.Background>
-                <ui:RichTextBox Margin="15"/>
+                <ui:TextBlock Margin="25" Padding="10" Foreground="#00ee00" Text="{Binding ViewModel.PrintedCode,FallbackValue='this is your terminal'}">
+                    <ui:TextBlock.Background>
+                        <ImageBrush Opacity="0.23" ImageSource="/Assets/Glare-PNG-Photo.png"/>
+                     
+                    </ui:TextBlock.Background>
+                    
+                </ui:TextBlock>
             </Border>
         </Grid>
+        <!--end of left side-->
     </Grid>
 </Page>

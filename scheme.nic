@@ -1,15 +1,19 @@
 <?xml version = "1.0"?>
-
-<def-info>
-
-<niccontroller>
+ 
+ 
+<NICControllerAsString>
    
-   <Nic_index>4</Nic_index>
+   <Nic_Index>4</Nic_Index>
+   <FriendlyName>xxx</FriendlyName>
    <Address>192.168.1.46</Address> 
    <Gate>192.168.1.1</Gate>
    <Mask>255.255.255.0</Mask>
+   <PhysicalAdress>00:22:13:aa:44</PhysicalAdress>
+   <Manufacture>no_data</Manufacture>
+   <Broadcast>192.168.1.254</Broadcast>
+   <Active>true</Active>
 
-</niccontroller>
+</NICControllerAsString>
 
 
-</def-info>
+ 

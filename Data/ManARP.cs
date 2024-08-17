@@ -21,7 +21,7 @@ namespace DarkArmor.Data
         public ManARP(string _url,NICController _defInterface,int spf,NetworkDevice _victim,int indexofthevictim) { 
         
             this.url = _url;
-            this.interfIndex = (int)_defInterface.Nic_index;
+            this.interfIndex = (int)_defInterface.Nic_Index;
             this.spoofed = spf;
             this.sacrifiicedDevice = _victim;
             this.ipv4Gateway = this.sacrifiicedDevice.Nic?.Gate?.ToString();

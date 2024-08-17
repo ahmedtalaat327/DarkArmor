@@ -3,6 +3,7 @@ using DarkArmor.Helpers;
 using DarkArmor.Models;
 using DarkArmor.Models.Skeleton;
 using System.Collections.ObjectModel;
+using System.Windows.Documents;
 using System.Windows.Media;
 using Wpf.Ui.Controls;
 
@@ -19,10 +20,13 @@ namespace DarkArmor.ViewModels.Pages
         private Visibility _indicatorAppear = Visibility.Collapsed;
 
         [ObservableProperty]
-        private ObservableCollection<string> _cardsnics = new ObservableCollection<string>();
+        private ObservableCollection<NICController> _cardsNics = new ObservableCollection<NICController>();
 
         [ObservableProperty]
-        private int _selectednicindex = 0;
+        private int _selectednicIndex = 0;
+
+        [ObservableProperty]
+        private string _printedCode = "null";
 
         public void OnNavigatedTo()
         {
@@ -40,19 +44,54 @@ namespace DarkArmor.ViewModels.Pages
 
             var res  = await new CollectNICS().TrigExpProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
 
-            Cardsnics.Clear();
+            CardsNics.Clear();
 
             foreach(var nic in res)
             {
-                Cardsnics.Add(nic.Manufacture);
+                CardsNics.Add(nic);
             }
             //usually this come from presaved settings 
-            Selectednicindex = 0;
+            SelectednicIndex = 0;
 
             Counter = false;
             IndicatorAppear = Visibility.Collapsed;
 
             _isInitialized = true;
+        }
+        [RelayCommand]
+        public async Task OnNicChose(NICController nicc)
+        {
+            //print result
+            PrintedCode = $"<?xml version = \"1.0\"?>" +
+                $"\r\n" +
+                $"<NICControllerAsString>" +
+                $"\r\n   " +
+                $"<Nic_Index>{nicc.Nic_Index}</Nic_Index>" +
+                $"\r\n   " +
+                $"<Friendlyname>{nicc.FriendlyName}</Friendlyname>" +
+                $"\r\n   " +
+                $"<Address>{nicc.Address}</Address>" +
+                $"\r\n   " +
+                $"<Mask>{nicc.Mask}</Mask>" +
+                $"\r\n   " +
+                $"<Gate>{nicc.Gate}</Gate>" +
+                $"\r\n   " +
+                $"<PhysicalAdress>{nicc.PhysicalAdress}</PhysicalAdress>" +
+                $"\r\n   " +
+                $"<Manufacture>{nicc.Manufacture}</Manufacture>" +
+                $"\r\n   " +
+                $"<Broadcast>{nicc.Broadcast}</Broadcast>" +
+                $"\r\n   " +
+                $"<Active>{nicc.Active}</Active>" +
+                $"\r\n " +
+                $"</NICControllerAsString>" +
+                $"\r\n\r\n\r\n";
+            //chnge the current or defult nic controller used in scan 
+            App.GetService<DashboardViewModel>().LocalNic = nicc;
+            //break the role [loading as first time from the file]
+            App.GetService<DashboardViewModel>().FirstLoad = false ;
+            //save this to the scheme.nic file by writing it 
+
         }
     }
 }

@@ -38,6 +38,9 @@ namespace DarkArmor.ViewModels.Pages
 
         private async Task InitializeViewModel()
         {
+
+            _isInitialized = true;
+
             Counter = true;
             IndicatorAppear = Visibility.Visible;
 
@@ -56,7 +59,7 @@ namespace DarkArmor.ViewModels.Pages
             Counter = false;
             IndicatorAppear = Visibility.Collapsed;
 
-            _isInitialized = true;
+           
         }
         [RelayCommand]
         public async Task OnNicChose(NICController nicc)
@@ -68,7 +71,7 @@ namespace DarkArmor.ViewModels.Pages
                 $"\r\n   " +
                 $"<Nic_Index>{nicc.Nic_Index}</Nic_Index>" +
                 $"\r\n   " +
-                $"<Friendlyname>{nicc.FriendlyName}</Friendlyname>" +
+                $"<FriendlyName>{nicc.FriendlyName}</FriendlyName>" +
                 $"\r\n   " +
                 $"<Address>{nicc.Address}</Address>" +
                 $"\r\n   " +

@@ -51,7 +51,6 @@ namespace DarkArmor.Views.Pages
                         ViewModel.DataShowed.Add(new NetworkDevice()
                         {
                             DeviceIndex = xcount,
-                            DomainName = "John Doe",
                             Type = Models.Skeleton.DeviceType.UDevice,
                             Active = true,
                             Nic = ViewModel.DiscoveredNICControllers[xcount]

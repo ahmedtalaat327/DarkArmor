@@ -11,3 +11,5 @@ Main Points is only execlusive for the creator.
 Permits reuse within proprietary software as long as copies of the licensed software include a copy of the MIT license terms and copyright notice.
 Proprietary software stays proprietary.
 Explicitly states the rights of the user.
+
+-Final product may changes so conditions are vary-

@@ -134,7 +134,7 @@
                 <ui:TextBlock Grid.Row="2" Grid.Column="0" Margin="5 0 0 0" Padding="24 0 0 0" VerticalAlignment="Top" Text="Time-out [in ms] :"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" Margin="5 5 20 5" Padding="4" VerticalAlignment="Center"
                           ItemsSource="{Binding ViewModel.CardsNics}" DisplayMemberPath="FriendlyName" SelectionChanged="ComboBox_SelectionChanged"
-                          SelectedIndex="{Binding ViewModel.SelectednicIndex}"/>
+                          SelectedIndex="{Binding ViewModel.SelectednicIndex}" IsEnabled="{Binding ViewModel.NICComboBoxEnabled}"/>
                 <Slider Grid.Row="2" Grid.Column="1" Margin="20 0 40 0" Padding="4" VerticalAlignment="Top" HorizontalAlignment="Stretch" MinWidth="100"
                         AutoToolTipPlacement="BottomRight"
                         AutoToolTipPrecision="0"
@@ -142,7 +142,7 @@
                         Maximum="147"
                         Minimum="49"
                         TickFrequency="49"
-                        
+                        IsEnabled="{Binding ViewModel.NICComboBoxEnabled}"
                         TickPlacement="BottomRight"/>
             </Grid>
             <!--end of nic preferences-->

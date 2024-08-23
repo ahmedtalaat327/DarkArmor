@@ -22,11 +22,14 @@ namespace DarkArmor.ViewModels.Pages
         [ObservableProperty]
         private ObservableCollection<NICController> _cardsNics = new ObservableCollection<NICController>();
 
-        [ObservableProperty]
+        [ObservableProperty]//not used
         private int _selectednicIndex = 0;
 
         [ObservableProperty]
         private string _printedCode = "null";
+
+        [ObservableProperty]    
+        private bool _nICComboBoxEnabled = true;
 
         public void OnNavigatedTo()
         {
@@ -94,7 +97,7 @@ namespace DarkArmor.ViewModels.Pages
             //break the role [loading as first time from the file]
             App.GetService<DashboardViewModel>().FirstLoad = false ;
             //save this to the scheme.nic file by writing it 
-
+            NICComboBoxEnabled =  await DesktopAppOnly.PutToStreamBlock(nicc);
         }
     }
 }

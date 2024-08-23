@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:DarkArmor.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:DarkArmor.Models"
+   xmlns:local2="clr-namespace:DarkArmor.Views.Messages"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="DataPage"
     d:DataContext="{d:DesignInstance local:DataPage,
@@ -167,5 +168,10 @@
             </Border>
         </Grid>
         <!--end of left side-->
+        
+        
+        
+        <local2:SpeediSetup Grid.ColumnSpan="2" x:Name="messageControl" Visibility="Visible" />
+        
     </Grid>
 </Page>

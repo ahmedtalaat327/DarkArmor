@@ -34,6 +34,8 @@ namespace DarkArmor.Views.Pages
 
             this.ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             
+            //check environment files..
+
         }
         int xcount = 0;
         private void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

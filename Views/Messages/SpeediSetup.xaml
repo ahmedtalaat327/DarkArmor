@@ -45,7 +45,7 @@
             FontWeight="Medium"
             Text="Environment setup:" />
                         <TextBlock Foreground="Orange" Margin="0,12,0,0" Text="We will setup some libraries and files to make everything work correctly" />
-                        <Image MaxWidth="50" Margin="10" Source="/Assets/icons8-fix-96.png"/>
+                        <Image MaxWidth="50" Margin="10 10 10 30" Source="/Assets/icons8-fix-96.png"/>
                         
                         <!---grid process 4*n-->
                         <Grid 
@@ -70,16 +70,16 @@
 
                                 </Border.Effect>
                             </Border>
-                            <ui:TextBlock Margin="10" Grid.Row="0" Foreground="#fa0" Grid.Column="0" Text="#1"/>
-                            <ui:TextBlock Margin="10" Grid.Row="1" Foreground="#fa0" Grid.Column="0" Text="#2"/>
-                            <ui:TextBlock Margin="10" Grid.Row="2" Foreground="#fa0" Grid.Column="0" Text="#3"/>
+                            <ui:TextBlock Margin="10" Grid.Row="0" Foreground="#fa0" Grid.Column="0" FontSize="16"  Text="➊"/>
+                            <ui:TextBlock Margin="10" Grid.Row="1" Foreground="#fa0" Grid.Column="0"  FontSize="16"  Text="➋"/>
+                            <ui:TextBlock Margin="10" Grid.Row="2" Foreground="#fa0" Grid.Column="0"  FontSize="16"  Text="➌"/>
 
                             <ui:TextBlock Margin="10" Grid.Row="0" Foreground="#fa0"  Grid.Column="1" Text="Copy important data files in your system disk [secured]"/>
                             <ui:TextBlock Margin="10" Grid.Row="1" Foreground="#fa0"  Grid.Column="1" Text="Activate services and intiate virtual adapter to filter packets."/>
                             <ui:TextBlock Margin="10" Grid.Row="2" Foreground="#fa0"  Grid.Column="1" Text="Make sure all data is there and set flags."/>
 
                             <Border Margin="10" CornerRadius="4" Grid.Row="0" Grid.Column="2">
-                                <ui:TextBlock HorizontalAlignment="Center" Text="Wait"/>
+                                <ui:TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Wait"/>
                                 <Border.Background>
  
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -93,7 +93,7 @@
                             </Border>
 
                             <Border Margin="10" CornerRadius="4" Grid.Row="1" Grid.Column="2">
-                                <ui:TextBlock HorizontalAlignment="Center" Text="Wait"/>
+                                <ui:TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Wait"/>
                                 <Border.Background>
 
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -107,7 +107,7 @@
                             </Border>
 
                             <Border Margin="10" CornerRadius="4" Grid.Row="2" Grid.Column="2">
-                                <ui:TextBlock HorizontalAlignment="Center" Text="Wait"/>
+                                <ui:TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Wait"/>
                                 <Border.Background>
 
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -119,13 +119,11 @@
 
                                 </Border.Background>
                             </Border>
-                         
-                            <ui:Button Content="Restart" Background="#006fff" Grid.Row="0" Grid.Column="3"/>
 
-                            <ui:Button Content="Restart" Background="#006fff" Grid.Row="1" Grid.Column="3"/>
+                            <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="0" Grid.Column="3"/>
+                            <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="1" Grid.Column="3"/>
 
-
-                            <ui:Button Content="Restart" Background="#006fff" Grid.Row="2" Grid.Column="3"/>
+                            <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="2" Grid.Column="3"/>
                         </Grid>
                      
                         <!--end grid process-->
@@ -142,7 +140,7 @@
 
                     </Grid.ColumnDefinitions>
                     <ui:Button Grid.Column="0" Margin="15 1 5 1" HorizontalAlignment="Stretch" Foreground="Black" Background="Orange" Content="Start"/>
-                    <ui:Button Grid.Column="1" Margin="5 1 15 1"  HorizontalAlignment="Stretch" Content="Cancel" />
+                    <ui:Button Grid.Column="1" Margin="5 1 15 1"  HorizontalAlignment="Stretch" Content="Cancel" Click="Button_Click"/>
 
                 </Grid>
             </Grid>

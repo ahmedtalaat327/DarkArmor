@@ -1,13 +1,15 @@
 # DarkArmor [inDark Sneaky]
 
 <p align="center" width="100%">
-    <img width="25%" src="./beta-wpfui-icon-256.png">
+    <img width="18%" src="./beta-wpfui-icon-256.png">
 </p>
-(image.png)
+
 </br>New tool to cut packet off on network programmed in MVVM pattern for educational purposes.</br></br>
  
 
-[<img src="./Assets/home.png" width="280" style="display: block; margin: auto; "/>](image.png)
+<p align="center" width="100%">
+    <img width="55%" src="./Assets/home.png">
+</p>
  
 </br>
 

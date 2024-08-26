@@ -8,7 +8,7 @@ style=" max-width: 60; corner-radius: 4; border: 5; border-color: blue;   displa
 <p align="center">
 <kbd>
 <img src="./Assets/home.png" alt="Glass-Type-Copy-5-1366x697" 
-style="corner-radius: 4; max-width:330; border: 5; border-color: blue;">
+style="corner-radius: 4; max-width:300; border: 5; border-color: blue;">
 </kbd>
 </p>
 </br>

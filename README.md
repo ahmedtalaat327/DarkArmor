@@ -1,16 +1,11 @@
 # DarkArmor [inDark Sneaky]
-<img src="./Assets/beta-wpfui-icon-256.png" alt="Glass-Type-Copy-5-1366x697" 
-style="width:30% corner-radius: 4; border: 5; border-color: blue;   display: table-cell;
-    margin: 0 auto;
-    text-align: center;
-    vertical-align: middle;">
+
+[<img src="./Assets/beta-wpfui-icon-256.png" width="80" style="display: block; margin: auto; "/>](image.png)
 </br>New tool to cut packet off on network programmed in MVVM pattern for educational purposes.</br></br>
-<p align="center">
-<kbd>
-<img src="./Assets/home.png" alt="Glass-Type-Copy-5-1366x697" 
-style="corner-radius: 4;width:40% border: 5; border-color: blue;">
-</kbd>
-</p>
+ 
+
+[<img src="./Assets/home.png" width="280" style="display: block; margin: auto; "/>](image.png)
+ 
 </br>
 
 <!-- ABOUT THE PROJECT -->

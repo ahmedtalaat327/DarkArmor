@@ -1,6 +1,6 @@
 # DarkArmor [inDark Sneaky]
 <img src="./Assets/beta-wpfui-icon-256.png" alt="Glass-Type-Copy-5-1366x697" 
-style=" max-width: 60; corner-radius: 4; border: 5; border-color: blue;   display: table-cell;
+style="width:30% corner-radius: 4; border: 5; border-color: blue;   display: table-cell;
     margin: 0 auto;
     text-align: center;
     vertical-align: middle;">
@@ -8,7 +8,7 @@ style=" max-width: 60; corner-radius: 4; border: 5; border-color: blue;   displa
 <p align="center">
 <kbd>
 <img src="./Assets/home.png" alt="Glass-Type-Copy-5-1366x697" 
-style="corner-radius: 4; max-width:300; border: 5; border-color: blue;">
+style="corner-radius: 4;width:40% border: 5; border-color: blue;">
 </kbd>
 </p>
 </br>

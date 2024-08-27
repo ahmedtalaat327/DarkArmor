@@ -44,6 +44,7 @@ namespace DarkArmor.ViewModels.Pages
 
             _isInitialized = true;
 
+
             Counter = true;
             IndicatorAppear = Visibility.Visible;
 

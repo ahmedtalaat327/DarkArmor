@@ -27,6 +27,7 @@
     <None Remove="Assets\dotted.png" />
     <None Remove="Assets\Glare-PNG-Photo.png" />
     <None Remove="Assets\headr-p.png" />
+    <None Remove="Assets\home.png" />
     <None Remove="Assets\icons8-fix-96.png" />
     <None Remove="Assets\icons8-loading-infinity.gif" />
     <None Remove="Assets\process.gif" />
@@ -48,6 +49,7 @@
     <Resource Include="Assets\dotted.png" />
     <Resource Include="Assets\Glare-PNG-Photo.png" />
     <Resource Include="Assets\headr-p.png" />
+    <Resource Include="Assets\home.png" />
     <Resource Include="Assets\icons8-fix-96.png" />
     <Resource Include="Assets\icons8-loading-infinity.gif" />
     <Resource Include="Assets\process.gif" />

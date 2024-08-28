@@ -79,7 +79,7 @@
                             <ui:TextBlock Margin="10" Grid.Row="2" Foreground="#fa0"  Grid.Column="1" Text="Make sure all data is there and set flags."/>
 
                             <Border Margin="10" CornerRadius="4" Grid.Row="0" Grid.Column="2">
-                                <ui:TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Wait"/>
+                                <ui:TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding UnpackProcessStatus}"/>
                                 <Border.Background>
  
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -120,7 +120,7 @@
                                 </Border.Background>
                             </Border>
 
-                            <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="0" Grid.Column="3"/>
+                            <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="0" Grid.Column="3" Click="Button_Click_1"/>
                             <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="1" Grid.Column="3"/>
 
                             <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="2" Grid.Column="3"/>

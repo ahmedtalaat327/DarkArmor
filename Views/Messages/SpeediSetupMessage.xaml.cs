@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DarkArmor.ViewModels.Messagaes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,21 @@ namespace DarkArmor.Views.Messages
     /// </summary>
     public partial class SpeediSetupMessage : UserControl
     {
+        public SpeediSetupMessageViewModel SpeediSetupMessageViewModel { get; set; } = new SpeediSetupMessageViewModel();
         public SpeediSetupMessage()
         {
+            DataContext = SpeediSetupMessageViewModel;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SpeediSetupMessageViewModel.UnpackProcessStatus = "Finished";
         }
     }
 }

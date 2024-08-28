@@ -1,7 +1,10 @@
 ﻿using CliWrap;
+using DarkArmor.Models.Skeleton;
+using DarkArmor.ViewModels.Messagaes;
 using DarkArmor.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,17 +12,36 @@ using System.Threading.Tasks;
 
 namespace DarkArmor.Data
 {
-    public class Unpacker
+    public  class Unpacker : ObservableObject
     {
         private string? url = null;
-        private string FeedBckMessage { get; set; }
+
+
+        private ObservableCollection<string> resOfUnpacking { get; set; } = new ObservableCollection<string>();
 
         CancellationTokenSource? cts;
 
         public Unpacker(string _url)
         {
-            this.url = _url;    
+            this.url = _url;
 
+            this.resOfUnpacking.CollectionChanged += (e, b) => {
+
+                foreach(var  rs in resOfUnpacking) {
+
+
+                    App.GetService<SpeediSetupMessageViewModel>().DiscoveredStatusForUnpacking.Add(rs);
+
+
+                }
+
+             
+
+                OnPropertyChanged("DiscoveredStatusForUnpacking");
+
+               
+            };
+           
         }
 
         public async Task TrigAsyncProc()
@@ -64,11 +86,11 @@ namespace DarkArmor.Data
         {
             if (inp.Contains("done"))
             {
-                FeedBckMessage = "Done unpacking";
+                resOfUnpacking.Add("Done unpacking");
             }
             else
             {
-                FeedBckMessage = "Error [ " + inp + " ]";
+                resOfUnpacking.Add("Error [ " + inp + " ]");
 
                 // Command was canceled
                 cts.Cancel();

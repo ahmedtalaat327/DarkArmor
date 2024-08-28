@@ -1,7 +1,9 @@
 ﻿using DarkArmor.Helpers;
 using DarkArmor.Services;
+using DarkArmor.ViewModels.Messagaes;
 using DarkArmor.ViewModels.Pages;
 using DarkArmor.ViewModels.Windows;
+using DarkArmor.Views.Messages;
 using DarkArmor.Views.Pages;
 using DarkArmor.Views.Windows;
 using Microsoft.Extensions.Configuration;
@@ -53,6 +55,8 @@ namespace DarkArmor
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+                services.AddSingleton<SpeediSetupMessage>();
+                services.AddSingleton<SpeediSetupMessageViewModel>();
             }).Build();
 
         /// <summary>

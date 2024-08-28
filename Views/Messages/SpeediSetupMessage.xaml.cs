@@ -26,6 +26,25 @@ namespace DarkArmor.Views.Messages
         {
             DataContext = SpeediSetupMessageViewModel;
             InitializeComponent();
+
+
+
+            this.SpeediSetupMessageViewModel.PropertyChanged += SpeediSetupMessageViewModel_PropertyChanged; ;
+
+        }
+
+        private void SpeediSetupMessageViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals(nameof(SpeediSetupMessageViewModel.DiscoveredStatusForUnpacking)))
+            {
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    foreach(var rs in SpeediSetupMessageViewModel.DiscoveredStatusForUnpacking)
+                    {
+                        SpeediSetupMessageViewModel.UnpackProcessStatus = rs;
+                    }
+                });
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -33,9 +52,9 @@ namespace DarkArmor.Views.Messages
             this.Visibility = Visibility.Collapsed;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            SpeediSetupMessageViewModel.UnpackProcessStatus = "Finished";
+            await SpeediSetupMessageViewModel.StartUnpacking();
         }
     }
 }

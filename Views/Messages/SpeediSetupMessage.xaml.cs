@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace DarkArmor.Views.Messages
 {
     /// <summary>
-    /// Interaction logic for DeviceShowcase.xaml
+    /// Interaction logic for SpeediSetup.xaml
     /// </summary>
-    public partial class DeviceShowcase : UserControl
+    public partial class SpeediSetupMessage : UserControl
     {
-        public DeviceShowcase()
+        public SpeediSetupMessage()
         {
             InitializeComponent();
         }

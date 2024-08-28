@@ -168,10 +168,10 @@
             </Border>
         </Grid>
         <!--end of left side-->
-        
-        
-        
-        <local2:SpeediSetup Grid.ColumnSpan="2" x:Name="messageControl" Visibility="Visible" />
+
+
+
+        <local2:SpeediSetupMessage Grid.ColumnSpan="2" x:Name="messageControl" Visibility="Visible" />
         
     </Grid>
 </Page>

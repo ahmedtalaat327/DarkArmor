@@ -241,8 +241,8 @@
             </StackPanel>
 
         </Grid>
-        
-        <local2:DeviceShowcase x:Name="messageControl"  Visibility="Collapsed" />
+
+        <local2:DeviceShowcaseMessage x:Name="messageControl"  Visibility="Collapsed" />
 
         <DockPanel Grid.Row="1" LastChildFill="False">
             <ui:Button DockPanel.Dock="Right"  Icon="{ui:SymbolIcon ReceiptPlay24}"  Background="#006fff" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="30" HorizontalAlignment="Right">

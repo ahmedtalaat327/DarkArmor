@@ -1,14 +1,8 @@
 ﻿using CliWrap;
-using DarkArmor.Models.Skeleton;
-using DarkArmor.ViewModels.Messagaes;
-using DarkArmor.ViewModels.Pages;
-using System;
-using System.Collections.Generic;
+
+using DarkArmor.Views.Messages;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DarkArmor.Data
 {
@@ -30,15 +24,11 @@ namespace DarkArmor.Data
                 foreach(var  rs in resOfUnpacking) {
 
 
-                    App.GetService<SpeediSetupMessageViewModel>().DiscoveredStatusForUnpacking.Add(rs);
-
+                    SpeediSetupMessage.ViewModel.UnpackProcessStatus = resOfUnpacking.Count < 2 ? resOfUnpacking[0] : resOfUnpacking[1];
 
                 }
 
-             
-
-                OnPropertyChanged("DiscoveredStatusForUnpacking");
-
+                //OnPropertyChanged(nameof());
                
             };
            
@@ -86,7 +76,7 @@ namespace DarkArmor.Data
         {
             if (inp.Contains("done"))
             {
-                resOfUnpacking.Add("Done unpacking");
+                resOfUnpacking.Add("Done");
             }
             else
             {

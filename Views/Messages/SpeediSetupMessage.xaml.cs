@@ -1,18 +1,6 @@
 ﻿using DarkArmor.ViewModels.Messagaes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Wpf.Ui.Controls;
 
 namespace DarkArmor.Views.Messages
 {
@@ -21,28 +9,34 @@ namespace DarkArmor.Views.Messages
     /// </summary>
     public partial class SpeediSetupMessage : UserControl
     {
-        public SpeediSetupMessageViewModel SpeediSetupMessageViewModel { get; set; } = new SpeediSetupMessageViewModel();
+      
+        /// <summary>
+        /// view model 
+        /// </summary>
+        public static SpeediSetupMessageViewModel ViewModel { get; set; } = new SpeediSetupMessageViewModel();
+
+        /// <summary>
+        /// ctr
+        /// </summary>
         public SpeediSetupMessage()
         {
-            DataContext = SpeediSetupMessageViewModel;
+            DataContext = ViewModel;
+
             InitializeComponent();
+            
 
-
-
-            this.SpeediSetupMessageViewModel.PropertyChanged += SpeediSetupMessageViewModel_PropertyChanged; ;
+            ViewModel.PropertyChanged += SpeediSetupMessageViewModel_PropertyChanged; ;
 
         }
 
         private void SpeediSetupMessageViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName.Equals(nameof(SpeediSetupMessageViewModel.DiscoveredStatusForUnpacking)))
+            if (e.PropertyName.Equals(nameof(ViewModel.UnpackProcessStatus)))
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
-                    foreach(var rs in SpeediSetupMessageViewModel.DiscoveredStatusForUnpacking)
-                    {
-                        SpeediSetupMessageViewModel.UnpackProcessStatus = rs;
-                    }
+                    if(!ViewModel.RunUnpackingProcessButtonfloag)
+                    ViewModel.RunUnpackingProcessButtonfloag = true;
                 });
             }
         }
@@ -54,7 +48,8 @@ namespace DarkArmor.Views.Messages
 
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            await SpeediSetupMessageViewModel.StartUnpacking();
+
+            await ViewModel.StartUnpacking();
         }
     }
 }

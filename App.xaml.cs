@@ -55,8 +55,7 @@ namespace DarkArmor
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
-                services.AddSingleton<SpeediSetupMessage>();
-                services.AddSingleton<SpeediSetupMessageViewModel>();
+             
             }).Build();
 
         /// <summary>

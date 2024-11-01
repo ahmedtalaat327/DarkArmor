@@ -3,8 +3,6 @@ using DarkArmor.Helpers;
 using DarkArmor.Models;
 using DarkArmor.Models.Skeleton;
 using System.Collections.ObjectModel;
-using System.Windows.Documents;
-using System.Windows.Media;
 using Wpf.Ui.Controls;
 
 namespace DarkArmor.ViewModels.Pages

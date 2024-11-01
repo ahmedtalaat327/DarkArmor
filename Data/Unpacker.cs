@@ -40,6 +40,8 @@ namespace DarkArmor.Data
             {
                 cts = new CancellationTokenSource();
 
+                string option_param = "1";
+
                 string f_param = $"{url}\\Processes\\Unpacker\\env.pack";
                 
                 string s_param = Path.Combine(Environment
@@ -49,7 +51,7 @@ namespace DarkArmor.Data
                 try
                 {
                     var task = Cli.Wrap("powershell.exe")
-                              .WithArguments(new[] { $@"& '{url}\Processes\Unpacker\Unpacker.exe'" + " " + f_param + " " + s_param })
+                              .WithArguments(new[] { $@"& '{url}\Processes\Unpacker\Unpacker.exe'" + " " + option_param + " " + f_param + " " + s_param })
                               // This can be simplified with `ExecuteBufferedAsync()`
                               .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
                               .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))

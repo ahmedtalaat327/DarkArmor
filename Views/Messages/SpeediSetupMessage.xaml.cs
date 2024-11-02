@@ -51,5 +51,11 @@ namespace DarkArmor.Views.Messages
 
             await ViewModel.StartUnpacking();
         }
+
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+            await ViewModel.StartCloning();
+        }
     }
 }

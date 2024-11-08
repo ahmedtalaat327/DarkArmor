@@ -37,6 +37,16 @@ namespace DarkArmor.Views.Messages
                 {
                     if(!ViewModel.RunUnpackingProcessButtonfloag)
                     ViewModel.RunUnpackingProcessButtonfloag = true;
+                   
+                });
+            }
+            if (e.PropertyName.Equals(nameof(ViewModel.CloneOneProcessStatus)))
+            {
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                  
+                    if (!ViewModel.RunCloneOneProcessButtonfloag)
+                        ViewModel.RunCloneOneProcessButtonfloag = true;
                 });
             }
         }

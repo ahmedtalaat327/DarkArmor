@@ -73,7 +73,13 @@ namespace DarkArmor.Data
                     // Command was canceled
                     cts.Cancel();
                 }
-
+                finally
+                {
+                    if (FileExists(f_param))
+                    {
+                        HandleLinesForUnpackerRunning("operations performed");
+                    }
+                }
             });
         }
        
@@ -94,6 +100,12 @@ namespace DarkArmor.Data
                 cts.Cancel();
                 //then run another process with 'ctr + c' parameter
             }
+        }
+        public bool FileExists(string dir)
+        {
+           // var workingDirectory = Environment.CurrentDirectory;
+            var file = $"{dir}";
+            return File.Exists(file);
         }
 
     }

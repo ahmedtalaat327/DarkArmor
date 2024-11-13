@@ -129,7 +129,7 @@
                      
                         <!--end grid process-->
   
-                        <ui:TextBlock Padding="0 100 0 0" Text="* All these prcedure are very mandatory to make this app work."/>
+                        <ui:TextBlock Padding="0 100 0 0" Text="* All these prcedures are very mandatory to make this app work."/>
                     </StackPanel>
                 </Border>
                 <Grid Grid.Row="1">

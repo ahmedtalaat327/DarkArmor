@@ -1,7 +1,7 @@
 ﻿using DarkArmor.ViewModels.Messagaes;
 using System.Windows.Controls;
 
-
+////*this viewmodel property change works in old fashion*///
 namespace DarkArmor.Views.Messages
 {
     /// <summary>

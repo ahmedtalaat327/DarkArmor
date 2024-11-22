@@ -164,7 +164,7 @@ namespace DarkArmor.Data
             });
         }
 
-        //copying npf.sys => SysWOW64\
+        //copying wpcap.dll => SysWOW64\
         public async Task TrigAsyncProc_2()
         {
             await Task.Run(async () =>
@@ -179,6 +179,58 @@ namespace DarkArmor.Data
                 string s_param = Environment.GetFolderPath(Environment.SpecialFolder.SystemX86);
 
                // s_param += "\\drivers\\";
+
+                try
+                {
+                    var task = Cli.Wrap("powershell.exe")
+                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + f_param + " " + s_param })
+                              // This can be simplified with `ExecuteBufferedAsync()`
+                              .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
+                              .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
+                              .ExecuteAsync(cts.Token);
+
+
+
+                    // Get the process ID
+                    //   var processId = task.ProcessId;
+                    //   App.GetService<DashboardViewModel>().ProcessesMimsIds.Add(new System.Collections.ObjectModel.ObservableCollection<int> { inKey, processId });
+                    //async exec
+                    await task;
+                }
+                catch (OperationCanceledException)
+                {
+                    // Command was canceled
+                    cts.Cancel();
+                }
+                finally
+                {
+                    if (FileExists(f_param))
+                    {
+                        HandleLinesForUnpackerRunning("operations performed");
+
+                        //initial the chain.. clone
+                        await TrigAsyncProc_3();
+
+                    }
+                }
+            });
+        }
+
+        //copying pthreadVC.dll => SysWOW64\
+        public async Task TrigAsyncProc_3()
+        {
+            await Task.Run(async () =>
+            {
+                cts = new CancellationTokenSource();
+
+
+                string f_param = Path.Combine(Environment
+                                   .GetFolderPath(Environment.SpecialFolder.ApplicationData), "inDarkSneaky");
+                f_param += "\\env\\data\\pthreadVC.dll";
+
+                string s_param = Environment.GetFolderPath(Environment.SpecialFolder.SystemX86);
+
+                // s_param += "\\drivers\\";
 
                 try
                 {

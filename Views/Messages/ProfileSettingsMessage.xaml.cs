@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DarkArmor.ViewModels.Messagaes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf.Ui.Controls;
 
 namespace DarkArmor.Views.Messages
 {
@@ -20,9 +22,21 @@ namespace DarkArmor.Views.Messages
     /// </summary>
     public partial class ProfileSettingsMessage : UserControl
     {
-        public ProfileSettingsMessage()
-        {
+
+        public static ProfileSettingsMessageViewModel ViewModel { get; set; } = new ProfileSettingsMessageViewModel();
+
+        public ProfileSettingsMessage() {
+           
+            DataContext = ViewModel;
+
             InitializeComponent();
+        }
+
+      
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SubwindVisibility = false;
         }
     }
 }

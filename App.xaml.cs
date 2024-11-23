@@ -55,7 +55,8 @@ namespace DarkArmor
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
-             
+
+               
             }).Build();
 
         /// <summary>

@@ -1,13 +1,26 @@
-﻿<UserControl x:Class="DarkArmor.Views.Messages.ProfileSettingsMessage"
+﻿
+    
+<UserControl x:Class="DarkArmor.Views.Messages.ProfileSettingsMessage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DarkArmor.Views.Messages"
+           xmlns:helpers="clr-namespace:DarkArmor.Helpers"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                
+             Visibility="{Binding SubwindVisibility, Converter={StaticResource BooleanToVisibilityConverter}}"
           
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+
+    <UserControl.Resources>
+
+        <helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    </UserControl.Resources>
+
     <Grid Background="#66000000"
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
@@ -51,17 +64,40 @@
                             
                             <TextBlock Grid.Column="0" Foreground="Orange" Margin="0,12,0,0" 
                                  FontSize="22"  Text="Welcome to your Cloud profile." />
-                            <ui:Button Grid.Column="1" Height="32" CornerRadius="55" Background="Orange" Margin="2"  HorizontalAlignment="Stretch" Content="X"/>
+                            <ui:Button Grid.Column="1" Height="32" CornerRadius="55" Background="Orange" Margin="2"  HorizontalAlignment="Stretch" Content="X" Click="Button_Click"/>
 
                         </Grid>
-                        <Grid Grid.Row="1">
-                            
-                        </Grid>
+                        <Grid Grid.Row="1" 
+                              HorizontalAlignment="Stretch" 
+                              VerticalAlignment="Stretch">
 
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Foreground="White" Margin="0,12,0,0" 
+                                  Text="This profile is binded to cloud system accross all devices" />
+                            <StackPanel Margin="10" Grid.ColumnSpan="3" Grid.Row="1">
+                               
+                                <!--grid for 3 sync lines-->
+                                
+                                
+                            </StackPanel>
+                        </Grid>
+                        
                     </Grid>
 
                 </Border>
             </Grid>
         </Border>
     </Grid>
+    
+    
 </UserControl>
+    

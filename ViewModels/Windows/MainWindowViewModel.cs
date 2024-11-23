@@ -27,7 +27,8 @@ namespace DarkArmor.ViewModels.Windows
                 Content = "Preferences",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Book24 },
                 TargetPageType = typeof(Views.Pages.DataPage)
-            }
+            },
+            
         };
 
         [ObservableProperty]

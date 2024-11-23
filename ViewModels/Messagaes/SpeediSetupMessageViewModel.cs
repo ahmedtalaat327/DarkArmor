@@ -1,7 +1,8 @@
 ﻿using DarkArmor.Data;
 using DarkArmor.Helpers;
 using System.Collections.ObjectModel;
- 
+using Wpf.Ui.Controls;
+
 namespace DarkArmor.ViewModels.Messagaes
 {
     public partial class SpeediSetupMessageViewModel : ObservableObject
@@ -31,6 +32,16 @@ namespace DarkArmor.ViewModels.Messagaes
             CloneOneProcessStatus = "Wait";
             RunCloneOneProcessButtonfloag = false;
             await new Cloner(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc();
+        }
+
+        public void OnNavigatedTo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNavigatedFrom()
+        {
+            throw new NotImplementedException();
         }
     }
 }

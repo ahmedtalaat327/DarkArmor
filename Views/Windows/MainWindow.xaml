@@ -70,7 +70,7 @@
                         Margin="-24 0 0 0"
                       >
                     <ui:NavigationViewItem.Content>
-                        <Border CornerRadius="5" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Orange">
+                        <Border MouseDown="Border_MouseDown"  CornerRadius="5" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Orange">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <ui:SymbolIcon HorizontalAlignment="Left" MinWidth="18" MinHeight="24" Symbol="InprivateAccount20"/>
                                  
@@ -109,7 +109,7 @@
         </ui:TitleBar>
         <ui:Badge Margin="130 0 0 0" HorizontalAlignment="Left" MaxHeight="28" MaxWidth="50" Background="Orange">BETA</ui:Badge>
 
-        <local2:ProfileSettingsMessage Grid.Row="0" Grid.RowSpan="2" x:Name="messageControl" Visibility="Visible" />
+        <local2:ProfileSettingsMessage Grid.Row="0" Grid.RowSpan="2" x:Name="messageControl" />
 
     </Grid>
 </ui:FluentWindow>

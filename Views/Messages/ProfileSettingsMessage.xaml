@@ -86,7 +86,44 @@
                             <StackPanel Margin="10" Grid.ColumnSpan="3" Grid.Row="1">
                                
                                 <!--grid for 3 sync lines-->
-                                
+                                <Grid Height="300">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.35*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="2*"/>
+
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.ColumnSpan="3" Grid.Row="0" Margin="2" CornerRadius="12" Background="#fa0">
+                                       
+                                        <StackPanel>
+                                            <ui:TextBlock Padding="5" FontSize="16" Text="  ➡ Sync 'NIC info'"/>
+                                        <ui:TextBlock Padding="5 0 5 10" FontSize="10" Text="             save all Network card physical details including (index, name, mac address and more)"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.ColumnSpan="3" Grid.Row="1" Margin="2" CornerRadius="12" Background="#fa0">
+                                        <StackPanel>
+                                            <ui:TextBlock Padding="5" FontSize="16" Text="  ➡ Sync 'Time-out for scanner operation'"/>
+                                            <ui:TextBlock Padding="5 0 5 10" FontSize="10" Text="             save delay time used for requests reply to detect any outer NIC on the network range"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.ColumnSpan="3" Grid.Row="2" Margin="2" CornerRadius="12" Background="#fa0">
+                                        <StackPanel>
+                                            <ui:TextBlock Padding="5" FontSize="16" Text="  ➡ Sync 'Personal Statistics and profile language'"/>
+                                            <ui:TextBlock Padding="5 0 5 10" FontSize="10" Text="             save statiscs and summary data for your scan with prefrences info"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Row="3" Grid.ColumnSpan="3">
+                                        <StackPanel>
+                                            
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
                                 
                             </StackPanel>
                         </Grid>

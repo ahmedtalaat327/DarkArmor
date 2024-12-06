@@ -21,7 +21,7 @@
 
     </UserControl.Resources>
 
-    <Grid Background="#66000000"
+    <Grid Background="#66000000" 
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
 
@@ -86,7 +86,7 @@
                             <StackPanel Margin="10" Grid.ColumnSpan="3" Grid.Row="1">
                                
                                 <!--grid for 3 sync lines-->
-                                <Grid Height="300">
+                                <Grid >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="0.5*"/>
@@ -118,10 +118,44 @@
                                             <ui:TextBlock Padding="5 0 5 10" FontSize="10" Text="             save statiscs and summary data for your scan with prefrences info"/>
                                         </StackPanel>
                                     </Border>
-                                    <Border Grid.Row="3" Grid.ColumnSpan="3">
-                                        <StackPanel>
+                                    
+                                    <Border Margin="2 2 2 0" Padding="5" Grid.Row="3" Grid.ColumnSpan="3" CornerRadius="23">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                                <LinearGradientBrush.GradientStops>
+                                                    <GradientStop Offset="0.03" Color="#8919ff" />
+                                                    <GradientStop Offset="1.7" Color="#031fff" />
+                                                </LinearGradientBrush.GradientStops>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                            <StackPanel Margin="80 0 80 0">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <ui:TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Foreground="White" Margin="40 0 0 0" Text="Please login."/>
+                                                <ui:TextBlock Grid.Column="0" Grid.Row="1" Margin="80 10 10 10" Text="Username:" Foreground="White"/>
+                                                <ui:TextBox Grid.Column="1" Grid.Row="1"/>
+
+                                                <ui:TextBlock Grid.Column="0" Grid.Row="2" Margin="80 10 10 10" Text="Password:" Foreground="White"/>
+                                                <ui:PasswordBox Grid.Column="1" Grid.Row="2"/>
+
+                                                <ui:Button   Background="#50C878" Grid.Row="3" Grid.Column="1" Content="Login"/>
+                                                <ui:ProgressRing Margin="35 0 0 0"  Grid.Column="1" Grid.Row="3" BorderThickness="6" Width="22" Height="22"/>
+                                            </Grid>
                                             
                                         </StackPanel>
+                                            
                                     </Border>
                                 </Grid>
                                 

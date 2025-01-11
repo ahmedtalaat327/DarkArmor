@@ -56,6 +56,21 @@ namespace DarkArmor.Data
                 }
 
                App.GetService<DashboardViewModel>().DiscoveredNICControllers = App.GetService<DashboardViewModel>().DiscoveredNICControllers.Union(NICController_list).ToObservableCollection();
+                //we need also to check if our machine is included or not sometimes the reply is nearly impossible
+                //adding the local machine manually. if not included.
+                for (int p = 0; p< NICController_list.Count;p++) {
+                    if (NICController_list[p].Address.Equals(def_NICController.Address))
+                    {
+                        break;
+                    }
+                    if(NICController_list.Count-1==p)
+                    {
+                        //not here we gonna add it manually
+                        NICController_list.Add(def_NICController);
+                        App.GetService<DashboardViewModel>().DiscoveredNICControllers = App.GetService<DashboardViewModel>().DiscoveredNICControllers.Union(NICController_list).ToObservableCollection();
+
+                    }
+                }
 
                 OnPropertyChanged("DiscoveredNICControllers");
               

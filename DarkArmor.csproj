@@ -18,6 +18,7 @@
   <ItemGroup>
     <PackageReference Include="CliWrap" Version="3.6.6" />
     <PackageReference Include="System.Management" Version="8.0.0" />
+    <PackageReference Include="TaskScheduler" Version="2.12.2" />
     <PackageReference Include="WPF-UI" Version="3.0.4" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2 " />

@@ -20,6 +20,10 @@ namespace DarkArmor.ViewModels.Messagaes
         [ObservableProperty]
         private bool _runCloneOneProcessButtonfloag = true;
 
+        [ObservableProperty]
+        private string _taskExecuterStatus = "Sleep";
+
+
         public async Task StartUnpacking()
         {
             UnpackProcessStatus = "Wait";
@@ -32,6 +36,12 @@ namespace DarkArmor.ViewModels.Messagaes
             CloneOneProcessStatus = "Wait";
             RunCloneOneProcessButtonfloag = false;
             await new Cloner(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc();
+        }
+
+        public async Task StartSceduler()
+        {
+            TaskExecuterStatus = "Wait";
+          //  await new TaskExecuter(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc();
         }
 
         public void OnNavigatedTo()

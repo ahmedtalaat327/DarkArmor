@@ -23,6 +23,9 @@ namespace DarkArmor.ViewModels.Messagaes
         [ObservableProperty]
         private string _taskExecuterStatus = "Sleep";
 
+        [ObservableProperty]
+        private bool _runTaskExecuterProcessButtonfloag = true;
+
 
         public async Task StartUnpacking()
         {
@@ -41,7 +44,8 @@ namespace DarkArmor.ViewModels.Messagaes
         public async Task StartSceduler()
         {
             TaskExecuterStatus = "Wait";
-          //  await new TaskExecuter(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc();
+            RunTaskExecuterProcessButtonfloag = false;
+             await new ExeTaskSC().CreateDriverForPacketFiltering();
         }
 
         public void OnNavigatedTo()

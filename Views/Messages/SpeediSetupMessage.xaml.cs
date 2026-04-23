@@ -49,6 +49,15 @@ namespace DarkArmor.Views.Messages
                         ViewModel.RunCloneOneProcessButtonfloag = true;
                 });
             }
+            if (e.PropertyName.Equals(nameof(ViewModel.TaskExecuterStatus)))
+            {
+                App.Current.Dispatcher.Invoke(() =>
+                {
+
+                    if (!ViewModel.RunTaskExecuterProcessButtonfloag)
+                        ViewModel.RunTaskExecuterProcessButtonfloag = true;
+                });
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

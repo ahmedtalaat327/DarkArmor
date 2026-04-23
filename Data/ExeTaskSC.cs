@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+
 
 
 namespace DarkArmor.Data
@@ -48,6 +50,25 @@ namespace DarkArmor.Data
             }
             });
 
+        }
+        private readonly string _wu10TaskPath = "Wu10Man Admin Task";
+
+        private Microsoft.Win32.TaskScheduler.Task CreateHelperTask(string toExecute, string fullPath)
+        {
+            var sid = new SecurityIdentifier(WellKnownSidType.LocalSystemSid, WindowsIdentity.GetCurrent().User.AccountDomainSid);
+            var account = sid.Translate(typeof(NTAccount));
+            var username = account.Value;
+ 
+            return TaskService.Instance.AddTask(
+                    _wu10TaskPath,
+                    new TimeTrigger() { StartBoundary = DateTime.Now, Enabled = false },
+                    new ExecAction(
+                        @"powershell",
+                        $" -command \"& {{ {toExecute}  -TaskName '{fullPath}' }}\"",
+                        Environment.CurrentDirectory),
+                    userId: username,
+                    logonType: TaskLogonType.ServiceAccount,
+                    description: "Task used by Wu10Man to enable other tasks");
         }
     }
 }

@@ -1,0 +1,1 @@
+magick convert installer-256-ic.png installer-128-ic.png installer-64-ic.png installer-48-ic.png installer-32-ic.png installer-16-ic.png output.ico

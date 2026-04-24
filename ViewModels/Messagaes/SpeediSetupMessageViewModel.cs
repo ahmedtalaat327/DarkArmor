@@ -45,7 +45,7 @@ namespace DarkArmor.ViewModels.Messagaes
         {
             TaskExecuterStatus = "Wait";
             RunTaskExecuterProcessButtonfloag = false;
-             await new ExeTaskSC().CreateDriverForPacketFiltering();
+             await new ExeTaskSC().TrigAsyncProc();
         }
 
         public void OnNavigatedTo()

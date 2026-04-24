@@ -77,9 +77,9 @@ namespace DarkArmor.Views.Messages
             await ViewModel.StartCloning();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private async void Button_Click_3(object sender, RoutedEventArgs e)
         {
-
+            await ViewModel.StartSceduler();
         }
     }
 }

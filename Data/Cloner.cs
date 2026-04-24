@@ -2,7 +2,9 @@
 using DarkArmor.Views.Messages;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Security.Policy;
+
+/////////////////////////////NOT WORKING////////////////
+/////////////////// WILL BE REWORKED IN THE FUTURE FOR BETTER PERFORMANCE AND RELIABILITY [CURRENTLY THIS IS A HACKY WAY TO ACHIEVE THE GOAL]
 
 namespace DarkArmor.Data
 {
@@ -50,6 +52,9 @@ namespace DarkArmor.Data
 
                 string s_param = Environment.GetFolderPath(Environment.SpecialFolder.System);
 
+                f_param = $"'{f_param}'";
+                s_param = $"'{s_param}'";
+
                 try
                 {
                     var task = Cli.Wrap("powershell.exe")
@@ -74,13 +79,11 @@ namespace DarkArmor.Data
                 }
                 finally
                 {
-                    if (FileExists(f_param))
+                    if (FileExists(s_param+"\\Packet.dll"))
                     {
                         HandleLinesForUnpackerRunning("operations performed");
 
-                        //initial the chain.. clone
-
-                        await TrigAsyncProc_1();
+                        
 
                     }
                 }
@@ -96,6 +99,9 @@ namespace DarkArmor.Data
             {
                 status_no++;
                 resOfCloning.Add($"{status_no} Done");
+                //initial the chain.. clone
+
+                await TrigAsyncProc_1();
             }
             else
             {
@@ -153,7 +159,7 @@ namespace DarkArmor.Data
                 }
                 finally
                 {
-                    if (FileExists(f_param))
+                    if (FileExists(s_param+ "\\drivers\\npf.sys"))
                     {
                         HandleLinesForUnpackerRunning("operations performed");
 
@@ -204,7 +210,7 @@ namespace DarkArmor.Data
                 }
                 finally
                 {
-                    if (FileExists(f_param))
+                    if (FileExists(s_param + "\\wpcap.dll"))
                     {
                         HandleLinesForUnpackerRunning("operations performed");
 
@@ -256,7 +262,7 @@ namespace DarkArmor.Data
                 }
                 finally
                 {
-                    if (FileExists(f_param))
+                    if (FileExists(s_param))
                     {
                         HandleLinesForUnpackerRunning("operations performed");
 
@@ -307,7 +313,7 @@ namespace DarkArmor.Data
                 }
                 finally
                 {
-                    if (FileExists(f_param))
+                    if (FileExists(s_param+ "\\Packet.dll"))
                     {
                         HandleLinesForUnpackerRunning("operations performed");
 

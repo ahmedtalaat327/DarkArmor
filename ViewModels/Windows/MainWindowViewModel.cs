@@ -17,14 +17,14 @@ namespace DarkArmor.ViewModels.Windows
         {
             new NavigationViewItem()
             {
-                Content = "Dashboard",
+                Content = "Board", 
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage),
                 
             },
             new NavigationViewItem()
             {
-                Content = "Preferences",
+                Content = "Prefs",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Book24 },
                 TargetPageType = typeof(Views.Pages.DataPage)
             },

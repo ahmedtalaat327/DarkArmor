@@ -30,8 +30,8 @@
         
         <Grid Grid.Column="0">
             <Grid.Background>
-                <SolidColorBrush Color="#202020"/>
                 
+                <ImageBrush ImageSource="/Assets/bgggg.jpeg" Stretch="UniformToFill" />
             </Grid.Background>
             <StackPanel Orientation="Vertical">
 

@@ -52,10 +52,10 @@
                         <Grid 
                             ShowGridLines="True">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="100"/>
+                                <ColumnDefinition  Width="40"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -76,8 +76,8 @@
                             <ui:TextBlock Margin="10" Grid.Row="2" Foreground="#fa0" Grid.Column="0"  FontSize="16"  Text="➌"/>
 
                             <ui:TextBlock Margin="10" Grid.Row="0" Foreground="#fa0"  Grid.Column="1" Text="Copy important data files in your system disk [secured]"/>
-                            <ui:TextBlock Margin="10" Grid.Row="1" Foreground="#fa0"  Grid.Column="1" Text="Activate services and intiate virtual adapter to filter packets."/>
-                            <ui:TextBlock Margin="10" Grid.Row="2" Foreground="#fa0"  Grid.Column="1" Text="Make sure all data is there and set flags."/>
+                            <ui:TextBlock Margin="10" Grid.Row="1" Foreground="#fa0"  Grid.Column="1" Text="Copy to windows folder 5 files."/>
+                            <ui:TextBlock Margin="10" Grid.Row="2" Foreground="#fa0"  Grid.Column="1" Text="Activate and Intiaize these services."/>
 
                             <Border Margin="10" CornerRadius="4" Grid.Row="0" Grid.Column="2">
                                 <ui:TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding UnpackProcessStatus}"/>
@@ -122,8 +122,14 @@
                             </Border>
 
                             <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="0" Grid.Column="3" Click="Button_Click_1" IsEnabled="{Binding RunUnpackingProcessButtonfloag}"/>
-                            <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
+                            <StackPanel Grid.Column="4" Grid.Row="1" Orientation="Horizontal">
+                                <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="1" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
+                                <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="2" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
+                                <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="3" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
+                                <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="4" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
+                                <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="5" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
 
+                            </StackPanel>
                             <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="2" Grid.Column="3" Click="Button_Click_3" IsEnabled="{Binding RunTaskExecuterProcessButtonfloag}"/>
                         </Grid>
                      

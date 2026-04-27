@@ -81,7 +81,7 @@ namespace DarkArmor.Data
                 {
                     if (FileExists(s_param+"\\Packet.dll"))
                     {
-                        HandleLinesForUnpackerRunning("operations performed");
+                     //   HandleLinesForUnpackerRunning("operations performed");
 
                         
 
@@ -95,13 +95,13 @@ namespace DarkArmor.Data
         ///would work in this case!! [future development]
         private async Task HandleLinesForUnpackerRunning(string inp)
         {
-            if (inp.Contains("operations performed"))
+            if (inp.ToLower().Contains("all"))
             {
                 status_no++;
                 resOfCloning.Add($"{status_no} Done");
                 //initial the chain.. clone
 
-                await TrigAsyncProc_1();
+                //await TrigAsyncProc_1();
             }
             else
             {

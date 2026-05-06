@@ -34,11 +34,29 @@ namespace DarkArmor.ViewModels.Messagaes
             await new Unpacker(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc();
         }
 
-        public async Task StartCloning()
+        public async Task StartCloning(int stepNo)
         {
-            CloneOneProcessStatus = "Wait";
-            RunCloneOneProcessButtonfloag = false;
-            await new Cloner(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc();
+            switch(stepNo)
+            {
+                case 1:
+                    CloneOneProcessStatus = "Wait";
+                    RunCloneOneProcessButtonfloag = false;
+                    await new Cloner(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc();
+                    break;
+                case 2:
+                    CloneOneProcessStatus = "Wait";
+                    RunCloneOneProcessButtonfloag = false;
+                    await new Cloner(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc_2();
+                    break;
+                case 3:
+                    CloneOneProcessStatus = "Wait";
+                    RunCloneOneProcessButtonfloag = false;
+                    await new Cloner(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc_4();
+                    break;
+                default:
+                    break;
+            }
+           
         }
 
         public async Task StartSceduler()

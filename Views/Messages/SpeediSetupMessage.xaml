@@ -34,7 +34,7 @@
                 </Grid.RowDefinitions>
 
 
-                <Border Background="#77306fff" 
+                <Border Background="#186b9e" 
                 CornerRadius="10"
                 Margin="15 15 15 5">
                     <StackPanel Margin="30">
@@ -45,7 +45,8 @@
             Foreground="Orange"
             FontWeight="Medium"
             Text="Environment setup:" />
-                        <TextBlock Foreground="Orange" Margin="0,12,0,0" Text="We will setup some libraries and files to make everything work correctly" />
+                        <TextBlock Foreground="Orange" TextWrapping="Wrap" Margin="0,12,0,0" Text="We will setup some libraries and files to make everything work correctly
+                                                                    Make sure you are 'Runing this app as admin'" />
                         <Image MaxWidth="50" Margin="10 10 10 30" Source="/Assets/icons8-fix-96.png"/>
                         
                         <!---grid process 4*n-->
@@ -76,7 +77,7 @@
                             <ui:TextBlock Margin="10" Grid.Row="2" Foreground="#fa0" Grid.Column="0"  FontSize="16"  Text="➌"/>
 
                             <ui:TextBlock Margin="10" Grid.Row="0" Foreground="#fa0"  Grid.Column="1" Text="Copy important data files in your system disk [secured]"/>
-                            <ui:TextBlock Margin="10" Grid.Row="1" Foreground="#fa0"  Grid.Column="1" Text="Copy to windows folder 5 files."/>
+                            <ui:TextBlock Margin="10" Grid.Row="1" Foreground="#fa0"  Grid.Column="1" Text="Copy to windows folder some independencies files."/>
                             <ui:TextBlock Margin="10" Grid.Row="2" Foreground="#fa0"  Grid.Column="1" Text="Activate and Intiaize these services."/>
 
                             <Border Margin="10" CornerRadius="4" Grid.Row="0" Grid.Column="2">
@@ -124,11 +125,9 @@
                             <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="0" Grid.Column="3" Click="Button_Click_1" IsEnabled="{Binding RunUnpackingProcessButtonfloag}"/>
                             <StackPanel Grid.Column="4" Grid.Row="1" Orientation="Horizontal">
                                 <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="1" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
-                                <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="2" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
-                                <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="3" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
-                                <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="4" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
-                                <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="5" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
-
+                                <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="2" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_4" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
+                                <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="3" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_5" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
+                             
                             </StackPanel>
                             <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="2" Grid.Column="3" Click="Button_Click_3" IsEnabled="{Binding RunTaskExecuterProcessButtonfloag}"/>
                         </Grid>
@@ -146,7 +145,7 @@
 
 
                     </Grid.ColumnDefinitions>
-                    <ui:Button Grid.Column="0" Margin="15 1 5 1" HorizontalAlignment="Stretch" Foreground="Black" Background="Orange" Content="Start"/>
+                    <ui:Button Grid.Column="0" Margin="15 1 5 1" HorizontalAlignment="Stretch" Foreground="Black" Background="Orange" Content="I've finished these steps"/>
                     <ui:Button Grid.Column="1" Margin="5 1 15 1"  HorizontalAlignment="Stretch" Content="Cancel" Click="Button_Click"/>
 
                 </Grid>

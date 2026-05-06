@@ -28,7 +28,9 @@ namespace DarkArmor.Models
         [ObservableProperty]
         [Browsable(false)]
         public NICController _nic = new NICController() { Nic_Index = 0,Address = IPAddress.Parse("192.168.0.0"), Mask = IPAddress.Parse("255.255.0.0") ,Manufacture = "some trading manf", PhysicalAdress = "00:00:00:00"};
-         
+        [ObservableProperty]
+        //expermenral field, will be used to show the real-time network traffic in the future
+        public int _receivedBytes = 0;
       
     }
 }

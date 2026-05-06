@@ -16,6 +16,7 @@ namespace DarkArmor.Data
 
 
 
+
         public ExeTaskSC() {
 
             this.resOfScripting.CollectionChanged += (e, b) =>
@@ -42,6 +43,9 @@ namespace DarkArmor.Data
 
 
                 string _pathrpcainroaming = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "inDarkSneaky\\env\\data\\rpcapd.exe");
+                string _pathrpcainroamingini = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "inDarkSneaky\\env\\data\\rpcapd.ini");
+
+
                 string _pathnpf = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "drivers\\npf.sys");
                
 
@@ -54,11 +58,25 @@ namespace DarkArmor.Data
 
                 try
                 {
-                    var task = Cli.Wrap("powershell.exe")
-                              .WithArguments(new[] { $@"&  option_param "})
+                    var task = Cli.Wrap("sc.exe")
+                                    .WithArguments(new[] {
+                                        "create",
+                                        "rpcapd",
+                                        $"binPath=\"{_pathrpcainroaming}\" -d -f \"{_pathrpcainroamingini}\"",
+                                        "DisplayName=Remote Package Capture Protocol...",
+                                        "start=demand",
+                                        "type=own",
+
+                                    })
+                              //Cli.Wrap("cmd")
+                              //.WithArguments($"-Command Start-Process {option_param} -Verb RunAs")
+
+                              //.WithArguments(new[] { $@"&  {option_param} "})
                               // This can be simplified with `ExecuteBufferedAsync()`
+                              //.WithStandardInputPipe(PipeSource.FromString($"{option_param}"))
                               .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
                               .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
+                              //.WithCredentials(new Credentials("codinglap", "ahmed hassan", "EGYX@720p"))
                               .ExecuteAsync(cts.Token);
 
 
@@ -74,9 +92,81 @@ namespace DarkArmor.Data
                     // Command was canceled
                     cts.Cancel();
                 }
+                
+
+                try
+                {
+                    var task_1 = Cli.Wrap("sc.exe")
+                                    .WithArguments(new[] {
+                                        "create",
+                                        "npf",
+                                        $"binPath={_pathnpf}",
+                                        "DisplayName=NetGroup Packet Filter Driver",
+                                        "start=auto",
+                                        "type=kernel",
+                                        "error=normal",
+                                        "tag=no",
+
+                                    })
+                              //Cli.Wrap("cmd")
+                              //.WithArguments($"-Command Start-Process {option_param} -Verb RunAs")
+
+                              //.WithArguments(new[] { $@"&  {option_param} "})
+                              // This can be simplified with `ExecuteBufferedAsync()`
+                              //.WithStandardInputPipe(PipeSource.FromString($"{option_param}"))
+                              .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
+                              .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
+                              //.WithCredentials(new Credentials("codinglap", "ahmed hassan", "EGYX@720p"))
+                              .ExecuteAsync(cts.Token);
 
 
 
+                    // Get the process ID
+                    //   var processId = task.ProcessId;
+                    //   App.GetService<DashboardViewModel>().ProcessesMimsIds.Add(new System.Collections.ObjectModel.ObservableCollection<int> { inKey, processId });
+                    //async exec
+                    await task_1;
+                }
+                catch (OperationCanceledException)
+                {
+                    // Command was canceled
+                    cts.Cancel();
+                }
+
+                
+                try
+                {
+                    var task_2 = Cli.Wrap($"sc")
+
+                              //Cli.Wrap("cmd")
+                              .WithArguments(new[] { 
+                                  "start",
+                                  "npf" })
+                              
+
+                              //.WithArguments(new[] { $@"&  {option_param} "})
+                              // This can be simplified with `ExecuteBufferedAsync()`
+                              //.WithStandardInputPipe(PipeSource.FromString($"{option_param}"))
+                              .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
+                              .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
+                              //.WithCredentials(new Credentials("codinglap", "ahmed hassan", "EGYX@720p"))
+                               
+                              .ExecuteAsync(cts.Token);
+
+
+
+                    // Get the process ID
+                    //   var processId = task.ProcessId;
+                    //   App.GetService<DashboardViewModel>().ProcessesMimsIds.Add(new System.Collections.ObjectModel.ObservableCollection<int> { inKey, processId });
+                    //async exec
+                    await task_2;
+                }
+                catch (OperationCanceledException)
+                {
+                    // Command was canceled
+                    cts.Cancel();
+                }
+                
             });
 
 
@@ -85,7 +175,7 @@ namespace DarkArmor.Data
 
         private async Task HandleLinesForUnpackerRunning(string inp)
         {
-            if (inp.ToLower().Contains("done"))
+            if (inp.ToLower().Contains("createservice"))
             {
                 resOfScripting.Add("Done");
             }

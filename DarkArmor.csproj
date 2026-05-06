@@ -4,14 +4,17 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>beta-wpfui-icon-256.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\robo.ico</ApplicationIcon>
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <Copyright>DarkAromr 2026 All right reserved.</Copyright>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Assets\robo.ico" />
     <Content Include="wpfui-icon.ico" />
   </ItemGroup>
 
@@ -35,6 +38,7 @@
     <None Remove="Assets\icons8-fix-96.png" />
     <None Remove="Assets\icons8-loading-infinity.gif" />
     <None Remove="Assets\process.gif" />
+    <None Remove="Assets\robo.png" />
     <None Remove="Assets\univers24-banner-graphic-0f616694f8e4.png" />
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
@@ -59,6 +63,7 @@
     <Resource Include="Assets\icons8-fix-96.png" />
     <Resource Include="Assets\icons8-loading-infinity.gif" />
     <Resource Include="Assets\process.gif" />
+    <Resource Include="Assets\robo.png" />
     <Resource Include="Assets\univers24-banner-graphic-0f616694f8e4.png" />
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />

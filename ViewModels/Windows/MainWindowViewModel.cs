@@ -56,11 +56,11 @@ namespace DarkArmor.ViewModels.Windows
             var x = App.GetService<SettingsViewModel>().Released;
             if (x)
             {
-                AppIcon = new Uri("/Assets/wpfui-icon-256.png", UriKind.RelativeOrAbsolute);
+                AppIcon = new Uri("/Assets/robo.png", UriKind.RelativeOrAbsolute);
             }
             else
             {
-                AppIcon = new Uri("/Assets/beta-wpfui-icon-256.png", UriKind.RelativeOrAbsolute);
+                AppIcon = new Uri("/Assets/robo.png", UriKind.RelativeOrAbsolute);
             }
         }
     }

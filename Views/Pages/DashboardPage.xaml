@@ -68,7 +68,7 @@
                                  IsReadOnly="True"
                                  ItemsSource="{Binding ViewModel.DataShowed}"
                                  Name="tabledata"
-                                 
+                                 MouseEnter="tabledata_MouseEnter"
                                  MouseDoubleClick="DataGrid_MouseDoubleClick">
                        
                         <ui:DataGrid.ColumnHeaderStyle>
@@ -245,7 +245,7 @@
         <local2:DeviceShowcaseMessage x:Name="messageControl"  Visibility="Collapsed" />
 
         <DockPanel Grid.Row="1" LastChildFill="False">
-            <ui:Button DockPanel.Dock="Right"  Icon="{ui:SymbolIcon ReceiptPlay24}"  Background="#006fff" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="30" HorizontalAlignment="Right">
+            <ui:Button DockPanel.Dock="Right"  Icon="{ui:SymbolIcon ReceiptPlay24}"  Background="#006fff" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="30" HorizontalAlignment="Right" Click="Button_Click_1">
                 <ui:Button.Effect>
                 <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
             </ui:Button.Effect>

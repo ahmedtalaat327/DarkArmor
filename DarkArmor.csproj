@@ -37,6 +37,7 @@
     <None Remove="Assets\home.png" />
     <None Remove="Assets\icons8-fix-96.png" />
     <None Remove="Assets\icons8-loading-infinity.gif" />
+    <None Remove="Assets\poj.jpeg" />
     <None Remove="Assets\process.gif" />
     <None Remove="Assets\robo.png" />
     <None Remove="Assets\univers24-banner-graphic-0f616694f8e4.png" />
@@ -62,6 +63,7 @@
     <Resource Include="Assets\home.png" />
     <Resource Include="Assets\icons8-fix-96.png" />
     <Resource Include="Assets\icons8-loading-infinity.gif" />
+    <Resource Include="Assets\poj.jpeg" />
     <Resource Include="Assets\process.gif" />
     <Resource Include="Assets\robo.png" />
     <Resource Include="Assets\univers24-banner-graphic-0f616694f8e4.png" />

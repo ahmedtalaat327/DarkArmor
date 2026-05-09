@@ -199,5 +199,15 @@ namespace DarkArmor.Views.Pages
             xcount = 0;
             //checkMyDataShowedCollection.Start();
         }
+
+        private void tabledata_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+          
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ViewModel.OnTablePacketCapacityRefesh();
+        }
     }
 }

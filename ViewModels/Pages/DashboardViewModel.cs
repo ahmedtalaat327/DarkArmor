@@ -28,6 +28,9 @@ namespace DarkArmor.ViewModels.Pages
         public ObservableCollection<ObservableCollection<int>> _processesMimsIds = new ObservableCollection<ObservableCollection<int>>();
 
         [ObservableProperty]
+        public ObservableCollection<int> _processesDataSniffsIds = new ObservableCollection<int>();
+
+        [ObservableProperty]
         public NICController? localNic;
 
         [ObservableProperty]
@@ -216,6 +219,28 @@ namespace DarkArmor.ViewModels.Pages
             {
                 // Process already exited.
             }
+        }
+        [RelayCommand]
+        public async Task OnTablePacketCapacityRefesh()
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    foreach (var pid in ProcessesDataSniffsIds)
+                    {
+                        KillProcessAndChildren(pid);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions if necessary
+                    Console.WriteLine($"Error killing processes: {ex.Message}");
+                }
+            });
+
+           
+            await new DataPacketSense(LocalNic, DesktopAppOnly.PathFinder.GetApplicationRoot(),false).TrigProcAsync();
         }
     }
    

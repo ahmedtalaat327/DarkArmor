@@ -19,6 +19,8 @@
     mc:Ignorable="d">
     <Page.Resources>
         <helpers:BooleanToColorConverter x:Key="BooleanToColorConverter" />
+        <helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
     </Page.Resources>
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         
@@ -151,7 +153,8 @@
 
 
 
-                            <DataGridTemplateColumn  DisplayIndex="2" Header="Description">
+                            <DataGridTemplateColumn  DisplayIndex="2" Header="Description"
+                                                     Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <ScrollViewer HorizontalScrollBarVisibility="Visible" 
@@ -231,7 +234,26 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                          
+
+
+
+
+                            <DataGridTemplateColumn Width="auto" MinWidth="60" MaxWidth="100" DisplayIndex="4" Header="ReceivedBytes">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ui:RatingControl Name="RateBar" 
+                                                         HorizontalAlignment="Left"
+                                                         Width="auto"
+                                                         Margin="0 0 5 0"
+                                                         Foreground="Orange"
+                                                         ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                                         Value="{Binding ReceivedBytes}"/>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+
                         </DataGrid.Columns>
 
                     </ui:DataGrid>
@@ -245,11 +267,32 @@
         <local2:DeviceShowcaseMessage x:Name="messageControl"  Visibility="Collapsed" />
 
         <DockPanel Grid.Row="1" LastChildFill="False">
-            <ui:Button DockPanel.Dock="Right"  Icon="{ui:SymbolIcon ReceiptPlay24}"  Background="#006fff" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="30" HorizontalAlignment="Right" Click="Button_Click_1">
+            <ui:Button DockPanel.Dock="Right" ToolTip="Sniff packts" 
+                  Visibility="{Binding ViewModel.StartSnifShowUp, Converter={StaticResource BooleanToVisibilityConverter},ConverterParameter=ViewModel.StartSnifShowUp,Mode=TwoWay}"
+                  Background="#006fff" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="30" HorizontalAlignment="Right" Click="Button_Click_1">
+            
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="Play24"/>
+                </ui:Button.Icon>
+
                 <ui:Button.Effect>
                 <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
             </ui:Button.Effect>
         </ui:Button>
+
+            <ui:Button DockPanel.Dock="Right" ToolTip="Skip sniff packts" 
+                 Visibility="{Binding ViewModel.StopSnifShowUp, Converter={StaticResource BooleanToVisibilityConverter},ConverterParameter=ViewModel.StopSnifShowUp,Mode=TwoWay}"
+          Background="#006fff" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="30" HorizontalAlignment="Right">
+
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="Stop24"/>
+                </ui:Button.Icon>
+
+                <ui:Button.Effect>
+                    <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
+                </ui:Button.Effect>
+            </ui:Button>
+
         </DockPanel>
     </Grid>
 </Page>

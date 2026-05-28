@@ -15,6 +15,7 @@ namespace DarkArmor.ViewModels.Pages
     {
         [ObservableProperty]
         private bool _counter = false;
+
         [ObservableProperty]
         private Visibility _indicatorAppear = Visibility.Collapsed;
 
@@ -36,7 +37,14 @@ namespace DarkArmor.ViewModels.Pages
         [ObservableProperty]
         public bool firstLoad = true;
 
-       [RelayCommand]
+        [ObservableProperty]
+        private bool _startSnifShowUp = true;
+
+        [ObservableProperty]
+        private bool _stopSnifShowUp = false;
+
+
+        [RelayCommand]
         private async Task OnCounterIncrement()
         {
            
@@ -82,7 +90,7 @@ namespace DarkArmor.ViewModels.Pages
                     return;
                 }
 
-                await new ARPRequest(LocalNic).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
+                await new ARPRequest( LocalNic, App.GetService<DataViewModel>().TimeOutVal / 100).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
 
 
                 Counter = false;
@@ -218,6 +226,7 @@ namespace DarkArmor.ViewModels.Pages
             catch (ArgumentException)
             {
                 // Process already exited.
+
             }
         }
         [RelayCommand]
@@ -236,6 +245,8 @@ namespace DarkArmor.ViewModels.Pages
                 {
                     // Handle exceptions if necessary
                     Console.WriteLine($"Error killing processes: {ex.Message}");
+                    MessageBox.Show($"Error killing processes: {ex.Message}");
+
                 }
             });
 

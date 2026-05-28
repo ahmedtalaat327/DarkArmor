@@ -73,6 +73,7 @@
                     <RowDefinition Height="34"/>   
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="28"/>
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0"
@@ -143,8 +144,11 @@
                         Maximum="147"
                         Minimum="49"
                         TickFrequency="49"
+                        Value="{Binding ViewModel.TimeOutVal, Mode=TwoWay}"
                         IsEnabled="{Binding ViewModel.NICComboBoxEnabled}"
                         TickPlacement="BottomRight"/>
+                <TextBlock FontSize="10" Background="#ff001133" LineStackingStrategy="BlockLineHeight" TextWrapping="Wrap"
+                           Grid.ColumnSpan="3" Grid.Row="3" Text="This timeout means the time took between the sender and receiver may lead to better results"/>
             </Grid>
             <!--end of nic preferences-->
         </Grid>
@@ -171,7 +175,7 @@
         
         
         
-        <local2:SpeediSetupMessage Grid.ColumnSpan="2" x:Name="messageControl" Visibility="Visible" />
+        <local2:SpeediSetupMessage Grid.ColumnSpan="2" x:Name="messageControl" Visibility="Hidden" />
         
     </Grid>
 </Page>

@@ -66,7 +66,19 @@ namespace DarkArmor.Data
                 
                 OnPropertyChanged("DataShowed");
             };
-        }
+
+            this.InfoSniffedPkts_list.CollectionChanged += (s, e) =>
+            {
+
+               
+                {
+
+                    App.GetService<DashboardViewModel>().StartSnifShowUp = false;
+                    App.GetService<DashboardViewModel>().StopSnifShowUp = true;
+                }
+               
+            };
+            }
         public async Task TrigProcAsync()
         {
             if(def_NICController == null || url == null)
@@ -84,7 +96,14 @@ namespace DarkArmor.Data
             if (client.Equals(gw))
             {
                 caseCount++;
-
+                InfoSniffedPkts_list.Add("0");
+                if (caseCount < countdevice)
+                    await TrigProcAsync();
+            }
+            if(client.Equals(//chnge the current or defult nic controller used in scan 
+            App.GetService<DashboardViewModel>().LocalNic.Address)){
+                caseCount++;
+                InfoSniffedPkts_list.Add("0");
                 if (caseCount < countdevice)
                     await TrigProcAsync();
             }
@@ -95,16 +114,17 @@ namespace DarkArmor.Data
                     {
 
                         var cts = new CancellationTokenSource();
-
+                        cts.CancelAfter(TimeSpan.FromMilliseconds(App.GetService<DataViewModel>().TimeOutVal*80));
 
                         try
                         {
                             var task = Cli.Wrap("powershell.exe")
-                                 .WithArguments(new[] { $@"& '{url}\Processes\DataCapacity.exe'" + " " + parameter1Value + " " + client + " " + gw })
+                                 .WithArguments(new[] { $@"& '{url}\Processes\DataCapacity.exe'" + " " + parameter1Value + " " + gw + " " + client })
                                  // This can be simplified with `ExecuteBufferedAsync()`
                                  .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForPacketSniffingBoardRunning))
                                  .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
                                  .ExecuteAsync(cts.Token);
+                                 
 
                             ctcs.Add(cts);
 
@@ -115,10 +135,15 @@ namespace DarkArmor.Data
 
                              await task;    
                         }
-                        catch (OperationCanceledException)
+                        catch (TaskCanceledException)
                         {
                             // Command was canceled
-                            cts.Cancel();
+                            //    cts.Cancel();
+                            caseCount++;
+                            InfoSniffedPkts_list.Add("0");
+                            if (caseCount < countdevice)
+                                await TrigProcAsync();
+
                         }
                         finally
                         {
@@ -126,6 +151,16 @@ namespace DarkArmor.Data
 
                             if (caseCount < countdevice)
                                 await TrigProcAsync();
+
+
+
+                            if (caseCount == App.GetService<DashboardViewModel>().DiscoveredNICControllers.Count)
+                            {
+                                App.GetService<DashboardViewModel>().StartSnifShowUp = true;
+                                App.GetService<DashboardViewModel>().StopSnifShowUp = false;
+                            }
+
+
                         }
 
 
@@ -145,6 +180,7 @@ namespace DarkArmor.Data
             {
                 InfoSniffedPkts_list.Add(inp);
             }
+            
         }
     }
 }

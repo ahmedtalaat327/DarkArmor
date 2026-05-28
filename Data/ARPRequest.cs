@@ -192,7 +192,8 @@ namespace DarkArmor.Data
                             Gate = def_NICController.Gate,
                             Broadcast = def_NICController.Broadcast,
                             Mask = def_NICController.Mask
-                             
+                           
+                            
                         });
 
 

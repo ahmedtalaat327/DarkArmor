@@ -55,7 +55,8 @@ namespace DarkArmor.Views.Pages
                             DeviceIndex = xcount,
                             Type = Models.Skeleton.DeviceType.UDevice,
                             Active = true,
-                            Nic = ViewModel.DiscoveredNICControllers[xcount]
+                            Nic = ViewModel.DiscoveredNICControllers[xcount],
+                            DomainName = "Samsung s22",
                         });
                             //////////////////////////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////////////////////////
@@ -144,6 +145,10 @@ namespace DarkArmor.Views.Pages
                 e.Cancel = true;
             }
             if ((string)e.Column.Header == nameof(NetworkDevice.Nic))
+            {
+                e.Cancel = true;
+            }
+            if ((string)e.Column.Header == nameof(NetworkDevice.ReceivedBytes))
             {
                 e.Cancel = true;
             }

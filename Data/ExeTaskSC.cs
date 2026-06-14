@@ -14,7 +14,7 @@ namespace DarkArmor.Data
 
         CancellationTokenSource? cts;
 
-
+        bool flagThisDoen = false;
 
 
         public ExeTaskSC() {
@@ -136,12 +136,12 @@ namespace DarkArmor.Data
                 
                 try
                 {
-                    var task_2 = Cli.Wrap($"sc")
+                    var task_2 = Cli.Wrap($"sc.exe")
 
                               //Cli.Wrap("cmd")
                               .WithArguments(new[] { 
-                                  "start",
-                                  "npf" })
+                                  "start npf"
+                                   })
                               
 
                               //.WithArguments(new[] { $@"&  {option_param} "})
@@ -175,17 +175,23 @@ namespace DarkArmor.Data
 
         private async Task HandleLinesForUnpackerRunning(string inp)
         {
-            if (inp.ToLower().Contains("createservice"))
+            if (inp.ToLower().Contains("createservice")|| inp.ToLower().Contains("already"))
             {
                 resOfScripting.Add("Done");
+
+                if(!flagThisDoen)
+                flagThisDoen = true;
             }
             else
             {
-                resOfScripting.Add("Error [ " + inp + " ]");
+                if (!flagThisDoen)
+                {
+                    resOfScripting.Add("Error [ " + inp + " ]");
 
-                // Command was canceled
-                cts.Cancel();
-                //then run another process with 'ctr + c' parameter
+                    // Command was canceled
+                    cts.Cancel();
+                    //then run another process with 'ctr + c' parameter
+                }
             }
         }
         /*

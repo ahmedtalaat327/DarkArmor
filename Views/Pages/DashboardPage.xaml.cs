@@ -56,7 +56,7 @@ namespace DarkArmor.Views.Pages
                             Type = Models.Skeleton.DeviceType.UDevice,
                             Active = true,
                             Nic = ViewModel.DiscoveredNICControllers[xcount],
-                            DomainName = "Samsung s22",
+                            DomainName = "Loading...",
                         });
                             //////////////////////////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////////////////////////
@@ -213,6 +213,13 @@ namespace DarkArmor.Views.Pages
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             ViewModel.OnTablePacketCapacityRefesh();
+        }
+
+        private void tabledata_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            ViewModel.TurnOnDomainGrapper(ViewModel.DataShowed[e.Row.GetIndex()]);
+            ViewModel.TurnOnManufactureDetection(ViewModel.DataShowed[e.Row.GetIndex()]);
+
         }
     }
 }

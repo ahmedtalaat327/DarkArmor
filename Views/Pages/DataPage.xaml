@@ -73,7 +73,7 @@
                     <RowDefinition Height="34"/>   
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="28"/>
+                    <RowDefinition Height="42"/>
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0"
@@ -88,7 +88,7 @@
                     </Border.Background>
                     
                     <ui:TextBlock
-                        Text="NIC preferences.."
+                        Text="NIC preferences"
                         FontSize="14">
                    
                 </ui:TextBlock>
@@ -147,10 +147,100 @@
                         Value="{Binding ViewModel.TimeOutVal, Mode=TwoWay}"
                         IsEnabled="{Binding ViewModel.NICComboBoxEnabled}"
                         TickPlacement="BottomRight"/>
-                <TextBlock FontSize="10" Background="#ff001133" LineStackingStrategy="BlockLineHeight" TextWrapping="Wrap"
-                           Grid.ColumnSpan="3" Grid.Row="3" Text="This timeout means the time took between the sender and receiver may lead to better results"/>
+                <Border Grid.Row="3"
+         CornerRadius="6" 
+         VerticalAlignment="Center"
+         HorizontalAlignment="Center"
+         Grid.ColumnSpan="2" 
+         Padding="14 5 14 5">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#77306fff"/>
+                    </Border.Background>
+                    <TextBlock FontSize="10" Background="Transparent" LineStackingStrategy="BlockLineHeight" TextWrapping="Wrap" 
+                          Grid.ColumnSpan="3" Text="This timeout means the time took between the sender and receiver may lead to better results"/>
+                </Border>
             </Grid>
             <!--end of nic preferences-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="34"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="42"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0"
+         CornerRadius="6"
+         VerticalAlignment="Center"
+         HorizontalAlignment="Center"
+         Grid.ColumnSpan="2"
+         Padding="4" Margin="30 0 0 0">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#006fff"/>
+                    </Border.Background>
+
+                    <ui:TextBlock
+         Text="Advcanced preferences"
+         FontSize="14">
+
+                    </ui:TextBlock>
+                </Border>
+                <Border Grid.Row="0"
+         CornerRadius="6"
+         VerticalAlignment="Center"
+         HorizontalAlignment="Center"
+         Grid.ColumnSpan="1"
+         Margin="-20 0 0 0"
+         Padding="4">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#50C878"/>
+                    </Border.Background>
+
+                    <ui:TextBlock
+         Text="Local"
+         FontSize="14">
+
+                    </ui:TextBlock>
+                </Border>
+                <Border Grid.Row="0"
+         CornerRadius="6"
+         VerticalAlignment="Center"
+         HorizontalAlignment="Center"
+         Grid.ColumnSpan="1"
+         Margin="70 0 0 0"
+         Padding="4">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="Gray"/>
+                    </Border.Background>
+
+                    <ui:TextBlock
+         Text="Cloud"
+         FontSize="14">
+
+                    </ui:TextBlock>
+                </Border>
+                <ui:TextBlock Grid.Row="1" 
+                              Grid.Column="0" 
+                              Margin="5 0 0 0" 
+                              Grid.RowSpan="3"
+                              Grid.ColumnSpan="2"
+                              HorizontalAlignment="Center"
+                              FontFamily="Aldhabi"
+                              FontSize="29"
+                              Padding="350"
+                              Foreground="LightBlue"
+                              VerticalAlignment="Center" 
+                              Text="Not Available"/>
+            </Grid>
+            <!-- end of advanced preferences-->
         </Grid>
         <!-- Left Side-->
         <Grid Grid.Column="1" 

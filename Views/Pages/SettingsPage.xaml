@@ -73,10 +73,15 @@
                 <Image Margin="0,12,0,0" Width="140" Height="140" Source="{Binding ViewModel.AppIcon}" />
                 <TextBlock Margin="0,12,0,0" Text="Developed and designed by @ahmedtalaat327 @github." />
                 <TextBlock Margin="0,12,0,0" Text="DarkArmor is a free and open-source application, licensed under the MIT License." />
-                <TextBlock Margin="0,12,0,90" Background="#996675"  TextWrapping="Wrap" Text="NOTE: You need to make sure you are currently using the original driver for your network adapter
+                <StackPanel>
+                    <Border Background="#77306fff" 
+            CornerRadius="10"
+            Margin="40">
+                    <TextBlock Margin="0,12,0,90"   TextWrapping="Wrap" Text="NOTE: You need to make sure you are currently using the original driver for your network adapter
 specially for modern one also Mediatek and Realtek make sure the driver from the OEM
  and forced to be installed without any limitations specially for PD controle and Monitoring features."/>
-
+                    </Border>
+                </StackPanel>  
             </StackPanel>
         </Border>
     </StackPanel>

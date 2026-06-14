@@ -71,7 +71,8 @@
                                  ItemsSource="{Binding ViewModel.DataShowed}"
                                  Name="tabledata"
                                  MouseEnter="tabledata_MouseEnter"
-                                 MouseDoubleClick="DataGrid_MouseDoubleClick">
+                                 MouseDoubleClick="DataGrid_MouseDoubleClick"
+                                 LoadingRow="tabledata_LoadingRow">
                        
                         <ui:DataGrid.ColumnHeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -188,7 +189,7 @@
                                                     BorderBrush="#998366" 
                                                     Background="#839966" 
                                                     CornerRadius="5">
-                                                    <TextBlock Text="{Binding Type}"/>
+                                                    <TextBlock Text="{Binding Nic.Manufacture}"/>
                                                 </Border>
                                                 <Border  
                                                     Margin="1" 
@@ -291,6 +292,12 @@
                 <ui:Button.Effect>
                     <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
                 </ui:Button.Effect>
+            </ui:Button>
+
+            <ui:Button DockPanel.Dock="Left" ToolTip="Skip sniff packts" 
+               
+          Background="#023333" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="10" HorizontalAlignment="Left"
+                       Content="{Binding ViewModel.Snapshot}">
             </ui:Button>
 
         </DockPanel>

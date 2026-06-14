@@ -23,7 +23,7 @@ namespace DarkArmor.ViewModels.Pages
         private ObservableCollection<NetworkDevice> _dataShowed = new ObservableCollection<NetworkDevice>();
 
         [ObservableProperty]
-        public ObservableCollection<NICController> _discoveredNICControllers = new ObservableCollection<NICController> ();
+        public ObservableCollection<NICController> _discoveredNICControllers = new ObservableCollection<NICController>();
 
         [ObservableProperty]
         public ObservableCollection<ObservableCollection<int>> _processesMimsIds = new ObservableCollection<ObservableCollection<int>>();
@@ -43,12 +43,35 @@ namespace DarkArmor.ViewModels.Pages
         [ObservableProperty]
         private bool _stopSnifShowUp = false;
 
+        [ObservableProperty]
+        public ObservableCollection<int> _processesDomainCheckersIds = new ObservableCollection<int>();
+
+        [ObservableProperty]
+        public string _snapshot = String.Empty;
+
+
+
+        public DashboardViewModel()
+        {
+            // Initialize properties or commands if needed
+            _snapshot = $"Snapshot : {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}";
+        }
 
         [RelayCommand]
         private async Task OnCounterIncrement()
         {
-           
-            Counter =true;
+            for (int x = 0; x < ProcessesDomainCheckersIds.Count; x++)
+            {
+                
+                        var processId = ProcessesDomainCheckersIds[x];
+                        KillProcessAndChildren(processId);
+                       
+                       
+                   
+            }
+
+
+            Counter = true;
             IndicatorAppear = Visibility.Visible;
 
             DiscoveredNICControllers.Clear();
@@ -56,31 +79,31 @@ namespace DarkArmor.ViewModels.Pages
 
 
 
-          
 
-                if (FirstLoad)
-                {
-                    var local_nicc_asstring = await Task.Run<NICControllerAsString>(
-                        () =>
-                        {
 
-                            return DesktopAppOnly.LoadFromStreamBlock();
-                        });
-                    LocalNic = new NICController()
+            if (FirstLoad)
+            {
+                var local_nicc_asstring = await Task.Run<NICControllerAsString>(
+                    () =>
                     {
-                        Nic_Index = Int32.Parse(local_nicc_asstring.Nic_Index),
-                        Address = IPAddress.Parse(local_nicc_asstring.Address),
-                        Gate = IPAddress.Parse(local_nicc_asstring.Gate),
-                        Mask = IPAddress.Parse(local_nicc_asstring.Mask),
-                        Broadcast = IPAddress.Parse(local_nicc_asstring.Broadcast),
-                        PhysicalAdress = local_nicc_asstring.PhysicalAdress,
-                        Manufacture = local_nicc_asstring.Manufacture,
-                        Active = bool.Parse(local_nicc_asstring.Active)
+
+                        return DesktopAppOnly.LoadFromStreamBlock();
+                    });
+                LocalNic = new NICController()
+                {
+                    Nic_Index = Int32.Parse(local_nicc_asstring.Nic_Index),
+                    Address = IPAddress.Parse(local_nicc_asstring.Address),
+                    Gate = IPAddress.Parse(local_nicc_asstring.Gate),
+                    Mask = IPAddress.Parse(local_nicc_asstring.Mask),
+                    Broadcast = IPAddress.Parse(local_nicc_asstring.Broadcast),
+                    PhysicalAdress = local_nicc_asstring.PhysicalAdress,
+                    Manufacture = local_nicc_asstring.Manufacture,
+                    Active = bool.Parse(local_nicc_asstring.Active)
 
 
-                    };
+                };
 
-                 FirstLoad = false;
+                FirstLoad = false;
                 //check if this network is valid ? or not [2 states not active NIC or Looping
                 if ((bool)!LocalNic.Active || LocalNic.Address.ToString().Equals("127.0.0.1"))
                 {
@@ -90,14 +113,14 @@ namespace DarkArmor.ViewModels.Pages
                     return;
                 }
 
-                await new ARPRequest( LocalNic, App.GetService<DataViewModel>().TimeOutVal / 100).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
+                await new ARPRequest(LocalNic, App.GetService<DataViewModel>().TimeOutVal / 100).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
 
 
                 Counter = false;
                 IndicatorAppear = Visibility.Collapsed;
             }
             else
-                {
+            {
 
 
                 //check if this network is valid ? or not [2 states not active NIC or Looping
@@ -109,26 +132,27 @@ namespace DarkArmor.ViewModels.Pages
                     return;
                 }
 
+                await new ARPRequest(LocalNic, App.GetService<DataViewModel>().TimeOutVal / 100).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
 
-                await new ARPRequest(LocalNic).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
-                    /*
-                    var local2_nicc = new NICController()
-                    {
-                        Nic_index = 4,
-                        Address = IPAddress.Parse("192.168.79.34"),
-                        Gate = IPAddress.Parse("192.168.79.243"),
-                        Mask = IPAddress.Parse("255.255.255.0"),
-                        PhysicalAdress = "02:23:a1:11:e8"
-                    };
-                    */
-                    //  DiscoveredNICControllers.Add(local2_nicc);
+                //       await new ARPRequest(LocalNic).TrigProcAsync(DesktopAppOnly.PathFinder.GetApplicationRoot());
+                /*
+                var local2_nicc = new NICController()
+                {
+                    Nic_index = 4,
+                    Address = IPAddress.Parse("192.168.79.34"),
+                    Gate = IPAddress.Parse("192.168.79.243"),
+                    Mask = IPAddress.Parse("255.255.255.0"),
+                    PhysicalAdress = "02:23:a1:11:e8"
+                };
+                */
+                //  DiscoveredNICControllers.Add(local2_nicc);
 
 
-                    Counter = false;
-                    IndicatorAppear = Visibility.Collapsed;
+                Counter = false;
+                IndicatorAppear = Visibility.Collapsed;
 
-                }
-            
+            }
+
         }
         [RelayCommand]
         private async Task OnCounterReset()
@@ -140,7 +164,8 @@ namespace DarkArmor.ViewModels.Pages
             await ARPRequest.StopAllProcess();
         }
         [RelayCommand]
-        public async Task OnToggleUnCheck(int keyin) {
+        public async Task OnToggleUnCheck(int keyin)
+        {
 
             //becomes unactive 
             //DataShowed[keyin].Active = false;
@@ -160,10 +185,10 @@ namespace DarkArmor.ViewModels.Pages
                 PhysicalAdress = local_nicc_asstring.PhysicalAdress
             };
             */
-          
 
 
-            await new ManARP(DesktopAppOnly.PathFinder.GetApplicationRoot(), LocalNic, 1,DataShowed[keyin],keyin).TrigAsyncProc();
+
+            await new ManARP(DesktopAppOnly.PathFinder.GetApplicationRoot(), LocalNic, 1, DataShowed[keyin], keyin).TrigAsyncProc();
 
         }
         [RelayCommand]
@@ -189,13 +214,14 @@ namespace DarkArmor.ViewModels.Pages
 
             await new ManARP(DesktopAppOnly.PathFinder.GetApplicationRoot(), local_nicc, 0, DataShowed[keyin]).TrigAsyncProc();
             */
-            for(int x = 0; x < ProcessesMimsIds.Count; x++)
+            for (int x = 0; x < ProcessesMimsIds.Count; x++)
             {
-                for(int y = 0; y < ProcessesMimsIds[x].Count; y++) {
-                
-                   if(keyin == ProcessesMimsIds[x][y])
+                for (int y = 0; y < ProcessesMimsIds[x].Count; y++)
+                {
+
+                    if (keyin == ProcessesMimsIds[x][y])
                     {
-                        var processId = ProcessesMimsIds[x][y+1];
+                        var processId = ProcessesMimsIds[x][y + 1];
                         KillProcessAndChildren(processId);
                         DataShowed[keyin].Active = true;
                         break;
@@ -211,6 +237,9 @@ namespace DarkArmor.ViewModels.Pages
             {
                 return;
             }
+
+            // 1. Elevate token to Debugger status
+            ForcePRocessKillPatch.EnableDebugPrivilege();
             ManagementObjectSearcher searcher = new ManagementObjectSearcher
                     ("Select * From Win32_Process Where ParentProcessID=" + pid);
             ManagementObjectCollection moc = searcher.Get();
@@ -250,9 +279,19 @@ namespace DarkArmor.ViewModels.Pages
                 }
             });
 
-           
-            await new DataPacketSense(LocalNic, DesktopAppOnly.PathFinder.GetApplicationRoot(),false).TrigProcAsync();
+
+            await new DataPacketSense(LocalNic, DesktopAppOnly.PathFinder.GetApplicationRoot(), false).TrigProcAsync();
+        }
+
+        [RelayCommand]
+        public async Task TurnOnDomainGrapper(NetworkDevice networkDevice)
+        {
+            await new DoaminChecker(networkDevice, LocalNic).TrigAsyncProc();
+        }
+        [RelayCommand]
+        public async Task TurnOnManufactureDetection(NetworkDevice networkDevice)
+        {
+            await new HardwareChecker(networkDevice.Nic.PhysicalAdress.ToString(), networkDevice.Nic.Manufacture).GetMacManufacturerAsync();
         }
     }
-   
 }

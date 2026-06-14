@@ -12,7 +12,12 @@
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch"
           >
-
+        <Border CornerRadius="12" Background="#66000000">
+            <Border.Effect>
+                <!-- BlurRadius handles the frosted glass intensity, ShadowDepth handles outer elevation -->
+                <BlurEffect Radius="24" KernelType="Gaussian"/>
+            </Border.Effect>
+        </Border>
         <Border   HorizontalAlignment="Center" 
                   VerticalAlignment="Center" 
                   MaxWidth="800"
@@ -20,7 +25,7 @@
                   MinWidth="500"
                   MinHeight="400"
                   CornerRadius="12" 
-                  Background="#282828"
+                  Background="#77306fff"
                    >
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
@@ -41,9 +46,10 @@
 
                     <TextBlock
             FontSize="20"
+            Foreground="Aqua"
             FontWeight="Medium"
             Text="Device Details:." />
-                    <TextBlock Margin="0,12,0,0" Text="Theme" />
+                    <TextBlock Foreground="WhiteSmoke" Margin="0,12,0,0" Text="Theme" />
 
                 </StackPanel>
             </Border>

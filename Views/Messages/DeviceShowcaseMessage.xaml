@@ -8,64 +8,77 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              d:DesignHeight="1000" d:DesignWidth="1000">
 
-    <Grid Background="#66000000"
-          HorizontalAlignment="Stretch"
-          VerticalAlignment="Stretch"
-          >
-        <Border CornerRadius="12" Background="#66000000">
-            <Border.Effect>
-                <!-- BlurRadius handles the frosted glass intensity, ShadowDepth handles outer elevation -->
-                <BlurEffect Radius="24" KernelType="Gaussian"/>
-            </Border.Effect>
-        </Border>
-        <Border   HorizontalAlignment="Center" 
-                  VerticalAlignment="Center" 
-                  MaxWidth="800"
-                  MaxHeight="450" 
-                  MinWidth="500"
-                  MinHeight="400"
-                  CornerRadius="12" 
-                  Background="#77306fff"
-                   >
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
+    <!-- Translucent dark screen overlay layer mask -->
+    <Grid Background="#66000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
+        <!-- Main Modal Frame Container - Styled with deep subtle purple matching your ecosystem theme -->
+        <Border HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                MaxWidth="800"
+                MaxHeight="450" 
+                MinWidth="550"
+                MinHeight="400"
+                CornerRadius="12" 
+                Background="#1E1A2F"
+                BorderBrush="#00E5FF"
+                BorderThickness="1">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="40" Opacity="0.4" Color="#120F1D"/>
             </Border.Effect>
+
             <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
-            </Grid.RowDefinitions>
-               
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="64"/>
+                </Grid.RowDefinitions>
 
-            <Border Background="#77306fff" 
-                CornerRadius="10"
-                Margin="15 15 15 5">
-                <StackPanel Margin="30">
+                <!-- Content Dashboard Body Layer Pane - Slightly lighter purple tint panel -->
+                <Border Background="#26213B" 
+                        BorderBrush="#3D355E"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Margin="16,16,16,8">
 
+                    <StackPanel Margin="24">
+                        <Grid Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                    <TextBlock
-            FontSize="20"
-            Foreground="Aqua"
-            FontWeight="Medium"
-            Text="Device Details:." />
-                    <TextBlock Foreground="WhiteSmoke" Margin="0,12,0,0" Text="Theme" />
+                            <!-- Vector Icon placeholder matching modern dashboard components -->
+                            <ui:SymbolIcon Symbol="Info24" Filled="True" FontSize="26" Foreground="#00E5FF" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" FontSize="18" Foreground="#FFFFFF" FontWeight="SemiBold" Text="Device Details" VerticalAlignment="Center"/>
+                        </Grid>
 
-                </StackPanel>
-            </Border>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
+                        <TextBlock Foreground="#D5D0EA" FontSize="14" FontWeight="Medium" Text="Theme" />
+                    </StackPanel>
+                </Border>
 
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                <!-- Action Control Layer Tray Elements Footer Layout -->
+                <Grid Grid.Row="1" Margin="16,0,16,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
+                    <!-- Clean, flat buttons styled uniformly without high-contrast custom properties -->
+                    <ui:Button Grid.Column="0" 
+                               Appearance="Primary"
+                               Margin="0,0,8,0" 
+                               HorizontalAlignment="Stretch" 
+                               VerticalAlignment="Stretch"
+                               Content="Update"/>
 
-                </Grid.ColumnDefinitions>
-                    <ui:Button Grid.Column="0" Margin="15 1 5 1" HorizontalAlignment="Stretch" Background="#006fff" Content="Update"/>
-                    <ui:Button Grid.Column="1" Margin="5 1 15 1"  HorizontalAlignment="Stretch" Content="Revert" Click="Button_Click"/>
-
+                    <ui:Button Grid.Column="1" 
+                               Appearance="Secondary"
+                               Margin="8,0,0,0"  
+                               HorizontalAlignment="Stretch" 
+                               VerticalAlignment="Stretch"
+                               Content="Revert" 
+                               Click="Button_Click"/>
+                </Grid>
             </Grid>
-        </Grid>
         </Border>
     </Grid>
 </UserControl>

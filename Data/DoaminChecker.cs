@@ -46,7 +46,7 @@ namespace DarkArmor.Data
             await Task.Run(async () =>
             {
                 int processId = 1020202;
-                var timeoutt = ((App.GetService<DataViewModel>().TimeOutVal/100) * 1000)*10;
+                var timeoutt = ((App.GetService<DataViewModel>().Dnstimeoutval/100) * 1000)*10;
                 cts = new CancellationTokenSource();
                 cts.CancelAfter(TimeSpan.FromMilliseconds(timeoutt));
                 string t_param = ipv4Gateway.ToString();
@@ -102,22 +102,25 @@ namespace DarkArmor.Data
         private async Task HandleLinesForDomainCheckerRunning(string arg1, CancellationToken token)
         {
             //throw new NotImplementedException();
-                await Task.Run(() =>
+            await Task.Run(() =>
+            {
+                if (arg1.ToLower().Contains("domain"))
                 {
-                    if (arg1.ToLower().Contains("domain"))
+                    Console.WriteLine("Domain is up");
+                    // You can also update the UI or perform other actions here
+                    sacrifiicedDevice.DomainName = arg1.Split(':')[1].Trim(); // Assuming the output is in the format "Domain: domain_name"
+                    if (sacrifiicedDevice.DomainName.ToLower().Contains("not found"))
                     {
-                        Console.WriteLine("Domain is up");
-                        // You can also update the UI or perform other actions here
-                        sacrifiicedDevice.DomainName = arg1.Split(':')[1].Trim(); // Assuming the output is in the format "Domain: domain_name"
-
+                        sacrifiicedDevice.DomainName = "NA"; // Update the domain name to indicate it was not found
                     }
 
-                    else
-                    {
-                        Console.WriteLine($"Received output: {arg1}");
-                        // Handle other output as needed
-                    }
-                }, token);
+                }
+                else
+                {
+                Console.WriteLine($"Received output: {arg1}");
+                // Handle other output as needed
+                }
+          }   , token);
             
 
         }

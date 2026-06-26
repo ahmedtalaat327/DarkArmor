@@ -8,6 +8,8 @@ namespace DarkArmor.ViewModels.Messagaes
     public partial class SpeediSetupMessageViewModel : ObservableObject
     {
         [ObservableProperty]
+        private bool _isVisivblewindow = true;
+        [ObservableProperty]
         private string _unpackProcessStatus = "Sleep";
 
         [ObservableProperty]

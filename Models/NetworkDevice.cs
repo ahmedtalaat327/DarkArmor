@@ -18,7 +18,7 @@ namespace DarkArmor.Models
         public string _domainName = "UserName";
         [ObservableProperty]
         [Browsable(false)]
-        public string _oSName = "Unknown"; 
+        public string _oSName = "Unknown";
         [ObservableProperty]
         [Browsable(false)]
         public DeviceType _type = DeviceType.UDevice;

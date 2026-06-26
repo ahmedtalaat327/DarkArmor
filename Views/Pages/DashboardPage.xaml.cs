@@ -26,7 +26,7 @@ namespace DarkArmor.Views.Pages
             InitializeComponent();
 
             
-            this.tabledata.AutoGeneratingColumn += Tabledata_AutoGeneratingColumn;
+          //  this.tabledata.AutoGeneratingColumn += Tabledata_AutoGeneratingColumn;
 
 
            // checkMyDataShowedCollection.Tick += CheckMyDataShowedCollection_Tick; ;
@@ -220,6 +220,27 @@ namespace DarkArmor.Views.Pages
             ViewModel.TurnOnDomainGrapper(ViewModel.DataShowed[e.Row.GetIndex()]);
             ViewModel.TurnOnManufactureDetection(ViewModel.DataShowed[e.Row.GetIndex()]);
 
-        }
+
+
+
+
+            //gateway row 
+            if (ViewModel.DataShowed[e.Row.GetIndex()].Nic != null)
+            {
+                if (ViewModel.DataShowed[e.Row.GetIndex()].Nic.Gate != null)
+                {
+                    if (ViewModel.DataShowed[e.Row.GetIndex()].Nic.Address.ToString().Equals(ViewModel.localNic.Gate.ToString()))
+                    {
+                      //  e.Row.Background = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FFC68061"));
+                      //  e.Row.Background.Opacity = 0.5;
+                        e.Row.BorderBrush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FFC680"));
+                        e.Row.BorderThickness = new Thickness(1);
+
+                    }
+                }
+
+
+            }
     }
 }
+}   

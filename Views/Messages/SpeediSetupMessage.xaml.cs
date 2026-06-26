@@ -62,7 +62,7 @@ namespace DarkArmor.Views.Messages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            ViewModel.IsVisivblewindow = false;
         }
 
         private async void Button_Click_1(object sender, RoutedEventArgs e)

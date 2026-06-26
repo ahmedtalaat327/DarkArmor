@@ -42,6 +42,10 @@
             </ItemsControl.ItemTemplate>
         </ui:VirtualizingItemsControl>
        -->
+        <Grid.Background>
+
+            <ImageBrush ImageSource="/Assets/unnamed.webp" Stretch="UniformToFill" />
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -51,13 +55,13 @@
               HorizontalAlignment="Stretch"
               Margin="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.88*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
             </Grid.RowDefinitions>
             <Border Grid.RowSpan="3"  CornerRadius="28" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Border.Background>
-                    <SolidColorBrush  Color="#212130"/>
+                    <SolidColorBrush  Color="#21213f90"/>
 
                 </Border.Background>
             </Border>
@@ -71,6 +75,7 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="34"/>   
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="42"/>
@@ -133,7 +138,9 @@
                                   Visibility="{Binding ViewModel.IndicatorAppear}"  IsIndeterminate="{Binding ViewModel.Counter, Mode=TwoWay}"  />
 
                 <ui:TextBlock Grid.Row="1" Grid.Column="0" Margin="5 0 0 0" Padding="24 0 0 0 " VerticalAlignment="Center" Text="Network card :"/>
-                <ui:TextBlock Grid.Row="2" Grid.Column="0" Margin="5 0 0 0" Padding="24 0 0 0" VerticalAlignment="Top" Text="Time-out [in ms] :"/>
+                <ui:TextBlock Grid.Row="2" Grid.Column="0" Margin="5 0 0 0" Padding="24 0 0 0" VerticalAlignment="Top" Text="ARP Time-out[ms] :"/>
+                <ui:TextBlock Grid.Row="3" Grid.Column="0" Margin="5 0 0 0" Padding="24 0 0 0" VerticalAlignment="Top" Text="DNS Time-out[ms] :"/>
+
                 <ComboBox Grid.Row="1" Grid.Column="1" Margin="5 5 20 5" Padding="4" VerticalAlignment="Center"
                           ItemsSource="{Binding ViewModel.CardsNics}" DisplayMemberPath="FriendlyName" SelectionChanged="ComboBox_SelectionChanged"
                           SelectedIndex="{Binding ViewModel.SelectednicIndex}" IsEnabled="{Binding ViewModel.NICComboBoxEnabled}"/>
@@ -147,7 +154,9 @@
                         Value="{Binding ViewModel.TimeOutVal, Mode=TwoWay}"
                         IsEnabled="{Binding ViewModel.NICComboBoxEnabled}"
                         TickPlacement="BottomRight"/>
-                <Border Grid.Row="3"
+                <ui:TextBox Grid.Row="3" Grid.Column="1" Margin="20 0 40 0" Padding="4" VerticalAlignment="Top" HorizontalAlignment="Stretch" MinWidth="100"
+                            Text="{Binding ViewModel.Dnstimeoutval, Mode=TwoWay}" IsEnabled="{Binding ViewModel.NICComboBoxEnabled}"/>
+                <Border Grid.Row="4"
          CornerRadius="6" 
          VerticalAlignment="Center"
          HorizontalAlignment="Center"
@@ -249,7 +258,7 @@
               Margin="5">
             <Border CornerRadius="28" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Border.Background>
-                    <SolidColorBrush  Color="#212130"/>
+                    <SolidColorBrush  Color="#a3212130"/>
 
                 </Border.Background>
                 <ui:TextBlock Margin="25" Padding="10" Foreground="#00ee00" Text="{Binding ViewModel.PrintedCode,FallbackValue='this is your terminal'}">
@@ -262,10 +271,10 @@
             </Border>
         </Grid>
         <!--end of left side-->
-        
-        
-        
-        <local2:SpeediSetupMessage Grid.ColumnSpan="2" x:Name="messageControl" Visibility="Hidden" />
-        
+
+
+
+        <local2:SpeediSetupMessage Grid.ColumnSpan="2" x:Name="messageControl"/>
+
     </Grid>
 </Page>

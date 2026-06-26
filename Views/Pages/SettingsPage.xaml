@@ -23,7 +23,7 @@
     <StackPanel>
         <StackPanel.Background>
 
-            <ImageBrush ImageSource="/Assets/poj.jpeg" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="/Assets/unnamed.webp" Stretch="UniformToFill" />
         </StackPanel.Background>
         <Border Background="#77306fff" 
                 CornerRadius="10"

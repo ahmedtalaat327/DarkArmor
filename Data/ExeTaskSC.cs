@@ -1,4 +1,5 @@
 ﻿using CliWrap;
+using CliWrap.Exceptions;
 using DarkArmor.Views.Messages;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -92,7 +93,13 @@ namespace DarkArmor.Data
                     // Command was canceled
                     cts.Cancel();
                 }
-                
+                catch (CommandExecutionException)
+                {
+                    resOfScripting.Add("Done");
+
+                    if (!flagThisDoen)
+                        flagThisDoen = true;
+                }
 
                 try
                 {
@@ -132,8 +139,14 @@ namespace DarkArmor.Data
                     // Command was canceled
                     cts.Cancel();
                 }
+                catch (CommandExecutionException)
+                {
+                    resOfScripting.Add("Done");
 
-                
+                    if (!flagThisDoen)
+                        flagThisDoen = true;
+                }
+
                 try
                 {
                     var task_2 = Cli.Wrap($"sc.exe")
@@ -166,7 +179,13 @@ namespace DarkArmor.Data
                     // Command was canceled
                     cts.Cancel();
                 }
-                
+                catch (CommandExecutionException)
+                {
+                    resOfScripting.Add("Done");
+
+                    if (!flagThisDoen)
+                        flagThisDoen = true;
+                }
             });
 
 

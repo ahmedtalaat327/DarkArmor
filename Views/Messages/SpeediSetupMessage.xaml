@@ -6,10 +6,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DarkArmor.ViewModels.Messagaes"
              mc:Ignorable="d" 
+             xmlns:helpers="clr-namespace:DarkArmor.Helpers"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              d:DesignHeight="1000" d:DesignWidth="1000"
-             >
-    
+             Visibility="{Binding IsVisivblewindow, Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay}">
+    <UserControl.Resources>
+        <helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
     <Grid Background="#66000000"
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
@@ -20,8 +24,10 @@
                   MaxHeight="650" 
                   MinWidth="700"
                   MinHeight="500"
-                  CornerRadius="12" 
-                  Background="#282828"
+                    CornerRadius="12" 
+              Background="#1E1A2F"
+                BorderBrush="#00E5FF"
+                BorderThickness="1"
                    >
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
@@ -34,9 +40,11 @@
                 </Grid.RowDefinitions>
 
 
-                <Border Background="#186b9e" 
-                CornerRadius="10"
-                Margin="15 15 15 5">
+                <Border  Background="#26213B" 
+                        BorderBrush="#3D355E"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Margin="16,16,16,8">
                     <StackPanel Margin="30">
 
 
@@ -48,7 +56,7 @@
                         <TextBlock Foreground="Orange" TextWrapping="Wrap" Margin="0,12,0,0" Text="We will setup some libraries and files to make everything work correctly
                                                                     Make sure you are 'Runing this app as admin'" />
                         <Image MaxWidth="50" Margin="10 10 10 30" Source="/Assets/icons8-fix-96.png"/>
-                        
+
                         <!---grid process 4*n-->
                         <Grid 
                             ShowGridLines="True">
@@ -83,14 +91,14 @@
                             <Border Margin="10" CornerRadius="4" Grid.Row="0" Grid.Column="2">
                                 <ui:TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding UnpackProcessStatus}"/>
                                 <Border.Background>
- 
+
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                         <LinearGradientBrush.GradientStops>
                                             <GradientStop Color="#ff05cd" Offset="0.0" />
                                             <GradientStop Color="#313196" Offset="1.0" />
                                         </LinearGradientBrush.GradientStops>
                                     </LinearGradientBrush>
-                                    
+
                                 </Border.Background>
                             </Border>
 
@@ -127,14 +135,14 @@
                                 <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="1" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_2" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
                                 <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="2" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_4" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
                                 <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="3" MinWidth="40" HorizontalAlignment="Center" Content="3" Background="#006fff" Grid.Row="1" Grid.Column="3" Click="Button_Click_5" IsEnabled="{Binding RunCloneOneProcessButtonfloag}"/>
-                             
+
                             </StackPanel>
                             <ui:Button Icon="{ui:SymbolIcon Play48}" Margin="6" MinWidth="60" HorizontalAlignment="Center" Content="" Background="#006fff" Grid.Row="2" Grid.Column="3" Click="Button_Click_3" IsEnabled="{Binding RunTaskExecuterProcessButtonfloag}"/>
                         </Grid>
-                     
+
                         <!--end grid process-->
-  
-                        <ui:TextBlock Padding="0 100 0 0" Text="* All these prcedures are very mandatory to make this app work."/>
+
+                        <ui:TextBlock Foreground="AliceBlue" Padding="0 100 0 0" Text="* All these prcedures are very mandatory to make this app work."/>
                     </StackPanel>
                 </Border>
                 <Grid Grid.Row="1">
@@ -142,11 +150,15 @@
 
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
-
+                        <ColumnDefinition Width="*"/>
 
                     </Grid.ColumnDefinitions>
+                
                     <ui:Button Grid.Column="0" Margin="15 1 5 1" HorizontalAlignment="Stretch" Foreground="Black" Background="Orange" Content="I've finished these steps"/>
-                    <ui:Button Grid.Column="1" Margin="5 1 15 1"  HorizontalAlignment="Stretch" Content="Cancel" Click="Button_Click"/>
+                    <ui:Button Grid.Column="2" Margin="5 1 15 1"  HorizontalAlignment="Stretch" Content="Reset" Click="Button_Click"/>
+
+                    <ui:Button Grid.Column="1" Margin="5 1 5 1"  HorizontalAlignment="Stretch"  Foreground="Black" Background="Purple" Content="Cancel" Click="Button_Click"/>
+
 
                 </Grid>
             </Grid>

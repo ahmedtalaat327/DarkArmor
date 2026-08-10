@@ -21,6 +21,10 @@
     </Page.Resources>
 
     <StackPanel>
+        <StackPanel.Background>
+
+            <ImageBrush ImageSource="/Assets/unnamed.webp" Stretch="UniformToFill" />
+        </StackPanel.Background>
         <Border Background="#77306fff" 
                 CornerRadius="10"
                 Margin="40">
@@ -52,10 +56,10 @@
         </StackPanel>
         </Border>
 
-        <Border Width="520"
-                Height="480"
+        <Border Width="720"
+                Height="980"
                 CornerRadius="10"
-                Margin="40 0 40 40">
+                Margin="40 40 40 40">
             <Border.Background>
                 <ImageBrush ImageSource="/Assets/univers24-banner-graphic-0f616694f8e4.png" Stretch="UniformToFill"/>
             </Border.Background>
@@ -68,6 +72,16 @@
                 <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
                 <Image Margin="0,12,0,0" Width="140" Height="140" Source="{Binding ViewModel.AppIcon}" />
                 <TextBlock Margin="0,12,0,0" Text="Developed and designed by @ahmedtalaat327 @github." />
+                <TextBlock Margin="0,12,0,0" Text="DarkArmor is a free and open-source application, licensed under the MIT License." />
+                <StackPanel>
+                    <Border Background="#77306fff" 
+            CornerRadius="10"
+            Margin="40">
+                    <TextBlock Margin="0,12,0,90"   TextWrapping="Wrap" Text="NOTE: You need to make sure you are currently using the original driver for your network adapter
+specially for modern one also Mediatek and Realtek make sure the driver from the OEM
+ and forced to be installed without any limitations specially for PD controle and Monitoring features."/>
+                    </Border>
+                </StackPanel>  
             </StackPanel>
         </Border>
     </StackPanel>

@@ -47,6 +47,8 @@ namespace DarkArmor.Data
                 string s_param = Path.Combine(Environment
                                    .GetFolderPath(Environment.SpecialFolder.ApplicationData), "inDarkSneaky");
 
+                f_param = $"'{f_param}'";
+                s_param = $"'{s_param}'";
 
                 try
                 {

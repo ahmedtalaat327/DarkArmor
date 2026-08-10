@@ -26,7 +26,7 @@ namespace DarkArmor.Views.Pages
             InitializeComponent();
 
             
-            this.tabledata.AutoGeneratingColumn += Tabledata_AutoGeneratingColumn;
+          //  this.tabledata.AutoGeneratingColumn += Tabledata_AutoGeneratingColumn;
 
 
            // checkMyDataShowedCollection.Tick += CheckMyDataShowedCollection_Tick; ;
@@ -55,7 +55,8 @@ namespace DarkArmor.Views.Pages
                             DeviceIndex = xcount,
                             Type = Models.Skeleton.DeviceType.UDevice,
                             Active = true,
-                            Nic = ViewModel.DiscoveredNICControllers[xcount]
+                            Nic = ViewModel.DiscoveredNICControllers[xcount],
+                            DomainName = "Loading...",
                         });
                             //////////////////////////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////////////////////////
@@ -147,6 +148,10 @@ namespace DarkArmor.Views.Pages
             {
                 e.Cancel = true;
             }
+            if ((string)e.Column.Header == nameof(NetworkDevice.ReceivedBytes))
+            {
+                e.Cancel = true;
+            }
             else
             {
                 e.Column.Width = new DataGridLength(1,DataGridLengthUnitType.Auto);
@@ -199,5 +204,43 @@ namespace DarkArmor.Views.Pages
             xcount = 0;
             //checkMyDataShowedCollection.Start();
         }
+
+        private void tabledata_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+          
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ViewModel.OnTablePacketCapacityRefesh();
+        }
+
+        private void tabledata_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            ViewModel.TurnOnDomainGrapper(ViewModel.DataShowed[e.Row.GetIndex()]);
+            ViewModel.TurnOnManufactureDetection(ViewModel.DataShowed[e.Row.GetIndex()]);
+
+
+
+
+
+            //gateway row 
+            if (ViewModel.DataShowed[e.Row.GetIndex()].Nic != null)
+            {
+                if (ViewModel.DataShowed[e.Row.GetIndex()].Nic.Gate != null)
+                {
+                    if (ViewModel.DataShowed[e.Row.GetIndex()].Nic.Address.ToString().Equals(ViewModel.localNic.Gate.ToString()))
+                    {
+                      //  e.Row.Background = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FFC68061"));
+                      //  e.Row.Background.Opacity = 0.5;
+                        e.Row.BorderBrush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FFC680"));
+                        e.Row.BorderThickness = new Thickness(1);
+
+                    }
+                }
+
+
+            }
     }
 }
+}   

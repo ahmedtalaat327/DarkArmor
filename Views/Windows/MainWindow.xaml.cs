@@ -1,5 +1,7 @@
-﻿using DarkArmor.ViewModels.Windows;
+﻿using DarkArmor.ViewModels.Messagaes;
+using DarkArmor.ViewModels.Windows;
 using DarkArmor.Views.Messages;
+using System.Windows.Input;
 using Wpf.Ui;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
@@ -71,9 +73,16 @@ namespace DarkArmor.Views.Windows
             ViewModel.OnWindowLoad();
         }
 
-        private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Bordge_one_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ProfileSettingsMessage.ViewModel.SubwindVisibility = true;
+
+        }
+        private void Bordge_two_MouseDown(object sender, KeyEventArgs e)
+        {
+            // Check for a specific key (e.g., Escape to close or hide the window)
+            if (e.Key == Key.K)
+             SpeediSetupMessage.ViewModel.IsVisivblewindow = true;
         }
     }
 }

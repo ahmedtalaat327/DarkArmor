@@ -9,6 +9,6 @@ namespace DarkArmor.ViewModels.Messagaes
     public partial class ProfileSettingsMessageViewModel : ObservableObject
     {
         [ObservableProperty]
-        private bool _subwindVisibility = true;
+        private bool _subwindVisibility = false;
     }
 }

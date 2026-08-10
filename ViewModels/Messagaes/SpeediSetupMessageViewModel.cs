@@ -8,6 +8,8 @@ namespace DarkArmor.ViewModels.Messagaes
     public partial class SpeediSetupMessageViewModel : ObservableObject
     {
         [ObservableProperty]
+        private bool _isVisivblewindow = true;
+        [ObservableProperty]
         private string _unpackProcessStatus = "Sleep";
 
         [ObservableProperty]
@@ -23,6 +25,9 @@ namespace DarkArmor.ViewModels.Messagaes
         [ObservableProperty]
         private string _taskExecuterStatus = "Sleep";
 
+        [ObservableProperty]
+        private bool _runTaskExecuterProcessButtonfloag = true;
+
 
         public async Task StartUnpacking()
         {
@@ -31,17 +36,36 @@ namespace DarkArmor.ViewModels.Messagaes
             await new Unpacker(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc();
         }
 
-        public async Task StartCloning()
+        public async Task StartCloning(int stepNo)
         {
-            CloneOneProcessStatus = "Wait";
-            RunCloneOneProcessButtonfloag = false;
-            await new Cloner(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc();
+            switch(stepNo)
+            {
+                case 1:
+                    CloneOneProcessStatus = "Wait";
+                    RunCloneOneProcessButtonfloag = false;
+                    await new Cloner(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc();
+                    break;
+                case 2:
+                    CloneOneProcessStatus = "Wait";
+                    RunCloneOneProcessButtonfloag = false;
+                    await new Cloner(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc_2();
+                    break;
+                case 3:
+                    CloneOneProcessStatus = "Wait";
+                    RunCloneOneProcessButtonfloag = false;
+                    await new Cloner(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc_4();
+                    break;
+                default:
+                    break;
+            }
+           
         }
 
         public async Task StartSceduler()
         {
             TaskExecuterStatus = "Wait";
-          //  await new TaskExecuter(DesktopAppOnly.PathFinder.GetApplicationRoot()).TrigAsyncProc();
+            RunTaskExecuterProcessButtonfloag = false;
+             await new ExeTaskSC().TrigAsyncProc();
         }
 
         public void OnNavigatedTo()

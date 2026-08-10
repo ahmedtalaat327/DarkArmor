@@ -4,14 +4,17 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>beta-wpfui-icon-256.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\robo.ico</ApplicationIcon>
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <Copyright>DarkAromr 2026 All right reserved.</Copyright>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Assets\robo.ico" />
     <Content Include="wpfui-icon.ico" />
   </ItemGroup>
 
@@ -26,6 +29,8 @@
 
   <ItemGroup>
     <None Remove="Assets\beta-wpfui-icon-256.png" />
+    <None Remove="Assets\bgggg.jpeg" />
+    <None Remove="Assets\bgn.jpeg" />
     <None Remove="Assets\cloud.png" />
     <None Remove="Assets\dotted.png" />
     <None Remove="Assets\Glare-PNG-Photo.png" />
@@ -33,10 +38,14 @@
     <None Remove="Assets\home.png" />
     <None Remove="Assets\icons8-fix-96.png" />
     <None Remove="Assets\icons8-loading-infinity.gif" />
+    <None Remove="Assets\poj.jpeg" />
     <None Remove="Assets\process.gif" />
+    <None Remove="Assets\robo.png" />
     <None Remove="Assets\univers24-banner-graphic-0f616694f8e4.png" />
+    <None Remove="Assets\unnamed.webp" />
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
+    <None Remove="Assets\wq.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,7 +53,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\bgn.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Assets\beta-wpfui-icon-256.png" />
+    <Resource Include="Assets\bgggg.jpeg" />
     <Resource Include="Assets\cloud.png" />
     <Resource Include="Assets\DarkArmorStyles.xaml" />
   </ItemGroup>
@@ -56,10 +70,14 @@
     <Resource Include="Assets\home.png" />
     <Resource Include="Assets\icons8-fix-96.png" />
     <Resource Include="Assets\icons8-loading-infinity.gif" />
+    <Resource Include="Assets\poj.jpeg" />
     <Resource Include="Assets\process.gif" />
+    <Resource Include="Assets\robo.png" />
     <Resource Include="Assets\univers24-banner-graphic-0f616694f8e4.png" />
+    <Resource Include="Assets\unnamed.webp" />
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
+    <Resource Include="Assets\wq.jpeg" />
   </ItemGroup>
 
 </Project>

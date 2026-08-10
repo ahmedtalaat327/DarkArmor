@@ -110,7 +110,7 @@ namespace DarkArmor.Data
 
                     ips_to_scan = NewRangeForCustomScan(ips_to_scan, artifial_broadcast);
 
-                    var totalTime = timeOut * (1 + Int32.Parse(ips_to_scan.Count.ToString()));
+                    var totalTime = (timeOut*2) * (1 + Int32.Parse(ips_to_scan.Count.ToString()));
                     // Cancel after a timeout of 10 seconds
                     cts.CancelAfter(TimeSpan.FromSeconds(totalTime));
                 }
@@ -119,7 +119,7 @@ namespace DarkArmor.Data
 
 
 
-                    var totalTime = timeOut * (1 + Int32.Parse(ipnetwork.ListIPAddress().Count.ToString()));
+                    var totalTime = (timeOut * 2) * (1 + Int32.Parse(ipnetwork.ListIPAddress().Count.ToString()));
                     // Cancel after a timeout of 10 seconds
                     cts.CancelAfter(TimeSpan.FromSeconds(totalTime));
                 }
@@ -192,7 +192,8 @@ namespace DarkArmor.Data
                             Gate = def_NICController.Gate,
                             Broadcast = def_NICController.Broadcast,
                             Mask = def_NICController.Mask
-                             
+                           
+                            
                         });
 
 

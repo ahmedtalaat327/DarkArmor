@@ -3,6 +3,7 @@ using DarkArmor.Helpers;
 using DarkArmor.Models;
 using DarkArmor.Models.Skeleton;
 using System.Collections.ObjectModel;
+using System.Security.Cryptography.X509Certificates;
 using Wpf.Ui.Controls;
 
 namespace DarkArmor.ViewModels.Pages
@@ -28,6 +29,12 @@ namespace DarkArmor.ViewModels.Pages
 
         [ObservableProperty]    
         private bool _nICComboBoxEnabled = true;
+
+        [ObservableProperty]
+        private double _timeOutVal  = 98;
+
+        [ObservableProperty]
+        private double _dnstimeoutval = 500;
 
         public void OnNavigatedTo()
         {

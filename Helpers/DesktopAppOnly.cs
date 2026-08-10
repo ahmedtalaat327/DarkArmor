@@ -91,7 +91,7 @@ namespace DarkArmor.Helpers
 
                     writer.WriteEndElement();
                     writer.Flush();
-
+                    writer.Close();
                     done = true;
                     return done;
                 }

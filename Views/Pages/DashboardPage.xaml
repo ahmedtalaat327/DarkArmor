@@ -19,28 +19,29 @@
     mc:Ignorable="d">
     <Page.Resources>
         <helpers:BooleanToColorConverter x:Key="BooleanToColorConverter" />
+        <helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-           
+
         </Grid.ColumnDefinitions>
-        
-        
+
+
         <Grid Grid.Column="0">
             <Grid.Background>
-                <SolidColorBrush Color="#202020"/>
-                
+
+                <ImageBrush ImageSource="/Assets/wq.jpeg" Stretch="UniformToFill" />
             </Grid.Background>
             <StackPanel Orientation="Vertical">
 
-                <ui:Card Background="#282828" Padding="4 5 4 5" HorizontalAlignment="Center"  VerticalAlignment="Stretch" MinHeight="10" MaxHeight="60" Margin="18">
-                  
+                <ui:Card Background="#A0282828" Padding="4 5 4 5" HorizontalAlignment="Center"  VerticalAlignment="Stretch" MinHeight="10" MaxHeight="60" Margin="18">
+
                     <ui:Card.Effect>
                         <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
                     </ui:Card.Effect>
-                    
+
                     <StackPanel Margin="1" VerticalAlignment="Center"  Orientation="Horizontal">
                         <ui:Button  Margin="5 0 0 0" FontSize="16" Icon="{ui:SymbolIcon CalendarPlay16}" 
                              Content="Play Monitoring" HorizontalAlignment="Stretch" VerticalAlignment="Center"
@@ -56,186 +57,158 @@
                 </ui:Card>
 
                 <StackPanel Width="800" VerticalAlignment="Center">
+                    <StackPanel.Effect>
+                        <DropShadowEffect Color="Black" 
+                          Direction="315" 
+                          BlurRadius="15" 
+                          ShadowDepth="5" 
+                          Opacity="0.80"/>
+                    </StackPanel.Effect>
                     <StackPanel.Background>
+
                         <ImageBrush ImageSource="/Assets/dotted.png" TileMode="Tile"   Stretch="Uniform" AlignmentY="Top" Viewport="0,0,400,400" ViewportUnits="Absolute"/>
                     </StackPanel.Background>
+
                     <ui:DataGrid Margin="15" MaxHeight="500"
-                                 VerticalScrollBarVisibility="auto"
-                                 HorizontalScrollBarVisibility="Visible"
-                                 HorizontalAlignment="Stretch" 
-                                 VerticalAlignment="Center"
-                                 ColumnWidth="*" 
-                                 IsReadOnly="True"
-                                 ItemsSource="{Binding ViewModel.DataShowed}"
-                                 Name="tabledata"
-                                 
-                                 MouseDoubleClick="DataGrid_MouseDoubleClick">
-                       
-                        <ui:DataGrid.ColumnHeaderStyle>
-                            <Style TargetType="{x:Type DataGridColumnHeader}">
-                              
-                                <Setter Property="Foreground" Value="#ffffff" />
-                                <Setter Property="BorderThickness" Value="1" />
-                                <Setter Property="SnapsToDevicePixels" Value="True" />
-                                <Setter Property="UseLayoutRounding" Value="True" />
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <Setter Property="MinWidth" Value="10" />
-                                <Setter Property="MinHeight" Value="30" />
-                                <Setter Property="Cursor" Value="Hand" />
-                                 
-                                <Setter Property="Padding" Value="4" />
-                                <Setter Property="SeparatorBrush" Value="#FFC9CACA" />
-                                <Setter Property="HorizontalAlignment" Value="Stretch" />
-                                <Setter Property="Border.CornerRadius" Value="16" />
-                                <Setter Property="Border.Background" Value="#77308fff" />
- 
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                                            <Border Background="#77306fff" CornerRadius="5">
-                                                <ContentPresenter Margin="5"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter Property="TextBlock.Margin" Value="1"/>
-                                <Setter Property="TextBlock.Padding" Value="3"/>
-                                
- 
+             VerticalScrollBarVisibility="auto"
+             HorizontalScrollBarVisibility="Visible"
+             HorizontalAlignment="Stretch" 
+             VerticalAlignment="Center"
+             ColumnWidth="Auto" 
+             IsReadOnly="True"
+             ItemsSource="{Binding ViewModel.DataShowed}"
+             Name="tabledata2"
+             MouseEnter="tabledata_MouseEnter"
+             MouseDoubleClick="DataGrid_MouseDoubleClick"
+             LoadingRow="tabledata_LoadingRow"
+             HeadersVisibility="None" 
+             GridLinesVisibility="None"
+             BorderThickness="0"
+             Visibility="Visible">
 
-                            </Style>
-                        </ui:DataGrid.ColumnHeaderStyle>
-                        <ui:DataGrid.RowHeaderStyle>
-                            <Style TargetType="{x:Type DataGridRowHeader}">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
-                                            <Border Height="5" Width="5"
-                                                    Background="{Binding Active,Converter={StaticResource BooleanToColorConverter}, ConverterParameter=Active, Mode=OneWay}"
-                                                    
-                                                    CornerRadius="15">
-                                                <ContentPresenter Margin="5"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter Property="TextBlock.Margin" Value="1"/>
-                                <Setter Property="TextBlock.Padding" Value="3"/>
+                        <!-- OVERRIDE PANEL: Transforms DataGrid layout from standard rows to grid-tiled submarine scopes -->
+                        <ui:DataGrid.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ui:DataGrid.ItemsPanel>
 
-                            </Style>
-                        </ui:DataGrid.RowHeaderStyle>
+                        <!-- REMODEL ROW LOOK: Shapes every data item row into an absolute tactical radar system -->
                         <ui:DataGrid.RowStyle>
                             <Style TargetType="{x:Type DataGridRow}">
-                                <Setter Property="Padding" Value="4 0 4 0"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Margin" Value="20"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type DataGridRow}">
+                                            <Border Background="Transparent" SnapsToDevicePixels="True">
+                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
-                                
+                                                    <!-- ================= SUBMARINE RADAR RING VISUAL VIEWPORT ================= -->
+                                                    <Grid Width="150" Height="150" HorizontalAlignment="Center" Background="Transparent">
 
+                                                        <!-- Static Radar Grids Lines -->
+                                                        <Ellipse Stroke="#2233FF33" StrokeThickness="1" StrokeDashArray="4 4" Margin="2"/>
+                                                        <Ellipse Stroke="#1133FF33" StrokeThickness="0.5" StrokeDashArray="2 2" Margin="32"/>
+
+                                                        <!-- Pulsing Sonar Sweep Signal (Colors shift automatically based on Active state) -->
+                                                        <Ellipse Stroke="{Binding Active, Converter={StaticResource BooleanToColorConverter}, ConverterParameter=Active, Mode=OneWay}" 
+                                             StrokeThickness="2" RenderTransformOrigin="0.5,0.5" Margin="5">
+                                                            <Ellipse.RenderTransform>
+                                                                <ScaleTransform x:Name="RadarWave" ScaleX="0.1" ScaleY="0.1"/>
+                                                            </Ellipse.RenderTransform>
+                                                            <Ellipse.Triggers>
+                                                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard RepeatBehavior="Forever">
+                                                                            <DoubleAnimation Storyboard.TargetName="RadarWave" Storyboard.TargetProperty="ScaleX" From="0.1" To="1.0" Duration="0:0:2.8"/>
+                                                                            <DoubleAnimation Storyboard.TargetName="RadarWave" Storyboard.TargetProperty="ScaleY" From="0.1" To="1.0" Duration="0:0:2.8"/>
+                                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:2.8"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </EventTrigger>
+                                                            </Ellipse.Triggers>
+                                                        </Ellipse>
+
+                                                        <!-- Central Device Reference Anchor Core -->
+                                                        <Ellipse Fill="{Binding Active, Converter={StaticResource BooleanToColorConverter}, ConverterParameter=Active, Mode=OneWay}"
+                                             Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                                        <!-- Submarine Crosshair Icon Overlaid on Core -->
+                                                        <TextBlock Text="⌖" Foreground="#33FF33" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-2,0,0" IsHitTestVisible="False"/>
+                                                    </Grid>
+
+                                                    <!-- ================= FIXED DATA BINDINGS DISPLAY BADGES ================= -->
+                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,8,0,0">
+
+                                                        <!-- OS Description Badge -->
+                                                        <Border Margin="2" Padding="4,2,4,2" BorderThickness="1" BorderBrush="#926699" Background="#996675" CornerRadius="5">
+                                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                <ui:SymbolIcon Symbol="Router20" Margin="0,0,4,0"/>
+                                                                <TextBlock Text="{Binding OSName}" FontFamily="Consolas" Foreground="White" FontSize="11"/>
+                                                            </StackPanel>
+                                                        </Border>
+
+                                                        <!-- Manufacturer Badge -->
+                                                        <Border Margin="2" Padding="4,2,4,2" BorderThickness="1" BorderBrush="#998366" Background="#839966" CornerRadius="5">
+                                                            <TextBlock Text="{Binding Nic.Manufacture}" FontFamily="Consolas" Foreground="White" FontSize="11"/>
+                                                        </Border>
+
+                                                        <!-- Address Badge -->
+                                                        <Border Margin="2" Padding="4,2,4,2" BorderThickness="1" BorderBrush="#669975" Background="#669299" CornerRadius="5">
+                                                            <TextBlock Text="{Binding Nic.Address}" FontFamily="Consolas" Foreground="White" FontSize="11"/>
+                                                        </Border>
+
+                                                    </StackPanel>
+                                                    <!-- ================= FIXED DATA BINDINGS DISPLAY BADGES ================= -->
+                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,8,0,0">
+                                                        <!-- Physical Address Badge -->
+                                                        <Border Margin="2" Padding="4,2,4,2" BorderThickness="1" BorderBrush="#663375" Background="#663399" CornerRadius="5">
+                                                            <TextBlock Text="{Binding Nic.PhysicalAdress}" FontFamily="Consolas" Foreground="White" FontSize="11"/>
+                                                        </Border>
+                                                        <!-- DomainName Badge -->
+                                                        <Border Margin="2" Padding="4,2,4,2" BorderThickness="1" BorderBrush="#336699" Background="#336699" CornerRadius="5">
+                                                            <TextBlock Text="{Binding DomainName}" FontFamily="Consolas" Foreground="White" FontSize="11"/>
+                                                        </Border>
+                                                        <!-- Received Bytes Badge -->
+                                                        <Border Margin="2" Padding="4,2,4,2" BorderThickness="1" BorderBrush="#336699" Background="#336699" CornerRadius="5">
+                                                            <TextBlock Text="{Binding ReceivedBytes}" FontFamily="Consolas" Foreground="White" FontSize="11"/>
+                                                        </Border>
+                                                    </StackPanel>
+                                                    <!-- ================= NEW ACTIVE STATUS INTERACTIVE TOGGLE ================= -->
+                                                    <!-- Leverages Wpf.Ui native ToggleSwitch controls to seamlessly handle user input switches -->
+                                                    <ui:ToggleSwitch IsChecked="{Binding Active, Mode=TwoWay}"
+                                                 Margin="0,10,0,0" 
+                                                 FontSize="11"
+                                                 FontFamily="Consolas"
+                                                 Foreground="#33FF33"
+                                                 OnContent="Monitoring Active" 
+                                                 OffContent="Monitoring Paused" 
+                                                                  
+                                                    Checked="PART_Editor_Checked"
+                                                    Unchecked="PART_Editor_UnChecked"
+                                                 HorizontalAlignment="Center"/>
+
+                                                </StackPanel>
+                                            </Border>
+                                            
+                                        </ControlTemplate>
+                                        
+                                    </Setter.Value>
+                                </Setter>
                             </Style>
                         </ui:DataGrid.RowStyle>
 
-
-                        <DataGrid.CellStyle>
-                           
-                                    <Style TargetType="DataGridCell">
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="Background" Value="#12aa" />
-                                        <Setter Property="Margin" Value="5 1 5 1"/>
-                                        <Setter Property="VerticalAlignment" Value="Center"/>
-                                    </Style>
-                             
-                        </DataGrid.CellStyle>
-
-
-                        <DataGrid.Columns>
-
-
-
-
-                            <DataGridTemplateColumn  DisplayIndex="2" Header="Description">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <ScrollViewer HorizontalScrollBarVisibility="Visible" 
-                                                      VerticalScrollBarVisibility="Disabled" 
-                                                      HorizontalAlignment="Left" 
-                                                      Height="auto" 
-                                                      CanContentScroll="True">
-
-                                            <StackPanel MaxWidth="{TemplateBinding Width}" 
-                                                    HorizontalAlignment="Left"
-                                                    Orientation="Horizontal"
-                                                    CanHorizontallyScroll="True"
-                                                    ScrollViewer.HorizontalScrollBarVisibility="Visible">
-
-                                                <Border  
-                                                    Margin="1" 
-                                                    Padding="2" 
-                                                    BorderThickness="1" 
-                                                    BorderBrush="#926699" 
-                                                    Background="#996675" 
-                                                    CornerRadius="5">
-                                                    <StackPanel Orientation="Horizontal">
-                                                    <ui:SymbolIcon Symbol="StoreMicrosoft20" />
-                                                    <TextBlock Text="{Binding OSName}"/>
-                                                    </StackPanel>
-                                                </Border>
-                                                <Border 
-                                                    Margin="1" 
-                                                    Padding="2" 
-                                                    BorderThickness="1" 
-                                                    BorderBrush="#998366" 
-                                                    Background="#839966" 
-                                                    CornerRadius="5">
-                                                    <TextBlock Text="{Binding Type}"/>
-                                                </Border>
-                                                <Border  
-                                                    Margin="1" 
-                                                    Padding="2" 
-                                                    BorderThickness="1" 
-                                                    BorderBrush="#669975" 
-                                                    Background="#669299" 
-                                                    CornerRadius="5">
-                                                    <TextBlock Text="{Binding Nic.Address}"/>
-                                                </Border>
-                                                <Border  
-                                                    Margin="1" 
-                                                    Padding="2" 
-                                                    BorderThickness="1" 
-                                                    BorderBrush="#663375" 
-                                                    Background="#663399" 
-                                                    CornerRadius="5">
-                                                    <TextBlock Text="{Binding Nic.PhysicalAdress}"/>
-                                                </Border>
-
-                                            </StackPanel>
-                                        </ScrollViewer>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-
-
-
-
-                            <DataGridTemplateColumn Width="auto" MinWidth="60" MaxWidth="60" DisplayIndex="3" Header="Active">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <ui:ToggleSwitch Name="PART_Editor" 
-                                                         HorizontalAlignment="Center"
-                                                         Width="auto"
-                                                         Margin="0 0 5 0"
-                                                         IsChecked="{Binding Active}"
-                                                         Checked="PART_Editor_Checked"
-                                                         Unchecked="PART_Editor_UnChecked"/>   
-
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                          
-                        </DataGrid.Columns>
-
+                        <!-- Placeholder setup to satisfy structural base rules without drawing standard cells -->
+                        <ui:DataGrid.Columns>
+                            <DataGridTextColumn Width="0" Visibility="Collapsed"/>
+                        </ui:DataGrid.Columns>
                     </ui:DataGrid>
-               
+
+
+
+
                 </StackPanel>
 
             </StackPanel>
@@ -245,11 +218,38 @@
         <local2:DeviceShowcaseMessage x:Name="messageControl"  Visibility="Collapsed" />
 
         <DockPanel Grid.Row="1" LastChildFill="False">
-            <ui:Button DockPanel.Dock="Right"  Icon="{ui:SymbolIcon ReceiptPlay24}"  Background="#006fff" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="30" HorizontalAlignment="Right">
+            <ui:Button DockPanel.Dock="Right" ToolTip="Sniff packts" 
+                  Visibility="{Binding ViewModel.StartSnifShowUp, Converter={StaticResource BooleanToVisibilityConverter},ConverterParameter=ViewModel.StartSnifShowUp,Mode=TwoWay}"
+                  Background="#006fff" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="30" HorizontalAlignment="Right" Click="Button_Click_1">
+
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="Play24"/>
+                </ui:Button.Icon>
+
                 <ui:Button.Effect>
-                <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
-            </ui:Button.Effect>
-        </ui:Button>
+                    <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
+                </ui:Button.Effect>
+            </ui:Button>
+
+            <ui:Button DockPanel.Dock="Right" ToolTip="Skip sniff packts" 
+                 Visibility="{Binding ViewModel.StopSnifShowUp, Converter={StaticResource BooleanToVisibilityConverter},ConverterParameter=ViewModel.StopSnifShowUp,Mode=TwoWay}"
+          Background="#006fff" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="30" HorizontalAlignment="Right">
+
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="Stop24"/>
+                </ui:Button.Icon>
+
+                <ui:Button.Effect>
+                    <DropShadowEffect ShadowDepth="0.1" BlurRadius="115"/>
+                </ui:Button.Effect>
+            </ui:Button>
+
+            <ui:Button DockPanel.Dock="Left" ToolTip="Skip sniff packts" 
+               
+          Background="#023333" VerticalAlignment="Bottom" Margin="30" MinHeight="45"  MinWidth="45"  CornerRadius="10" HorizontalAlignment="Left"
+                       Content="{Binding ViewModel.Snapshot}">
+            </ui:Button>
+
         </DockPanel>
     </Grid>
 </Page>

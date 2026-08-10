@@ -2,7 +2,9 @@
 using DarkArmor.Views.Messages;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Security.Policy;
+
+/////////////////////////////NOT WORKING////////////////
+/////////////////// WILL BE REWORKED IN THE FUTURE FOR BETTER PERFORMANCE AND RELIABILITY [CURRENTLY THIS IS A HACKY WAY TO ACHIEVE THE GOAL]
 
 namespace DarkArmor.Data
 {
@@ -50,15 +52,27 @@ namespace DarkArmor.Data
 
                 string s_param = Environment.GetFolderPath(Environment.SpecialFolder.System);
 
+             //   f_param = $"{f_param}";
+             //   s_param = $"{s_param}";
+
                 try
                 {
                     var task = Cli.Wrap("powershell.exe")
-                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + f_param + " " + s_param })
+                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + $"-c -i \"{f_param}\" -o \"{s_param}\"" })
+                            //  .WithArguments($"-Command \"Start-Process '{url}\\Processes\\Cloner\\Cloner.exe' -ArgumentList '-c -i \"{f_param}\" -o \"{s_param}\"' -Verb RunAs\"")
+                            //  .WithArguments(new[] { 
+                            //  "-File",$"{url}\\Processes\\Cloner\\Cloner.exe",
+                            //    $"-c -i \"{f_param}\" -o \"{s_param}\"",
+                                 
+
+
+                            //  })
                               // This can be simplified with `ExecuteBufferedAsync()`
                               .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
                               .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
+                              //.WithCredentials(new Credentials("codinglap", "ahmed hassan", "EGYX@720p"))
                               .ExecuteAsync(cts.Token);
-
+                            
 
 
                     // Get the process ID
@@ -74,15 +88,8 @@ namespace DarkArmor.Data
                 }
                 finally
                 {
-                    if (FileExists(f_param))
-                    {
-                        HandleLinesForUnpackerRunning("operations performed");
+                    await TrigAsyncProc_1();
 
-                        //initial the chain.. clone
-
-                        await TrigAsyncProc_1();
-
-                    }
                 }
             });
         }
@@ -92,10 +99,13 @@ namespace DarkArmor.Data
         ///would work in this case!! [future development]
         private async Task HandleLinesForUnpackerRunning(string inp)
         {
-            if (inp.Contains("operations performed"))
+            if (inp.ToLower().Contains("operation"))
             {
                 status_no++;
                 resOfCloning.Add($"{status_no} Done");
+                //initial the chain.. clone
+
+               
             }
             else
             {
@@ -132,7 +142,7 @@ namespace DarkArmor.Data
                 try
                 {
                     var task = Cli.Wrap("powershell.exe")
-                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + f_param + " " + s_param })
+                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + $"-c -i \"{f_param}\" -o \"{s_param}\"" })
                               // This can be simplified with `ExecuteBufferedAsync()`
                               .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
                               .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
@@ -153,18 +163,16 @@ namespace DarkArmor.Data
                 }
                 finally
                 {
-                    if (FileExists(f_param))
-                    {
-                        HandleLinesForUnpackerRunning("operations performed");
+                   
 
                         //initial the chain.. clone
-                        await TrigAsyncProc_2();
-                    }
+                      //  await TrigAsyncProc_2();
+                    
                 }
             });
         }
 
-        //copying wpcap.dll => SysWOW64\
+        //copying wpcap.dll => System32\
         public async Task TrigAsyncProc_2()
         {
             await Task.Run(async () =>
@@ -176,14 +184,14 @@ namespace DarkArmor.Data
                                    .GetFolderPath(Environment.SpecialFolder.ApplicationData), "inDarkSneaky");
                 f_param += "\\env\\data\\wpcap.dll";
 
-                string s_param = Environment.GetFolderPath(Environment.SpecialFolder.SystemX86);
+                string s_param = Environment.GetFolderPath(Environment.SpecialFolder.System);
 
                // s_param += "\\drivers\\";
 
                 try
                 {
                     var task = Cli.Wrap("powershell.exe")
-                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + f_param + " " + s_param })
+                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + $"-c -i \"{f_param}\" -o \"{s_param}\"" })
                               // This can be simplified with `ExecuteBufferedAsync()`
                               .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
                               .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
@@ -204,19 +212,17 @@ namespace DarkArmor.Data
                 }
                 finally
                 {
-                    if (FileExists(f_param))
-                    {
-                        HandleLinesForUnpackerRunning("operations performed");
+                    
 
                         //initial the chain.. clone
                         await TrigAsyncProc_3();
 
-                    }
+                    
                 }
             });
         }
 
-        //copying pthreadVC.dll => SysWOW64\
+        //copying pthreadVC.dll => System32\
         public async Task TrigAsyncProc_3()
         {
             await Task.Run(async () =>
@@ -228,14 +234,14 @@ namespace DarkArmor.Data
                                    .GetFolderPath(Environment.SpecialFolder.ApplicationData), "inDarkSneaky");
                 f_param += "\\env\\data\\pthreadVC.dll";
 
-                string s_param = Environment.GetFolderPath(Environment.SpecialFolder.SystemX86);
+                string s_param = Environment.GetFolderPath(Environment.SpecialFolder.System);
 
                 // s_param += "\\drivers\\";
 
                 try
                 {
                     var task = Cli.Wrap("powershell.exe")
-                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + f_param + " " + s_param })
+                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + $"-c -i \"{f_param}\" -o \"{s_param}\"" })
                               // This can be simplified with `ExecuteBufferedAsync()`
                               .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
                               .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
@@ -256,13 +262,11 @@ namespace DarkArmor.Data
                 }
                 finally
                 {
-                    if (FileExists(f_param))
-                    {
-                        HandleLinesForUnpackerRunning("operations performed");
+                    
 
                         //initial the chain.. clone
-                        await TrigAsyncProc_4();
-                    }
+                        //await TrigAsyncProc_4();
+                    
                 }
             });
         }
@@ -286,7 +290,7 @@ namespace DarkArmor.Data
                 try
                 {
                     var task = Cli.Wrap("powershell.exe")
-                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + f_param + " " + s_param })
+                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + $"-c -i \"{f_param}\" -o \"{s_param}\"" })
                               // This can be simplified with `ExecuteBufferedAsync()`
                               .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
                               .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
@@ -307,13 +311,96 @@ namespace DarkArmor.Data
                 }
                 finally
                 {
-                    if (FileExists(f_param))
-                    {
-                        HandleLinesForUnpackerRunning("operations performed");
+                    await TrigAsyncProc_5();
+                }
+            });
+        }
 
-                        //initial the chain.. clone
+        //copying ->wpcap.dll    => SysWOW64\
+        public async Task TrigAsyncProc_5()
+        {
+            await Task.Run(async () =>
+            {
+                cts = new CancellationTokenSource();
 
-                    }
+
+                string f_param = Path.Combine(Environment
+                                   .GetFolderPath(Environment.SpecialFolder.ApplicationData), "inDarkSneaky");
+                f_param += "\\env\\data\\wpcap.dll";
+
+                string s_param = Environment.GetFolderPath(Environment.SpecialFolder.SystemX86);
+
+                // s_param += "\\drivers\\";
+
+                try
+                {
+                    var task = Cli.Wrap("powershell.exe")
+                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + $"-c -i \"{f_param}\" -o \"{s_param}\"" })
+                              // This can be simplified with `ExecuteBufferedAsync()`
+                              .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
+                              .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
+                              .ExecuteAsync(cts.Token);
+
+
+
+                    // Get the process ID
+                    //   var processId = task.ProcessId;
+                    //   App.GetService<DashboardViewModel>().ProcessesMimsIds.Add(new System.Collections.ObjectModel.ObservableCollection<int> { inKey, processId });
+                    //async exec
+                    await task;
+                }
+                catch (OperationCanceledException)
+                {
+                    // Command was canceled
+                    cts.Cancel();
+                }
+                finally
+                {
+                    await TrigAsyncProc_6();
+                }
+            });
+        }
+        //copying ->Packet.dll    => SysWOW64\
+        public async Task TrigAsyncProc_6()
+        {
+            await Task.Run(async () =>
+            {
+                cts = new CancellationTokenSource();
+
+
+                string f_param = Path.Combine(Environment
+                                   .GetFolderPath(Environment.SpecialFolder.ApplicationData), "inDarkSneaky");
+                f_param += "\\env\\data\\pthreadVC.dll";
+
+                string s_param = Environment.GetFolderPath(Environment.SpecialFolder.SystemX86);
+
+                // s_param += "\\drivers\\";
+
+                try
+                {
+                    var task = Cli.Wrap("powershell.exe")
+                              .WithArguments(new[] { $@"& '{url}\Processes\Cloner\Cloner.exe'" + " " + $"-c -i \"{f_param}\" -o \"{s_param}\"" })
+                              // This can be simplified with `ExecuteBufferedAsync()`
+                              .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLinesForUnpackerRunning))
+                              .WithStandardErrorPipe(PipeTarget.ToDelegate(Console.WriteLine))
+                              .ExecuteAsync(cts.Token);
+
+
+
+                    // Get the process ID
+                    //   var processId = task.ProcessId;
+                    //   App.GetService<DashboardViewModel>().ProcessesMimsIds.Add(new System.Collections.ObjectModel.ObservableCollection<int> { inKey, processId });
+                    //async exec
+                    await task;
+                }
+                catch (OperationCanceledException)
+                {
+                    // Command was canceled
+                    cts.Cancel();
+                }
+                finally
+                {
+
                 }
             });
         }
